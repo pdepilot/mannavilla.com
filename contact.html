@@ -1,330 +1,1369 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>HappyHomes</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contact - Mannavilla Luxury Real Estate</title>
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="./img/1000100184-removebg-preview.png">
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Lenis -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <!-- Font Awesome (for premium icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --primary: #5b0161;
+            --primary-light: #7a1f80;
+            --primary-dark: #3f0043;
+            --secondary: #14051d;
+            --accent: #eed279;
+            --accent-light: #f7e3a8;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --gray: #6c757d;
+            --dark-gray: #343a40;
+            --border-color: rgba(91, 1, 97, 0.1);
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 30px rgba(91, 1, 97, 0.1);
+            --shadow-lg: 0 20px 40px rgba(20, 5, 29, 0.15);
+            --shadow-xl: 0 30px 60px rgba(91, 1, 97, 0.2);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            color: var(--secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #fff 0%, #faf5ff 100%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
+        h2 { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+        h3 { font-size: clamp(1.5rem, 5vw, 2rem); }
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(91, 1, 97, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(91, 1, 97, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ===== NAVBAR ===== */
+        .nav-bar {
+            position: relative;
+            margin-top: 30px;
+            padding: 0 1rem;
+            transition: var(--transition);
+            z-index: 9999;
+        }
+
+        @media (min-width: 992px) {
+            .nav-bar {
+                padding: 0 3rem;
+            }
+        }
+
+        .nav-bar.sticky-top {
+            position: sticky;
+            top: 0;
+            padding: 0;
+            margin-top: 0;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--accent);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                border-radius: 30px;
+            }
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            padding: 0.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .brand-icon:hover {
+            transform: rotate(360deg);
+        }
+
+        .brand-icon img {
+            width: 100%;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .navbar-brand h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-toggler {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .navbar-toggler:hover {
+            background: var(--primary);
+        }
+
+        .navbar-toggler:hover .navbar-toggler-icon {
+            filter: brightness(0) invert(1);
+        }
+
+        .navbar-toggler-icon {
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%235b0161' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            transition: var(--transition);
+        }
+
+        .navbar-collapse {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+            margin-left: auto;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            padding: 0.5rem 0;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .sell-btn {
+            margin-left: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: 2px solid var(--accent);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .sell-btn:hover {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(91, 1, 97, 0.3);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-toggler {
+                display: block;
+            }
+
+            .navbar-collapse {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 1rem;
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 1.5rem;
+                border-radius: 30px;
+                box-shadow: var(--shadow-lg);
+                border: 2px solid var(--accent);
+                margin-top: 1rem;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+                pointer-events: none;
+            }
+
+            .navbar-collapse.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                pointer-events: all;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                margin: 0;
+                gap: 0.8rem;
+            }
+
+            .nav-link {
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .sell-btn {
+                margin: 1rem 0 0;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            position: relative;
+            margin-top: -100px;
+            padding-top: 180px;
+            padding-bottom: 100px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(91, 1, 97, 0.85) 0%, rgba(20, 5, 29, 0.9) 100%);
+        }
+
+        @media (max-width: 991.98px) {
+            .page-header {
+                padding-top: 150px;
+                padding-bottom: 80px;
+            }
+        }
+
+        .page-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .page-header-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.3;
+            mix-blend-mode: overlay;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: rotate 30s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .page-header-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: 1rem;
+            font-family: "Agbalumo", cursive;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-header .breadcrumb {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            flex-wrap: wrap;
+        }
+
+        .page-header .breadcrumb a {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .page-header .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-header .breadcrumb span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* ===== CONTACT SECTION PREMIUM ===== */
+        .contact-premium {
+            padding: 80px 0;
+        }
+
+        @media (max-width: 768px) {
+            .contact-premium {
+                padding: 60px 0;
+            }
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        @media (min-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+            }
+        }
+
+        /* Contact Info Cards */
+        .contact-info-wrapper {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .contact-info-wrapper {
+                padding: 30px;
+            }
+        }
+
+        .contact-info-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent);
+        }
+
+        .section-subtitle {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-info-wrapper h2 {
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.6rem, 5vw, 2rem);
+        }
+
+        .contact-info-wrapper h2 .highlight {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-info-wrapper h2 .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--accent);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .info-cards {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background: var(--light-gray);
+            border-radius: 25px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .info-card:hover {
+            background: var(--white);
+            border-color: var(--accent);
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            border: 2px solid var(--accent);
+            flex-shrink: 0;
+        }
+
+        .info-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-family: "Inter", sans-serif;
+            font-weight: 700;
+        }
+
+        .info-content p {
+            margin-bottom: 0.25rem;
+            color: var(--gray);
+        }
+
+        .info-content a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .info-content a:hover {
+            color: var(--accent);
+        }
+
+        /* Social Connect */
+        .social-connect {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .social-connect h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-family: "Inter", sans-serif;
+        }
+
+        .social-icons-premium {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-premium {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 2px solid var(--accent);
+        }
+
+        .social-icon-premium:hover {
+            transform: translateY(-5px) rotate(360deg);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: var(--secondary);
+            border-color: var(--white);
+        }
+
+        /* Contact Form */
+        .contact-form-wrapper {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        @media (max-width: 768px) {
+            .contact-form-wrapper {
+                padding: 30px;
+            }
+        }
+
+        .contact-form-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent);
+        }
+
+        .contact-form-wrapper h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-control-premium {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            background: var(--light-gray);
+            transition: var(--transition);
+            font-family: "Inter", sans-serif;
+        }
+
+        .form-control-premium:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(91, 1, 97, 0.1);
+        }
+
+        textarea.form-control-premium {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0 0 80px 0;
+        }
+
+        .map-wrapper {
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .map-wrapper:hover {
+            transform: scale(1.01);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            display: block;
+            filter: grayscale(0.1) contrast(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .map-wrapper iframe {
+                height: 350px;
+            }
+        }
+
+        /* CTA Section */
+        .cta-about {
+            padding: 60px 0;
+        }
+
+        .cta-about-wrapper {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 40px;
+            padding: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .cta-about-wrapper {
+                padding: 40px 20px;
+            }
+        }
+
+        .cta-about-wrapper::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .cta-about-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-about-content h2 {
+            color: var(--white);
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-about-content p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-white:hover {
+            background: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
+            color: rgba(255, 255, 255, 0.8);
+            padding-top: 5rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent));
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 991.98px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-col h5 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h5::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-col p {
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+            display: inline-block;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .footer-links a::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+            left: -5px;
+        }
+
+        .gallery-grid-footer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .gallery-grid-footer img {
+            width: 100%;
+            border-radius: 15px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .gallery-grid-footer img:hover {
+            transform: scale(1.05);
+            border: 2px solid var(--accent);
+        }
+
+        .newsletter-form {
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            color: var(--white);
+            padding-right: 100px;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-form button {
+            position: absolute;
+            top: 0.25rem;
+            right: 0.25rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-top: 2px solid rgba(238, 210, 121, 0.2);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .copyright a {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .footer-menu {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-menu a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-menu a:hover {
+            color: var(--accent);
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 45px;
+            bottom: 45px;
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            z-index: 99;
+            transition: var(--transition);
+            border: 3px solid var(--accent);
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        }
+
+        @media (max-width: 767.98px) {
+            .back-to-top {
+                right: 20px;
+                bottom: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Form success message */
+        .form-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 30px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container-fluid bg-white p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
 
-
-        <!-- Navbar Start -->
-        <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
+    <!-- Navbar -->
+    <div class="nav-bar">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="navbar-brand">
+                    <div class="brand-icon">
+                        <img src="img/1000100184-removebg-preview.png" alt="Icon">
                     </div>
-                    <h1 class="m-0 text-primary">Makaan</h1>
+                    <h1>Mannavilla</h1>
                 </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <button class="navbar-toggler" id="navbarToggler">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">Property List</a>
-                                <a href="property-type.html" class="dropdown-item">Property Type</a>
-                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link active">Contact</a>
-                    </div>
-                    <a href="https://htmlcodex.com/downloading/?item=2259" class="btn btn-primary px-3 d-none d-lg-flex">Buy Pro Version</a>
-                </div>
-            </nav>
-        </div>
-        <!-- Navbar End -->
-
-
-        <!-- Header Start -->
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">Contact Us</h1> 
-                        <nav aria-label="breadcrumb animated fadeIn">
-                        <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">Contact</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="img/header.jpg" alt="">
+                <div class="navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+                        <li class="nav-item"><a href="property-list.html" class="nav-link">Property</a></li>
+                        <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+                        <li class="nav-item"><a href="contact.html" class="nav-link active">Contact</a></li>
+                    </ul>
+                    <a href="sell_your_property.html" class="btn btn-primary sell-btn">Sell Your Property</a>
                 </div>
             </div>
-        </div>
-        <!-- Header End -->
-
-
-        <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
-            <div class="container">
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-2">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Property Type</option>
-                                    <option value="1">Property Type 1</option>
-                                    <option value="2">Property Type 2</option>
-                                    <option value="3">Property Type 3</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Location</option>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100 py-3">Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Search End -->
-
-
-        <!-- Contact Start -->
-        <div class="container-fluid py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Contact Us</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="row gy-4">
-                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="bg-light rounded p-3">
-                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-                                            <i class="fa fa-map-marker-alt text-primary"></i>
-                                        </div>
-                                        <span>123 Street, New York, USA</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="bg-light rounded p-3">
-                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-                                            <i class="fa fa-envelope-open text-primary"></i>
-                                        </div>
-                                        <span>info@example.com</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="bg-light rounded p-3">
-                                    <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                                        <div class="icon me-3" style="width: 45px; height: 45px;">
-                                            <i class="fa fa-phone-alt text-primary"></i>
-                                        </div>
-                                        <span>+012 345 6789</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <iframe class="position-relative rounded w-100 h-100"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                            frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="wow fadeInUp" data-wow-delay="0.5s">
-                            <h4 class="mb-4">Receive messages instantly with our PHP and Ajax contact form - available in the <a href="https://htmlcodex.com/downloading/?item=2259">Pro Version</a> only.</h4>
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                            <label for="name">Your Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                            <label for="email">Your Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                            <label for="subject">Subject</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                            <label for="message">Message</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Contact End -->
-
-
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Photo Gallery</h5>
-                        <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-1.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-2.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-3.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-4.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-5.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-6.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Makaan</a>, All Right Reserved. 
-							
-							<!--/*** The author’s attribution link must remain intact in the template. ***/-->
-                            <!--/*** If you wish to remove this credit link, please purchase the Pro Version . ***/-->
-                            Designed By <a class="border-bottom" href="https://htmlcodex.com">ERIBS Tech</a>
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="footer-menu">
-                                <a href="">Home</a>
-                                <a href="">Cookies</a>
-                                <a href="">Help</a>
-                                <a href="">FQAs</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
-
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        </nav>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="page-header-bg">
+            <img src="./img/carousel-1.jpg" alt="Contact Luxury Background">
+        </div>
+        <div class="container">
+            <div class="page-header-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1>Contact Us</h1>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a>
+                    <span>/</span>
+                    <span>Contact</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <!-- Contact Section Premium -->
+    <section class="contact-premium">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <div class="contact-info-wrapper">
+                        <span class="section-subtitle">Connect With Elegance</span>
+                        <h2>Let's <span class="highlight">Create</span> Your Legacy</h2>
+                        <p>Experience the pinnacle of luxury real estate service. Our dedicated team is ready to assist you with discretion, expertise, and unwavering commitment to excellence.</p>
+                        
+                        <div class="info-cards">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h4>Visit Our Flagship Gallery</h4>
+                                    <p>123 Luxury Avenue, Manhattan</p>
+                                    <p>New York, NY 10001, USA</p>
+                                    <p><a href="#">View on Map →</a></p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h4>Private Concierge Line</h4>
+                                    <p><a href="tel:+1234567890">+1 (234) 567-8901</a></p>
+                                    <p><a href="tel:+1234567890">+1 (234) 567-8902</a></p>
+                                    <p>Available 24/7 for VIP clients</p>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h4>Executive Correspondence</h4>
+                                    <p><a href="mailto:concierge@mannavilla.com">concierge@mannavilla.com</a></p>
+                                    <p><a href="mailto:investments@mannavilla.com">investments@mannavilla.com</a></p>
+                                    <p>Response within 2 hours</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-connect">
+                            <h4>Connect With Us</h4>
+                            <div class="social-icons-premium">
+                                <a href="#" class="social-icon-premium"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon-premium"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon-premium"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-icon-premium"><i class="fab fa-x-twitter"></i></a>
+                                <a href="#" class="social-icon-premium"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div data-aos="fade-left" data-aos-duration="1000">
+                    <div class="contact-form-wrapper">
+                        <span class="section-subtitle">Inquire Privately</span>
+                        <h2>Request a Consultation</h2>
+                        <p>Fill out the form below and our luxury property specialist will contact you within 24 hours.</p>
+                        
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" class="form-control-premium" placeholder="e.g., Alexander Sterling" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" class="form-control-premium" placeholder="name@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control-premium" placeholder="+1 (234) 567-8900">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" class="form-control-premium" required>
+                                    <option value="">Select an inquiry type</option>
+                                    <option value="property">Property Inquiry</option>
+                                    <option value="investment">Investment Consultation</option>
+                                    <option value="selling">Selling Your Property</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" class="form-control-premium" placeholder="Tell us about your luxury real estate needs..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-submit">Send Private Inquiry <i class="fas fa-arrow-right"></i></button>
+                            <div id="formMessage" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div data-aos="zoom-in" data-aos-duration="1000">
+                <div class="map-wrapper">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316f6d8f7b%3A0x2f7e5e7f4e8b7a0!2sWall%20St%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-about">
+        <div class="container">
+            <div class="cta-about-wrapper" data-aos="zoom-in" data-aos-duration="1200">
+                <div class="cta-about-content">
+                    <h2>Experience Luxury Firsthand</h2>
+                    <p>Schedule a private viewing of our exclusive portfolio and discover properties that redefine elegance.</p>
+                    <a href="tel:+1234567890" class="btn btn-white"><i class="fas fa-phone-alt"></i> Call Concierge</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h5>Get In Touch</h5>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, New York, USA</p>
+                    <p><i class="fas fa-phone"></i> +1 (234) 567-8901</p>
+                    <p><i class="fas fa-envelope"></i> concierge@mannavilla.com</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Our Services</a></li>
+                        <li><a href="property-list.html">Luxury Properties</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Photo Gallery</h5>
+                    <div class="gallery-grid-footer">
+                        <img src="img/property-1.jpg" alt="Gallery">
+                        <img src="img/property-2.jpg" alt="Gallery">
+                        <img src="img/property-3.jpg" alt="Gallery">
+                        <img src="img/property-4.jpg" alt="Gallery">
+                        <img src="img/property-5.jpg" alt="Gallery">
+                        <img src="img/property-6.jpg" alt="Gallery">
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe for exclusive property previews and market insights.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-primary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2024 <a href="#">Mannavilla</a>. All Rights Reserved. Designed by <a href="#">ERIBS Tech</a>
+                </div>
+                <div class="footer-menu">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        (function() {
+            AOS.init({ duration: 800, easing: "ease-out-cubic", once: true, offset: 50 });
+
+            // Navbar toggle
+            const navbarToggler = document.getElementById("navbarToggler");
+            const navbarCollapse = document.getElementById("navbarCollapse");
+            if (navbarToggler) {
+                navbarToggler.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    navbarCollapse.classList.toggle("show");
+                });
+            }
+
+            document.addEventListener("click", function(e) {
+                if (navbarCollapse && !navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
+                    navbarCollapse.classList.remove("show");
+                }
+            });
+
+            // Sticky navbar & back to top
+            const backToTop = document.getElementById("backToTop");
+            window.addEventListener("scroll", function() {
+                const navBar = document.querySelector(".nav-bar");
+                if (navBar) {
+                    if (window.scrollY > 45) navBar.classList.add("sticky-top");
+                    else navBar.classList.remove("sticky-top");
+                }
+                if (backToTop) {
+                    backToTop.style.display = window.scrollY > 300 ? "flex" : "none";
+                }
+            });
+
+            if (backToTop) {
+                backToTop.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                });
+            }
+
+            window.addEventListener("resize", function() {
+                if (window.innerWidth > 991.98) {
+                    if (navbarCollapse) navbarCollapse.classList.remove("show");
+                }
+            });
+
+            // Form submission
+            const contactForm = document.getElementById("contactForm");
+            const formMessage = document.getElementById("formMessage");
+
+            if (contactForm) {
+                contactForm.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    
+                    // Simple validation
+                    const name = document.getElementById("name").value.trim();
+                    const email = document.getElementById("email").value.trim();
+                    const subject = document.getElementById("subject").value;
+                    const message = document.getElementById("message").value.trim();
+                    
+                    if (!name || !email || !subject || !message) {
+                        formMessage.className = "form-message error";
+                        formMessage.textContent = "Please fill in all required fields.";
+                        return;
+                    }
+                    
+                    if (!email.includes("@") || !email.includes(".")) {
+                        formMessage.className = "form-message error";
+                        formMessage.textContent = "Please enter a valid email address.";
+                        return;
+                    }
+                    
+                    // Simulate form submission
+                    formMessage.className = "form-message success";
+                    formMessage.textContent = "Thank you for your inquiry. A luxury property specialist will contact you within 24 hours.";
+                    
+                    contactForm.reset();
+                    
+                    setTimeout(() => {
+                        formMessage.style.display = "none";
+                        formMessage.className = "form-message";
+                    }, 5000);
+                });
+            }
+        })();
+    </script>
 </body>
-
 </html>
