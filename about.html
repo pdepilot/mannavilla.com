@@ -1,366 +1,2209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Mannavilla Luxury Real Estate</title>
 
-<head>
-    <meta charset="utf-8">
-    <title>Makaan - Real Estate HTML Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="./img/1000100184-removebg-preview.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <!-- AOS for premium animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Lenis for smooth scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <style>
+      /* ===== VARIABLES (same as home page for consistency) ===== */
+      :root {
+        --primary: #5b0161;
+        --primary-light: #7a1f80;
+        --primary-dark: #3f0043;
+        --secondary: #14051d;
+        --accent: #eed279;
+        --accent-light: #f7e3a8;
+        --white: #ffffff;
+        --light-gray: #f8f9fa;
+        --gray: #6c757d;
+        --dark-gray: #343a40;
+        --border-color: rgba(91, 1, 97, 0.1);
+        --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 10px 30px rgba(91, 1, 97, 0.1);
+        --shadow-lg: 0 20px 40px rgba(20, 5, 29, 0.15);
+        --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+      /* ===== RESET & BASE ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-</head>
+      body {
+        font-family: "Inter", sans-serif;
+        color: var(--secondary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #fff 0%, #faf5ff 100%);
+      }
 
-<body>
-    <div class="container-fluid bg-white p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* ===== TYPOGRAPHY ===== */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--secondary);
+      }
+
+      h1 {
+        font-size: 3.5rem;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+      h3 {
+        font-size: 2rem;
+      }
+      p {
+        margin-bottom: 1rem;
+        color: var(--gray);
+        line-height: 1.8;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: var(--transition);
+      }
+
+      /* ===== BUTTONS ===== */
+      .btn {
+        display: inline-block;
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5;
+        text-align: center;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        letter-spacing: 0.5px;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.6s,
+          height 0.6s;
+        z-index: -1;
+      }
+
+      .btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: var(--white);
+        box-shadow: 0 10px 20px rgba(91, 1, 97, 0.3);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(91, 1, 97, 0.4);
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      /* ===== SPINNER ===== */
+      .spinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--primary) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 99999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .spinner.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .spinner-border {
+        width: 4rem;
+        height: 4rem;
+        border: 4px solid var(--accent);
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: spinner 0.8s linear infinite;
+      }
+
+      @keyframes spinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ===== NAVBAR (same as home) ===== */
+      .nav-bar {
+        position: relative;
+        margin-top: 30px;
+        padding: 0 3rem;
+        transition: var(--transition);
+        z-index: 9999;
+      }
+
+      .nav-bar.sticky-top {
+        position: sticky;
+        top: 0;
+        padding: 0;
+        margin-top: 0;
+        animation: slideDown 0.5s ease;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .navbar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--accent);
+      }
+
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1.5rem;
+      }
+
+      .navbar-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+        padding: 0.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        border: 2px solid var(--accent);
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .brand-icon:hover {
+        transform: rotate(360deg);
+      }
+
+      .brand-icon img {
+        width: 100%;
+        height: auto;
+        filter: brightness(0) invert(1);
+      }
+
+      .navbar-brand h1 {
+        color: var(--primary);
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .navbar-toggler {
+        display: none;
+        background: transparent;
+        border: 2px solid var(--primary);
+        border-radius: 50px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .navbar-toggler:hover {
+        background: var(--primary);
+      }
+
+      .navbar-toggler:hover .navbar-toggler-icon {
+        filter: brightness(0) invert(1);
+      }
+
+      .navbar-toggler-icon {
+        display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%235b0161' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        transition: var(--transition);
+      }
+
+      .navbar-collapse {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+      }
+
+      .navbar-nav {
+        display: flex;
+        list-style: none;
+        margin-left: auto;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        color: var(--secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        padding: 0.5rem 0;
+        position: relative;
+        letter-spacing: 0.5px;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--primary);
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle::after {
+        content: "▼";
+        font-size: 0.7rem;
+        margin-left: 0.25rem;
+        display: inline-block;
+        transition: transform 0.3s;
+      }
+
+      .dropdown-toggle[aria-expanded="true"]::after {
+        transform: rotate(-180deg);
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 220px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        box-shadow: var(--shadow-lg);
+        list-style: none;
+        padding: 0.75rem 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid var(--accent);
+      }
+
+      .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-item {
+        display: block;
+        padding: 0.75rem 1.5rem;
+        color: var(--secondary);
+        transition: var(--transition);
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .dropdown-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, var(--primary), transparent);
+        opacity: 0.1;
+        transition: width 0.3s ease;
+      }
+
+      .dropdown-item:hover::before {
+        width: 100%;
+      }
+
+      .dropdown-item:hover {
+        color: var(--primary);
+        padding-left: 2rem;
+      }
+
+      .sell-btn {
+        margin-left: 1.5rem;
+        padding: 0.75rem 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        border: 2px solid var(--accent);
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .sell-btn:hover {
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--primary) 100%
+        );
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(91, 1, 97, 0.3);
+      }
+
+      /* ===== PAGE HEADER WITH BACKGROUND IMAGE ===== */
+      .page-header {
+        position: relative;
+        padding: 60px 0;
+        margin-top: -100px;
+        padding-top: 180px;
+        padding-bottom: 100px;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          rgba(91, 1, 97, 0.85) 0%,
+          rgba(20, 5, 29, 0.9) 100%
+        );
+      }
+
+      .page-header-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .page-header-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0.3;
+        mix-blend-mode: overlay;
+      }
+
+      .page-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        opacity: 0.1;
+        animation: rotate 30s linear infinite;
+        z-index: 1;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .page-header-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        color: var(--white);
+      }
+
+      .page-header h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        font-family: "Agbalumo", cursive;
+        color: var(--white);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .page-header .breadcrumb {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .page-header .breadcrumb a {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .page-header .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+
+      .page-header .breadcrumb span {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* ===== ABOUT HERO SECTION ===== */
+      .about-hero {
+        padding: 80px 0;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .about-image {
+        position: relative;
+      }
+
+      .about-image .main-img {
+        width: 100%;
+        border-radius: 30px;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        z-index: 2;
+      }
+
+      .about-image .shape-1 {
+        position: absolute;
+        top: -40px;
+        left: -40px;
+        bottom: -40px;
+        width: 85%; /* relative to container, but we want square */
+        height: auto;
+        aspect-ratio: 1 / 1; /* ensures perfect square */
+        background-color: var(--primary);
+        z-index: 1;
+        clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
+        max-width: calc(100% + 80px); /* allow it to extend like original */
+      }
+
+      .about-image .shape-2 {
+        position: absolute;
+        bottom: -30px;
+        right: -30px;
+        width: 150px;
+        height: 150px;
+        background: var(--primary);
+        border-radius: 50%;
+        z-index: 1;
+        opacity: 0.2;
+      }
+
+      .about-image .experience-badge {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        color: var(--white);
+        padding: 25px;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid var(--accent);
+        box-shadow: var(--shadow-lg);
+        z-index: 3;
+      }
+
+      .about-image .experience-badge .years {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .about-image .experience-badge .text {
+        font-size: 0.8rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .about-content .subtitle {
+        color: var(--primary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .about-content h2 {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
+      }
+
+      .about-content .highlight {
+        color: var(--primary);
+        position: relative;
+        display: inline-block;
+      }
+
+      .about-content .highlight::after {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: var(--accent);
+        opacity: 0.3;
+        z-index: -1;
+      }
+
+      .about-content .lead-text {
+        font-size: 1.2rem;
+        color: var(--dark-gray);
+        font-weight: 500;
+        margin-bottom: 2rem;
+        border-left: 4px solid var(--accent);
+        padding-left: 1.5rem;
+      }
+
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        font-family: "Playfair Display", serif;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        color: var(--gray);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* ===== MISSION & VISION ===== */
+      .mission-vision {
+        padding: 80px 0;
+        background: linear-gradient(145deg, #ffffff 0%, #faf3ff 100%);
+      }
+
+      .mission-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+      }
+
+      .mission-card {
+        background: var(--white);
+        padding: 40px;
+        border-radius: 30px;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
+        border: 1px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mission-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--accent);
+      }
+
+      .mission-card .icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        border: 2px solid var(--accent);
+      }
+
+      .mission-card .icon img {
+        width: 35px;
+        height: 35px;
+        filter: brightness(0) invert(1);
+      }
+
+      .mission-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .mission-card p {
+        color: var(--gray);
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+
+      /* ===== WHY CHOOSE US ===== */
+      .why-choose {
+        padding: 80px 0;
+      }
+
+      .section-header {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 4rem;
+      }
+
+      .section-header h2 {
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-header h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        border-radius: 3px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
+
+      .feature-card {
+        text-align: center;
+        padding: 30px 20px;
+        background: var(--white);
+        border-radius: 30px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        border: 1px solid transparent;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--accent);
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(91, 1, 97, 0.1) 0%,
+          rgba(238, 210, 121, 0.1) 100%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+      }
+
+      .feature-card:hover .feature-icon {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+      }
+
+      .feature-icon img {
+        width: 40px;
+        height: 40px;
+        transition: var(--transition);
+      }
+
+      .feature-card:hover .feature-icon img {
+        filter: brightness(0) invert(1);
+      }
+
+      .feature-card h4 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .feature-card p {
+        color: var(--gray);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      /* ===== TEAM SECTION (PREMIUM) ===== */
+      .team-premium {
+        padding: 80px 0;
+        background: linear-gradient(145deg, #ffffff 0%, #faf3ff 100%);
+      }
+
+      .team-grid-premium {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+      }
+
+      .team-card-premium {
+        background: var(--white);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .team-card-premium:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .team-image-premium {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+      }
+
+      .team-image-premium img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+      }
+
+      .team-card-premium:hover .team-image-premium img {
+        transform: scale(1.1);
+      }
+
+      .team-social-premium {
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(20, 5, 29, 0.9), transparent);
+        transition: bottom 0.4s ease;
+      }
+
+      .team-card-premium:hover .team-social-premium {
+        bottom: 0;
+      }
+
+      .team-social-premium .social-link {
+        width: 40px;
+        height: 40px;
+        background: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        transition: var(--transition);
+        border: 2px solid var(--accent);
+      }
+
+      .team-social-premium .social-link:hover {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        color: var(--white);
+        transform: translateY(-3px) rotate(360deg);
+      }
+
+      .team-info-premium {
+        padding: 25px;
+        text-align: center;
+      }
+
+      .team-info-premium h4 {
+        font-size: 1.3rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .team-info-premium .position {
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .team-info-premium .bio {
+        color: var(--gray);
+        font-size: 0.9rem;
+      }
+
+      /* ===== TESTIMONIALS ===== */
+      .testimonials-about {
+        padding: 80px 0;
+      }
+
+      .testimonial-card-about {
+        background: var(--white);
+        border-radius: 30px;
+        padding: 40px;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-color);
+        position: relative;
+        transition: var(--transition);
+      }
+
+      .testimonial-card-about:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--accent);
+      }
+
+      .testimonial-card-about .quote {
+        font-size: 4rem;
+        color: var(--accent);
+        opacity: 0.2;
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-family: serif;
+      }
+
+      .testimonial-card-about p {
+        font-size: 1.1rem;
+        font-style: italic;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .testimonial-author-about {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .testimonial-author-about img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--accent);
+      }
+
+      .testimonial-author-about h5 {
+        margin-bottom: 0.25rem;
+      }
+
+      .testimonial-author-about span {
+        color: var(--gray);
+        font-size: 0.9rem;
+      }
+
+      /* ===== CTA SECTION ===== */
+      .cta-about {
+        padding: 60px 0;
+      }
+
+      .cta-about-wrapper {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        border-radius: 60px;
+        padding: 60px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-about-wrapper::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+        opacity: 0.1;
+        animation: rotate 20s linear infinite;
+      }
+
+      .cta-about-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .cta-about-content h2 {
+        color: var(--white);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .cta-about-content p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+
+      .cta-about-content .btn-white {
+        background: var(--white);
+        color: var(--primary);
+        border: 2px solid var(--accent);
+      }
+
+      .cta-about-content .btn-white:hover {
+        background: transparent;
+        color: var(--white);
+        border-color: var(--white);
+      }
+
+      /* ===== FOOTER (same as home) ===== */
+      .footer {
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: rgba(255, 255, 255, 0.8);
+        padding-top: 5rem;
+        margin-top: 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          var(--primary),
+          var(--accent)
+        );
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        padding-bottom: 4rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .footer-col h5 {
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .footer-col h5::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--accent);
+      }
+
+      .footer-col p {
+        margin-bottom: 0.75rem;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.95rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        transition: var(--transition);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .social-icon:hover {
+        background: var(--accent);
+        color: var(--secondary);
+        transform: translateY(-3px) rotate(360deg);
+        border-color: var(--white);
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: var(--transition);
+        display: inline-block;
+        font-size: 0.95rem;
+        position: relative;
+        padding-left: 1.2rem;
+      }
+
+      .footer-links a::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+        transform: translateX(5px);
+      }
+
+      .footer-links a:hover::before {
+        opacity: 1;
+        left: -5px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+      }
+
+      .gallery-grid img {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        transition: var(--transition);
+        border: 2px solid transparent;
+        cursor: pointer;
+      }
+
+      .gallery-grid img:hover {
+        transform: scale(1.1);
+        border-color: var(--accent);
+        box-shadow: var(--shadow-md);
+      }
+
+      .newsletter-form {
+        position: relative;
+        margin-top: 1rem;
+      }
+
+      .newsletter-form .form-control {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        border: 2px solid var(--accent);
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+        padding-right: 100px;
+      }
+
+      .newsletter-form .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .newsletter-form .btn {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+        border-top: 2px solid rgba(238, 210, 121, 0.2);
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .copyright {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      .copyright a {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .copyright a:hover {
+        color: var(--white);
+      }
+
+      .footer-menu {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-menu a {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        position: relative;
+        padding-right: 1.5rem;
+        border-right: 2px solid rgba(238, 210, 121, 0.3);
+        line-height: 1;
+      }
+
+      .footer-menu a:last-child {
+        padding-right: 0;
+        border-right: none;
+      }
+
+      .footer-menu a:hover {
+        color: var(--accent);
+      }
+
+      /* ===== BACK TO TOP ===== */
+      .back-to-top {
+        position: fixed;
+        right: 45px;
+        bottom: 45px;
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        color: var(--white);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        z-index: 99;
+        transition: var(--transition);
+        border: 3px solid var(--accent);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px) scale(1.1);
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--primary) 100%
+        );
+        border-color: var(--white);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 1199.98px) {
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .team-grid-premium {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 991.98px) {
+        .nav-bar {
+          margin: 0;
+          padding: 0 1rem;
+        }
+
+        .navbar-toggler {
+          display: block;
+        }
+
+        .navbar-collapse {
+          display: block;
+          position: absolute;
+          top: 100%;
+          left: 1rem;
+          right: 1rem;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(10px);
+          padding: 1.5rem;
+          border-radius: 30px;
+          box-shadow: var(--shadow-lg);
+          border: 2px solid var(--accent);
+          margin-top: 1rem;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-20px);
+          transition:
+            opacity 0.4s ease,
+            transform 0.4s ease,
+            visibility 0.4s;
+          pointer-events: none;
+        }
+
+        .navbar-collapse.show {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+          pointer-events: all;
+        }
+
+        .navbar-nav {
+          flex-direction: column;
+          margin: 0;
+          gap: 0.5rem;
+        }
+
+        .nav-link {
+          padding: 1rem 0;
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .dropdown-menu {
+          position: static;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          box-shadow: none;
+          border: none;
+          background: transparent;
+          padding-left: 1rem;
+          margin-top: 0.5rem;
+        }
+
+        .sell-btn {
+          margin: 1rem 0 0;
+          display: block;
+          text-align: center;
+        }
+
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .mission-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .page-header h1 {
+          font-size: 3rem;
+        }
+      }
+
+      @media (max-width: 767.98px) {
+        .page-header h1 {
+          font-size: 2.5rem;
+        }
+
+        .about-content h2 {
+          font-size: 2rem;
+        }
+
+        .about-stats {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .team-grid-premium {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-about-wrapper {
+          padding: 40px 20px;
+        }
+
+        .cta-about-content h2 {
+          font-size: 2rem;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 575.98px) {
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .back-to-top {
+          right: 20px;
+          bottom: 20px;
+          width: 45px;
+          height: 45px;
+          font-size: 1.2rem;
+        }
+
+        .page-header {
+          padding-top: 150px;
+          padding-bottom: 70px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar (same as home) -->
+    <div class="nav-bar">
+      <nav class="navbar">
+        <div class="container nav-container">
+          <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">
+              <img src="img/1000100184-removebg-preview.png" alt="Icon" />
             </div>
+            <h1>Mannavilla</h1>
+          </a>
+
+          <button class="navbar-toggler" id="navbarToggler">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="about-us.html" class="nav-link active">About</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  id="propertyDropdown"
+                  >Property</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="property-list.html" class="dropdown-item"
+                      >Property List</a
+                    >
+                  </li>
+                  <li>
+                    <a href="property-type.html" class="dropdown-item"
+                      >Property Type</a
+                    >
+                  </li>
+                  <li>
+                    <a href="property-agent.html" class="dropdown-item"
+                      >Property Agent</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="pagesDropdown"
+                  >Pages</a
+                >
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="testimonial.html" class="dropdown-item"
+                      >Testimonial</a
+                    >
+                  </li>
+                  <li>
+                    <a href="404.html" class="dropdown-item">404 Error</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="contact.html" class="nav-link">Contact</a>
+              </li>
+            </ul>
+            <a href="#" class="btn btn-primary sell-btn">Sell Your Property</a>
+          </div>
         </div>
-        <!-- Spinner End -->
-
-
-        <!-- Navbar Start -->
-        <div class="container-fluid nav-bar bg-transparent">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
-                    </div>
-                    <h1 class="m-0 text-primary">Makaan</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link active">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">Property List</a>
-                                <a href="property-type.html" class="dropdown-item">Property Type</a>
-                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <a href="https://htmlcodex.com/downloading/?item=2259" class="btn btn-primary px-3 d-none d-lg-flex">Buy Pro Version</a>
-                </div>
-            </nav>
-        </div>
-        <!-- Navbar End -->
-
-
-        <!-- Header Start -->
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">About Us</h1> 
-                        <nav aria-label="breadcrumb animated fadeIn">
-                        <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">About</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="img/header.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
-
-
-        <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
-            <div class="container">
-                <div class="row g-2">
-                    <div class="col-md-10">
-                        <div class="row g-2">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Property Type</option>
-                                    <option value="1">Property Type 1</option>
-                                    <option value="2">Property Type 2</option>
-                                    <option value="3">Property Type 3</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-select border-0 py-3">
-                                    <option selected>Location</option>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100 py-3">Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Search End -->
-
-
-        <!-- About Start -->
-        <div class="container-fluid py-5">
-            <div class="container">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="about-img position-relative overflow-hidden p-5 pe-0">
-                            <img class="img-fluid w-100" src="img/about.jpg">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About End -->
-
-
-        <!-- Call to Action Start -->
-        <div class="container-fluid py-5">
-            <div class="container">
-                <div class="bg-light rounded p-3">
-                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                        <div class="row g-5 align-items-center">
-                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                                <img class="img-fluid rounded w-100" src="img/call-to-action.jpg" alt="">
-                            </div>
-                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="mb-4">
-                                    <h1 class="mb-3">Contact With Our Certified Agent</h1>
-                                    <p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
-                                </div>
-                                <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Make A Call</a>
-                                <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Call to Action End -->
-
-
-        <!-- Team Start -->
-        <div class="container-fluid py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Property Agents</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-1.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-2.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-3.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-4.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Team End -->
-        
-
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Photo Gallery</h5>
-                        <div class="row g-2 pt-2">
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-1.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-2.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-3.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-4.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-5.jpg" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="img/property-6.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Makaan</a>, All Right Reserved. 
-							
-							<!--/*** The author’s attribution link must remain intact in the template. ***/-->
-                            <!--/*** If you wish to remove this credit link, please purchase the Pro Version . ***/-->
-                            Designed By <a class="border-bottom" href="https://htmlcodex.com">ERIBS Tech</a>
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            <div class="footer-menu">
-                                <a href="">Home</a>
-                                <a href="">Cookies</a>
-                                <a href="">Help</a>
-                                <a href="">FQAs</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
-
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+      </nav>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <!-- Page Header with Background Image -->
+    <div class="page-header">
+      <div class="page-header-bg">
+        <img src="./img/carousel-1.jpg" alt="Luxury Property Background" />
+      </div>
+      <div class="container">
+        <div
+          class="page-header-content"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
+          <h1>About Us</h1>
+          <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>About Us</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
+    <!-- About Hero Section -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-grid">
+          <div
+            class="about-image"
+            data-aos="fade-right"
+            data-aos-duration="1200"
+          >
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <img
+              src="./img/carousel-2.jpg"
+              alt="Luxury Property"
+              class="main-img"
+            />
+            <div class="experience-badge">
+              <span class="years">25+</span>
+              <span class="text">Years of Excellence</span>
+            </div>
+          </div>
+          <div
+            class="about-content"
+            data-aos="fade-left"
+            data-aos-duration="1200"
+          >
+            <span class="subtitle">Welcome to Mannavilla</span>
+            <h2>
+              We're <span class="highlight">Redefining</span> Luxury Real Estate
+            </h2>
+            <p class="lead-text">
+              With over two decades of experience in premium properties, we've
+              established ourselves as the most trusted name in luxury real
+              estate.
+            </p>
+            <p>
+              Founded in 1998, Mannavilla has grown from a small boutique agency
+              to an international luxury property consultant. Our journey has
+              been defined by an unwavering commitment to excellence, integrity,
+              and a deep understanding of what makes a house a home.
+            </p>
+            <p>
+              We believe that finding the perfect property is not just about
+              square footage or location—it's about discovering a space that
+              resonates with your lifestyle and aspirations. Our team of
+              dedicated professionals works tirelessly to understand your unique
+              needs and match you with properties that exceed expectations.
+            </p>
 
+            <div class="about-stats">
+              <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Luxury Properties</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">1,200+</div>
+                <div class="stat-label">Happy Clients</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">15</div>
+                <div class="stat-label">Industry Awards</div>
+              </div>
+            </div>
+
+            <a href="#" class="btn btn-primary">Schedule Consultation</a>
+            <a href="#" class="btn btn-outline" style="margin-left: 15px"
+              >Our Portfolio</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mission-vision">
+      <div class="container">
+        <div class="mission-grid">
+          <div class="mission-card" data-aos="fade-up" data-aos-duration="1000">
+            <div class="icon">
+              <img src="img/icon-mission.png" alt="Mission" />
+            </div>
+            <h3>Our Mission</h3>
+            <p>
+              To provide unparalleled service in the luxury real estate market,
+              connecting discerning clients with exceptional properties while
+              maintaining the highest standards of professionalism, integrity,
+              and discretion.
+            </p>
+            <p>
+              We strive to make every real estate transaction a seamless and
+              enjoyable experience, building lasting relationships based on
+              trust and mutual respect.
+            </p>
+          </div>
+          <div
+            class="mission-card"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+          >
+            <div class="icon">
+              <img src="img/icon-vision.png" alt="Vision" />
+            </div>
+            <h3>Our Vision</h3>
+            <p>
+              To be the world's most admired luxury real estate brand,
+              recognized for our exceptional service, market expertise, and
+              commitment to redefining the standards of property consultancy.
+            </p>
+            <p>
+              We envision a future where every client finds not just a property,
+              but a sanctuary that reflects their unique lifestyle and
+              aspirations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+          <h2>Why Choose Mannavilla</h2>
+          <p>
+            Experience the difference that true dedication and expertise make in
+            your property journey.
+          </p>
+        </div>
+        <div class="features-grid">
+          <div
+            class="feature-card"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="100"
+          >
+            <div class="feature-icon">
+              <img src="img/icon-expertise.png" alt="Expertise" />
+            </div>
+            <h4>Unmatched Expertise</h4>
+            <p>
+              Our team brings decades of combined experience in luxury real
+              estate markets worldwide.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="200"
+          >
+            <div class="feature-icon">
+              <img src="img/icon-curated.png" alt="Curated" />
+            </div>
+            <h4>Curated Selection</h4>
+            <p>
+              Every property in our portfolio is handpicked and vetted to ensure
+              the highest standards.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="300"
+          >
+            <div class="feature-icon">
+              <img src="img/icon-private.png" alt="Private" />
+            </div>
+            <h4>Private & Discreet</h4>
+            <p>
+              We handle every transaction with the utmost confidentiality and
+              professionalism.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="400"
+          >
+            <div class="feature-icon">
+              <img src="img/icon-global.png" alt="Global" />
+            </div>
+            <h4>Global Network</h4>
+            <p>
+              Access to exclusive off-market properties through our
+              international connections.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section Premium -->
+    <section class="team-premium">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+          <h2>Meet Our Leadership</h2>
+          <p>
+            The visionaries behind our success, dedicated to excellence in every
+            detail.
+          </p>
+        </div>
+        <div class="team-grid-premium">
+          <div
+            class="team-card-premium"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="100"
+          >
+            <div class="team-image-premium">
+              <img src="img/team-1.jpg" alt="Alexander Sterling" />
+              <div class="team-social-premium">
+                <a href="#" class="social-link"
+                  ><i class="facebook-icon"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="linkedin-icon"></i
+                ></a>
+                <a href="#" class="social-link"><i class="twitter-icon"></i></a>
+              </div>
+            </div>
+            <div class="team-info-premium">
+              <h4>Alexander Sterling</h4>
+              <div class="position">Founder & CEO</div>
+              <p class="bio">
+                25+ years of luxury real estate expertise. Visionary leader with
+                a passion for architectural excellence.
+              </p>
+            </div>
+          </div>
+          <div
+            class="team-card-premium"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="200"
+          >
+            <div class="team-image-premium">
+              <img src="img/team-2.jpg" alt="Victoria Windsor" />
+              <div class="team-social-premium">
+                <a href="#" class="social-link"
+                  ><i class="facebook-icon"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="linkedin-icon"></i
+                ></a>
+                <a href="#" class="social-link"><i class="twitter-icon"></i></a>
+              </div>
+            </div>
+            <div class="team-info-premium">
+              <h4>Victoria Windsor</h4>
+              <div class="position">Head of Luxury Sales</div>
+              <p class="bio">
+                Specializes in high-net-worth client relationships and premium
+                property acquisitions.
+              </p>
+            </div>
+          </div>
+          <div
+            class="team-card-premium"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="300"
+          >
+            <div class="team-image-premium">
+              <img src="img/team-3.jpg" alt="Jonathan Blake" />
+              <div class="team-social-premium">
+                <a href="#" class="social-link"
+                  ><i class="facebook-icon"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="linkedin-icon"></i
+                ></a>
+                <a href="#" class="social-link"><i class="twitter-icon"></i></a>
+              </div>
+            </div>
+            <div class="team-info-premium">
+              <h4>Jonathan Blake</h4>
+              <div class="position">Chief Investment Officer</div>
+              <p class="bio">
+                Expert in real estate investment strategies and portfolio
+                optimization.
+              </p>
+            </div>
+          </div>
+          <div
+            class="team-card-premium"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="400"
+          >
+            <div class="team-image-premium">
+              <img src="img/team-4.jpg" alt="Isabella Rossi" />
+              <div class="team-social-premium">
+                <a href="#" class="social-link"
+                  ><i class="facebook-icon"></i
+                ></a>
+                <a href="#" class="social-link"
+                  ><i class="linkedin-icon"></i
+                ></a>
+                <a href="#" class="social-link"><i class="twitter-icon"></i></a>
+              </div>
+            </div>
+            <div class="team-info-premium">
+              <h4>Isabella Rossi</h4>
+              <div class="position">Director of Client Relations</div>
+              <p class="bio">
+                Ensures exceptional service and seamless experiences for every
+                client.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-about">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+          <h2>What Our Clients Say</h2>
+          <p>
+            Trusted by discerning clients worldwide for exceptional service.
+          </p>
+        </div>
+        <div
+          class="row"
+          style="
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+          "
+        >
+          <div
+            class="testimonial-card-about"
+            data-aos="fade-up"
+            data-aos-duration="800"
+          >
+            <div class="quote">"</div>
+            <p>
+              Mannavilla didn't just find us a home; they found us a sanctuary.
+              Their attention to detail and understanding of our lifestyle was
+              remarkable.
+            </p>
+            <div class="testimonial-author-about">
+              <img src="img/client-1.jpg" alt="Robert Anderson" />
+              <div>
+                <h5>Robert Anderson</h5>
+                <span>Penthouse Buyer, NYC</span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="testimonial-card-about"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="200"
+          >
+            <div class="quote">"</div>
+            <p>
+              The team handled our international property acquisition with
+              absolute professionalism. Discreet, efficient, and exceeded all
+              expectations.
+            </p>
+            <div class="testimonial-author-about">
+              <img src="img/client-2.jpg" alt="Elena Petrov" />
+              <div>
+                <h5>Elena Petrov</h5>
+                <span>Villa Owner, Monaco</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-about">
+      <div class="container">
+        <div
+          class="cta-about-wrapper"
+          data-aos="zoom-in"
+          data-aos-duration="1200"
+        >
+          <div class="cta-about-content">
+            <h2>Begin Your Luxury Journey</h2>
+            <p>
+              Let us help you find the perfect property that reflects your
+              success and aspirations.
+            </p>
+            <a href="contact.html" class="btn btn-white">Contact Our Team</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer (same as home) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h5>Get In Touch</h5>
+            <p><i class="location-icon"></i>123 Street, New York, USA</p>
+            <p><i class="phone-icon"></i>+012 345 67890</p>
+            <p><i class="email-icon"></i>info@mannavilla.com</p>
+            <div class="social-links">
+              <a href="#" class="social-icon"><i class="twitter-icon"></i></a>
+              <a href="#" class="social-icon"><i class="facebook-icon"></i></a>
+              <a href="#" class="social-icon"><i class="youtube-icon"></i></a>
+              <a href="#" class="social-icon"><i class="linkedin-icon"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h5>Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="about-us.html">About Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="#">Our Services</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms & Condition</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Photo Gallery</h5>
+            <div class="gallery-grid">
+              <img src="img/property-1.jpg" alt="Gallery" />
+              <img src="img/property-2.jpg" alt="Gallery" />
+              <img src="img/property-3.jpg" alt="Gallery" />
+              <img src="img/property-4.jpg" alt="Gallery" />
+              <img src="img/property-5.jpg" alt="Gallery" />
+              <img src="img/property-6.jpg" alt="Gallery" />
+            </div>
+          </div>
+          <div class="footer-col">
+            <h5>Newsletter</h5>
+            <p>Subscribe to receive updates on exclusive properties.</p>
+            <div class="newsletter-form">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Your email"
+              />
+              <button class="btn btn-primary">SignUp</button>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="copyright">
+            &copy; <a href="#">Mannavilla</a>, All Right Reserved. Designed By
+            <a href="#">ERIBS Tech</a>
+          </div>
+          <div class="footer-menu">
+            <a href="index.html">Home</a>
+            <a href="#">Cookies</a>
+            <a href="#">Help</a>
+            <a href="#">FQAs</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+      (function () {
+        "use strict";
+
+        // Initialize AOS
+        AOS.init({
+          duration: 800,
+          easing: "ease-out-cubic",
+          once: true,
+          offset: 50,
+          delay: 0,
+        });
+
+        // Navbar toggle
+        const navbarToggler = document.getElementById("navbarToggler");
+        const navbarCollapse = document.getElementById("navbarCollapse");
+        if (navbarToggler) {
+          navbarToggler.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            navbarCollapse.classList.toggle("show");
+          });
+        }
+
+        // Close navbar on click outside
+        document.addEventListener("click", function (e) {
+          if (
+            navbarCollapse &&
+            !navbarCollapse.contains(e.target) &&
+            !navbarToggler.contains(e.target)
+          ) {
+            navbarCollapse.classList.remove("show");
+          }
+        });
+
+        // Dropdown toggles
+        const propertyDropdown = document.getElementById("propertyDropdown");
+        const pagesDropdown = document.getElementById("pagesDropdown");
+        if (propertyDropdown) {
+          propertyDropdown.addEventListener("click", function (e) {
+            e.preventDefault();
+            const expanded =
+              this.getAttribute("aria-expanded") === "true" ? false : true;
+            this.setAttribute("aria-expanded", expanded);
+          });
+        }
+        if (pagesDropdown) {
+          pagesDropdown.addEventListener("click", function (e) {
+            e.preventDefault();
+            const expanded =
+              this.getAttribute("aria-expanded") === "true" ? false : true;
+            this.setAttribute("aria-expanded", expanded);
+          });
+        }
+
+        // Sticky navbar & back to top
+        const backToTop = document.getElementById("backToTop");
+        window.addEventListener("scroll", function () {
+          const navBar = document.querySelector(".nav-bar");
+          if (navBar) {
+            if (window.scrollY > 45) navBar.classList.add("sticky-top");
+            else navBar.classList.remove("sticky-top");
+          }
+          if (backToTop) {
+            backToTop.style.display = window.scrollY > 300 ? "flex" : "none";
+          }
+        });
+
+        if (backToTop) {
+          backToTop.addEventListener("click", function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
+
+        // Close dropdowns on click outside
+        document.addEventListener("click", function (e) {
+          if (!e.target.closest(".dropdown")) {
+            document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
+              toggle.setAttribute("aria-expanded", "false");
+            });
+          }
+        });
+
+        // Handle window resize
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 991.98) {
+            if (navbarCollapse) {
+              navbarCollapse.classList.remove("show");
+            }
+          }
+        });
+      })();
+    </script>
+
+    <!-- Social Icons (same as home) -->
+    <style>
+      .facebook-icon,
+      .twitter-icon,
+      .instagram-icon,
+      .youtube-icon,
+      .linkedin-icon {
+        width: 18px;
+        height: 18px;
+        background: currentColor;
+        display: inline-block;
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+      }
+      .facebook-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z'/%3E%3C/svg%3E");
+      }
+      .twitter-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z'/%3E%3C/svg%3E");
+      }
+      .linkedin-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z'/%3E%3Crect x='2' y='9' width='4' height='12'/%3E%3Ccircle cx='4' cy='4' r='2'/%3E%3C/svg%3E");
+      }
+      .youtube-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z'/%3E%3Cpolygon points='9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02'/%3E%3C/svg%3E");
+      }
+      .instagram-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Crect x='2' y='2' width='20' height='20' rx='5' ry='5'%3E%3C/rect%3E%3Cpath d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/%3E%3Cline x1='17.5' y1='6.5' x2='17.51' y2='6.5'/%3E%3C/svg%3E");
+      }
+      .location-icon,
+      .phone-icon,
+      .email-icon {
+        width: 16px;
+        height: 16px;
+        background: var(--accent);
+        display: inline-block;
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+      }
+      .location-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+      }
+      .phone-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 10a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.574 2.81.7A2 2 0 0 1 22 16.92z'/%3E%3C/svg%3E");
+      }
+      .email-icon {
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E");
+      }
+    </style>
+  </body>
 </html>
