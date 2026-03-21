@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" href="./img/1000100184-removebg-preview.png" />
+    <link rel="icon" href="./img/MANNAVILLA LOGO 1.jpg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -978,6 +978,198 @@
           font-size: 32px;
         }
       }
+
+
+       /* ===== NEW SECTION STYLES (only for Featured Listings, no existing classes touched) ===== */
+  .featured-listings-section {
+    padding: 5rem 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Horizontal scroll container */
+  .featured-horizontal-scroll {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: 20px;
+  }
+  
+  .featured-scroll-track {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    padding: 0.5rem 0.25rem 1rem 0.25rem;
+  }
+  
+  /* Ensure cards inside horizontal scroll keep original width */
+  .featured-scroll-track .property-card {
+    width: 350px;
+    flex-shrink: 0;
+    margin: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Custom scrollbar styling */
+  .featured-horizontal-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .featured-horizontal-scroll::-webkit-scrollbar-track {
+    background: rgba(91, 1, 97, 0.1);
+    border-radius: 10px;
+  }
+  .featured-horizontal-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+  }
+  
+  /* Video card specific */
+  .video-thumbnail-wrapper {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: rgba(91, 1, 97, 0.85);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(238, 210, 121, 0.5);
+    border: 2px solid var(--accent);
+  }
+  
+  .play-icon {
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+  }
+  
+  /* Pulse animation for play button */
+  .pulse-animation {
+    animation: pulseGlow 1.8s infinite;
+  }
+  
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(238, 210, 121, 0.7);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(238, 210, 121, 0);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(238, 210, 121, 0);
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  /* Featured badge with subtle pulse */
+  .featured-badge-pulse {
+    animation: badgePulse 2s infinite;
+  }
+  
+  @keyframes badgePulse {
+    0% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(238, 210, 121, 0.5);
+    }
+    70% {
+      opacity: 0.95;
+      box-shadow: 0 0 0 8px rgba(238, 210, 121, 0);
+    }
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(238, 210, 121, 0);
+    }
+  }
+  
+  /* Video playing state: hide thumbnail, show video */
+  .video-thumbnail-wrapper.playing .thumbnail-img {
+    display: none;
+  }
+  .video-thumbnail-wrapper.playing .inline-video {
+    display: block !important;
+  }
+  .video-thumbnail-wrapper.playing .play-overlay {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+  }
+  
+  /* Navigation buttons (below scroll) */
+  .scroll-nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .scroll-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    font-weight: bold;
+  }
+  
+  .scroll-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+  
+  /* Responsive adjustments (preserve original breakpoints) */
+  @media (max-width: 991.98px) {
+    .featured-scroll-track .property-card {
+      width: 320px;
+    }
+    .scroll-nav-buttons {
+      margin-top: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 575.98px) {
+    .featured-scroll-track {
+      gap: 1.2rem;
+    }
+    .featured-scroll-track .property-card {
+      width: 280px;
+    }
+    .play-overlay {
+      width: 55px;
+      height: 55px;
+    }
+    .play-icon {
+      width: 26px;
+      height: 26px;
+    }
+  }
 
       /* Property Listings */
       .listings-header {
@@ -2377,19 +2569,162 @@
         >
           <h2>#1 Place To Find The Perfect Property</h2>
           <p>
-            Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-            diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet
-            lorem sit clita duo justo magna dolore erat amet
+            Mannavilla LTD believes in the power of strategic development, thus we make sure that every project we embark on is placed in regions that provide our clients with convenience, accessibility, and an upgraded lifestyle.
           </p>
           <ul>
-            <li>Tempor erat elitr rebum at clita</li>
-            <li>Aliqu diam amet diam et eos</li>
-            <li>Clita duo justo magna dolore erat amet</li>
+            <li>Trustworthy</li>
+            <li>Excellence</li>
+            <li>Innovation</li>
           </ul>
           <a href="about.html" class="btn">Read More</a>
         </div>
       </div>
     </section>
+
+
+    <!-- ===== NEW SECTION: FEATURED LISTINGS (Video + Image Cards) ===== -->
+<section class="section featured-listings-section" style="background: linear-gradient(145deg, #fff 0%, #faf5ff 100%);">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+      <h2>Featured Listings</h2>
+      <p>Discover our handpicked properties — some with exclusive video tours.</p>
+    </div>
+
+    <!-- HORIZONTAL SCROLL WRAPPER (mobile-friendly) -->
+    <div class="featured-horizontal-scroll" data-aos="fade-up" data-aos-duration="1000">
+      <div class="featured-scroll-track" id="featuredScrollTrack">
+        <!-- CARD 1: Image Card (standard property card) -->
+        <div class="property-card featured-card">
+          <div class="property-image">
+            <img src="img/property-1.jpg" alt="Luxury Villa" />
+            <span class="property-badge">Featured</span>
+            <span class="property-type">Villa</span>
+          </div>
+          <div class="property-details">
+            <h3 class="property-price">$1,250,000</h3>
+            <h4 class="property-title">Sunset Cliff Villa</h4>
+            <p class="property-location"><i class="location-icon"></i>Beverly Hills, CA</p>
+          </div>
+          <div class="property-features">
+            <span><i class="ruler-icon"></i>4,200 Sqft</span>
+            <span><i class="bed-icon"></i>5 Bed</span>
+            <span><i class="bath-icon"></i>4 Bath</span>
+          </div>
+        </div>
+
+        <!-- CARD 2: VIDEO CARD (with play button & inline video) -->
+        <div class="property-card featured-card video-card" data-video-id="video1">
+          <div class="property-image video-thumbnail-wrapper" data-video-state="thumbnail">
+            <!-- Thumbnail image -->
+            <img class="thumbnail-img" src="img/property-2.jpg" alt="Video Preview" />
+            <!-- Play button overlay with pulse animation -->
+            <div class="play-overlay pulse-animation">
+              <svg class="play-icon" viewBox="0 0 24 24" width="48" height="48" fill="white">
+                <polygon points="5,3 19,12 5,21" fill="currentColor" />
+              </svg>
+            </div>
+            <!-- Video element (hidden initially) -->
+            <video class="inline-video" preload="metadata" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <span class="property-badge featured-badge-pulse">Featured</span>
+            <span class="property-type">Video Tour</span>
+          </div>
+          <div class="property-details">
+            <h3 class="property-price">$895,000</h3>
+            <h4 class="property-title">Modern Waterfront Loft</h4>
+            <p class="property-location"><i class="location-icon"></i>Miami Beach, FL</p>
+          </div>
+          <div class="property-features">
+            <span><i class="ruler-icon"></i>2,150 Sqft</span>
+            <span><i class="bed-icon"></i>3 Bed</span>
+            <span><i class="bath-icon"></i>2.5 Bath</span>
+          </div>
+        </div>
+
+        <!-- CARD 3: VIDEO CARD (second video) -->
+        <div class="property-card featured-card video-card" data-video-id="video2">
+          <div class="property-image video-thumbnail-wrapper" data-video-state="thumbnail">
+            <img class="thumbnail-img" src="img/property-3.jpg" alt="Video Preview" />
+            <div class="play-overlay pulse-animation">
+              <svg class="play-icon" viewBox="0 0 24 24" width="48" height="48" fill="white">
+                <polygon points="5,3 19,12 5,21" fill="currentColor" />
+              </svg>
+            </div>
+            <video class="inline-video" preload="metadata" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+            <span class="property-badge featured-badge-pulse">Featured</span>
+            <span class="property-type">Video Tour</span>
+          </div>
+          <div class="property-details">
+            <h3 class="property-price">$2,450,000</h3>
+            <h4 class="property-title">Downtown Sky Penthouse</h4>
+            <p class="property-location"><i class="location-icon"></i>New York, NY</p>
+          </div>
+          <div class="property-features">
+            <span><i class="ruler-icon"></i>3,800 Sqft</span>
+            <span><i class="bed-icon"></i>4 Bed</span>
+            <span><i class="bath-icon"></i>3 Bath</span>
+          </div>
+        </div>
+
+        <!-- CARD 4: Image Card (extra) -->
+        <div class="property-card featured-card">
+          <div class="property-image">
+            <img src="img/property-4.jpg" alt="Estate" />
+            <span class="property-badge">Featured</span>
+            <span class="property-type">Estate</span>
+          </div>
+          <div class="property-details">
+            <h3 class="property-price">$3,100,000</h3>
+            <h4 class="property-title">Mountain Ridge Estate</h4>
+            <p class="property-location"><i class="location-icon"></i>Aspen, CO</p>
+          </div>
+          <div class="property-features">
+            <span><i class="ruler-icon"></i>6,500 Sqft</span>
+            <span><i class="bed-icon"></i>6 Bed</span>
+            <span><i class="bath-icon"></i>5 Bath</span>
+          </div>
+        </div>
+
+        <!-- CARD 5: VIDEO CARD (third video) -->
+        <div class="property-card featured-card video-card" data-video-id="video3">
+          <div class="property-image video-thumbnail-wrapper" data-video-state="thumbnail">
+            <img class="thumbnail-img" src="img/property-5.jpg" alt="Video Preview" />
+            <div class="play-overlay pulse-animation">
+              <svg class="play-icon" viewBox="0 0 24 24" width="48" height="48" fill="white">
+                <polygon points="5,3 19,12 5,21" fill="currentColor" />
+              </svg>
+            </div>
+            <video class="inline-video" preload="metadata" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+            <span class="property-badge featured-badge-pulse">Featured</span>
+            <span class="property-type">Video Tour</span>
+          </div>
+          <div class="property-details">
+            <h3 class="property-price">$1,875,000</h3>
+            <h4 class="property-title">Seaside Mediterranean Villa</h4>
+            <p class="property-location"><i class="location-icon"></i>Malibu, CA</p>
+          </div>
+          <div class="property-features">
+            <span><i class="ruler-icon"></i>3,400 Sqft</span>
+            <span><i class="bed-icon"></i>4 Bed</span>
+            <span><i class="bath-icon"></i>3 Bath</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation buttons (visible on all screens, better on mobile) -->
+      <div class="scroll-nav-buttons">
+        <button class="scroll-btn scroll-prev" id="featuredScrollPrev" aria-label="Scroll left">←</button>
+        <button class="scroll-btn scroll-next" id="featuredScrollNext" aria-label="Scroll right">→</button>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- Property Listings -->
     <section class="section">
@@ -2487,7 +2822,7 @@
               </div>
             </div>
             <!-- Property 4 -->
-            <div
+            <!-- <div
               class="property-card"
               data-aos="fade-up"
               data-aos-duration="800"
@@ -2510,9 +2845,9 @@
                 <span><i class="bed-icon"></i>3 Bed</span>
                 <span><i class="bath-icon"></i>2 Bath</span>
               </div>
-            </div>
+            </div> -->
             <!-- Property 5 -->
-            <div
+            <!-- <div
               class="property-card"
               data-aos="fade-up"
               data-aos-duration="800"
@@ -2535,9 +2870,9 @@
                 <span><i class="bed-icon"></i>3 Bed</span>
                 <span><i class="bath-icon"></i>2 Bath</span>
               </div>
-            </div>
+            </div> -->
             <!-- Property 6 -->
-            <div
+            <!-- <div
               class="property-card"
               data-aos="fade-up"
               data-aos-duration="800"
@@ -2561,9 +2896,9 @@
                 <span><i class="bath-icon"></i>2 Bath</span>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="text-center" data-aos="fade-up" data-aos-duration="800">
-            <a href="#" class="btn btn-primary browse-btn"
+            <a href="property-list.html" class="btn btn-primary browse-btn"
               >Browse More Property</a
             >
           </div>
@@ -2658,7 +2993,7 @@
                 <a href="#" class="btn btn-primary"
                   ><i class="phone-icon"></i>Make A Call</a
                 >
-                <a href="#" class="btn btn-dark"
+                <a href="contact.html" class="btn btn-dark"
                   ><i class="calendar-icon"></i>Get Appoinment</a
                 >
               </div>
@@ -2929,7 +3264,7 @@
             <a href="#">ERIBS Tech</a>
           </div>
           <div class="footer-menu">
-            <a href="#">Home</a>
+            <a href="index.html">Home</a>
             <a href="#">Cookies</a>
             <a href="#">Help</a>
             <a href="#">FQAs</a>
@@ -3120,6 +3455,106 @@
           }
           typeEffect();
         }
+
+
+        (function() {
+    'use strict';
+    
+    // ---- Horizontal scroll with buttons (mobile & desktop) ----
+    const scrollContainer = document.getElementById('featuredScrollTrack')?.parentElement; // .featured-horizontal-scroll
+    const prevBtn = document.getElementById('featuredScrollPrev');
+    const nextBtn = document.getElementById('featuredScrollNext');
+    
+    if (scrollContainer && prevBtn && nextBtn) {
+      // scroll amount = ~ card width + gap
+      const scrollStep = () => {
+        if (!scrollContainer) return 320;
+        const firstCard = scrollContainer.querySelector('.featured-scroll-track .property-card');
+        if (firstCard) {
+          const cardWidth = firstCard.offsetWidth;
+          const gap = parseFloat(getComputedStyle(scrollContainer.querySelector('.featured-scroll-track')).gap) || 24;
+          return cardWidth + gap;
+        }
+        return 340;
+      };
+      
+      prevBtn.addEventListener('click', () => {
+        scrollContainer.scrollBy({ left: -scrollStep(), behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        scrollContainer.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+      });
+      
+      // Optional: disable buttons at edges (simple UX)
+      const checkScrollButtons = () => {
+        const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+        if (scrollContainer.scrollLeft <= 5) {
+          prevBtn.style.opacity = '0.5';
+          prevBtn.style.pointerEvents = 'none';
+        } else {
+          prevBtn.style.opacity = '1';
+          prevBtn.style.pointerEvents = 'auto';
+        }
+        if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= maxScroll - 5) {
+          nextBtn.style.opacity = '0.5';
+          nextBtn.style.pointerEvents = 'none';
+        } else {
+          nextBtn.style.opacity = '1';
+          nextBtn.style.pointerEvents = 'auto';
+        }
+      };
+      
+      scrollContainer.addEventListener('scroll', checkScrollButtons);
+      window.addEventListener('resize', () => setTimeout(checkScrollButtons, 100));
+      setTimeout(checkScrollButtons, 200);
+    }
+    
+    // ---- Video Playback Inline (same card, without leaving layout) ----
+    const videoCards = document.querySelectorAll('.video-card');
+    
+    videoCards.forEach(card => {
+      const wrapper = card.querySelector('.video-thumbnail-wrapper');
+      const playBtnOverlay = wrapper?.querySelector('.play-overlay');
+      const videoElem = wrapper?.querySelector('.inline-video');
+      const thumbnailImg = wrapper?.querySelector('.thumbnail-img');
+      
+      if (!wrapper || !videoElem) return;
+      
+      const startVideo = (e) => {
+        e.stopPropagation();
+        if (wrapper.classList.contains('playing')) return;
+        
+        // Hide thumbnail, show video, and play
+        wrapper.classList.add('playing');
+        videoElem.style.display = 'block';
+        videoElem.play().catch(err => {
+          console.warn("Autoplay blocked? User interaction needed, but we already have click.");
+          // Fallback: if autoplay fails, keep video visible but require second click? We'll handle gracefully.
+        });
+        
+        // Remove pulse animation while playing for cleaner look
+        if (playBtnOverlay) playBtnOverlay.style.opacity = '0';
+      };
+      
+      // Click on thumbnail or play button starts video
+      if (playBtnOverlay) {
+        playBtnOverlay.addEventListener('click', startVideo);
+      } else {
+        wrapper.addEventListener('click', startVideo);
+      }
+      
+      // Optional: when video ends, reset to thumbnail (nice UX)
+      videoElem.addEventListener('ended', () => {
+        wrapper.classList.remove('playing');
+        videoElem.style.display = 'none';
+        if (playBtnOverlay) playBtnOverlay.style.opacity = '1';
+        // reset video time
+        videoElem.currentTime = 0;
+      });
+      
+      // Also reset if user clicks away? Not needed, keeps consistent.
+    });
+  })();
 
         // Premium testimonial carousel (simple fallback, no GSAP)
         const slides = document.querySelectorAll(".testimonial-luxury-slide");
