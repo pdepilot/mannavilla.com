@@ -175,7 +175,7 @@
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-md);
             border: 1px solid var(--accent);
-            border-radius: 50px;
+    
         }
 
         @media (max-width: 991.98px) {
@@ -1075,11 +1075,6 @@
 </head>
 <body>
 
-    <!-- Spinner -->
-    <div id="spinner" class="spinner show">
-        <div class="spinner-border"></div>
-    </div>
-
     <!-- Navbar -->
     <div class="nav-bar">
         <nav class="navbar">
@@ -1288,11 +1283,6 @@
                 delay: 0,
             });
 
-            // Spinner
-            const spinner = document.getElementById("spinner");
-            window.addEventListener("load", function () {
-                if (spinner) setTimeout(() => spinner.classList.remove("show"), 500);
-            });
 
             // Navbar toggle
             const navbarToggler = document.getElementById("navbarToggler");
