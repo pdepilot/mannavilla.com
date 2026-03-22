@@ -345,6 +345,7 @@
     
     // State
     let isOpen = false;
+    let isRedirecting = false; // Prevent multiple redirects
     
     // Time-based greeting
     function getTimeBasedGreeting() {
@@ -403,14 +404,18 @@
         </div>
       `;
       
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes typingDot {
-          0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
-          30% { opacity: 1; transform: translateY(-4px); }
-        }
-      `;
-      document.head.appendChild(style);
+      // Add animation style if not exists
+      if (!document.getElementById('typingDotStyle')) {
+        const style = document.createElement('style');
+        style.id = 'typingDotStyle';
+        style.textContent = `
+          @keyframes typingDot {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-4px); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
       
       messagesContainer.appendChild(typingDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -423,17 +428,45 @@
       }
     }
     
-    // WhatsApp redirect
-    function redirectToWhatsApp() {
-      const phoneNumber = '+1234567890'; // Replace with actual number
-      const message = encodeURIComponent('Hi! I need assistance with your real estate services.');
-      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-      addMessage("I'm redirecting you to WhatsApp where our team will assist you immediately! 📱", false);
+    // Human-like random typing delay (900ms - 1500ms)
+    function getRandomTypingDelay() {
+      return Math.floor(Math.random() * (1500 - 900 + 1) + 900);
     }
     
-    // Bot response logic
+    // WhatsApp redirect with natural flow
+    async function redirectToWhatsAppWithDelay() {
+      if (isRedirecting) return;
+      isRedirecting = true;
+      
+      // First message: Acknowledgment
+      addMessage("Hmm... I want to make sure I give you the right information. Let me connect you with one of our experts in a moment... 🤔", false);
+      
+      // Show typing indicator for second message
+      await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
+      showTypingIndicator();
+      
+      await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
+      hideTypingIndicator();
+      
+      // Second message: Redirect notification
+      addMessage("You'll be redirected to WhatsApp shortly so our team can assist you directly. 📱", false);
+      
+      // Final delay before redirect
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      
+      // Perform redirect
+      const phoneNumber = '+1234567890'; // Replace with actual number
+      const message = encodeURIComponent('Hi! I need assistance with your real estate services. I was just chatting with your bot.');
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+      
+      isRedirecting = false;
+    }
+    
+    // Enhanced bot response logic with more real estate topics
     function getBotResponse(userMessage) {
       const msg = userMessage.toLowerCase().trim();
+      
+      // --- EXISTING RESPONSES (Kept intact) ---
       
       // Property Search
       if (msg.includes('property') && (msg.includes('search') || msg.includes('find') || msg.includes('looking'))) {
@@ -445,7 +478,7 @@
         return "💰 Our properties range from $150,000 for cozy apartments to $5,000,000+ for luxury estates. Pricing varies based on:\n• Location & neighborhood\n• Property size & amenities\n• Market conditions\n\nWould you like to browse properties in a specific price range?";
       }
       
-      // Location
+      // Location (general)
       if (msg.includes('location') || msg.includes('area') || msg.includes('city') || msg.includes('where')) {
         return "📍 We serve prime locations including:\n• Downtown & City Center\n• Beverly Hills & Luxury Districts\n• Waterfront Properties\n• Suburban Family Communities\n\nWhich area interests you most?";
       }
@@ -480,14 +513,73 @@
         return "You're most welcome! 😊 Is there anything else I can help you with regarding properties or our services?";
       }
       
-      // Default: redirect to WhatsApp
+      // --- NEW REAL ESTATE RESPONSES (Added) ---
+      
+      // Payment / Installments
+      if (msg.includes('installment') || msg.includes('payment plan') || (msg.includes('pay') && msg.includes('monthly'))) {
+        return "💳 We offer flexible payment plans! Many of our properties come with:\n\n• 10% initial deposit\n• Up to 24-month installment options\n• Bank mortgage partnerships\n• 0% interest developer plans on select properties\n\nWould you like to know which properties have flexible payment options?";
+      }
+      
+      // Property Types (detailed)
+      if (msg.includes('duplex') || msg.includes('bungalow') || msg.includes('apartment') || msg.includes('land') || msg.includes('townhouse')) {
+        let propertyType = '';
+        if (msg.includes('duplex')) propertyType = 'Duplex';
+        else if (msg.includes('bungalow')) propertyType = 'Bungalow';
+        else if (msg.includes('apartment')) propertyType = 'Apartment';
+        else if (msg.includes('land')) propertyType = 'Land';
+        else if (msg.includes('townhouse')) propertyType = 'Townhouse';
+        else propertyType = 'property';
+        
+        return `🏘️ We have a variety of ${propertyType} options available!\n\n• Starting from $150K\n• Multiple locations\n• Various sizes and configurations\n\nWould you like to see our current ${propertyType.toLowerCase()} listings?`;
+      }
+      
+      // Property Inspection / Visit
+      if (msg.includes('inspection') || msg.includes('visit') || msg.includes('view property') || msg.includes('see the property')) {
+        return "🔍 Property inspections are available! Here's how it works:\n\n• Schedule a physical viewing\n• Virtual tour options available\n• Accompanied by our expert agents\n• Detailed property reports provided\n\nWould you like to schedule an inspection for a specific property?";
+      }
+      
+      // Documentation / Legal
+      if (msg.includes('document') || msg.includes('c of o') || msg.includes('c-of-o') || msg.includes('title') || msg.includes('papers') || msg.includes('legal')) {
+        return "📄 We ensure all properties have proper documentation:\n\n• C of O (Certificate of Occupancy)\n• Survey Plans\n• Building Approvals\n• Title Deeds\n• Registered with relevant authorities\n\nAll documents are verified before listing. Need help with documentation for a specific property?";
+      }
+      
+      // Investment / ROI
+      if (msg.includes('investment') || msg.includes('roi') || msg.includes('return') || msg.includes('value appreciate')) {
+        return "📈 Real estate is a great investment! Our properties typically offer:\n\n• 8-15% annual appreciation\n• Rental yields of 5-10%\n• Strong capital appreciation in developing areas\n• Portfolio diversification\n\nWould you like to speak with our investment advisor about ROI opportunities?";
+      }
+      
+      // Nigerian Locations
+      if (msg.includes('imo') || msg.includes('owerri') || msg.includes('lagos') || msg.includes('abuja') || msg.includes('port harcourt') || msg.includes('enugu')) {
+        let location = '';
+        if (msg.includes('imo')) location = 'Imo State';
+        else if (msg.includes('owerri')) location = 'Owerri';
+        else if (msg.includes('lagos')) location = 'Lagos';
+        else if (msg.includes('abuja')) location = 'Abuja';
+        else if (msg.includes('port harcourt')) location = 'Port Harcourt';
+        else if (msg.includes('enugu')) location = 'Enugu';
+        else location = 'that area';
+        
+        return `📍 We have excellent properties in ${location}! 🏠\n\n• Luxury homes and commercial spaces\n• Affordable family housing\n• Prime locations with good infrastructure\n• Verified listings with proper documentation\n\nWould you like to see our current listings in ${location}?`;
+      }
+      
+      // Lifestyle / Family / Safety
+      if (msg.includes('family') || msg.includes('safe') || msg.includes('environment') || msg.includes('school') || msg.includes('security')) {
+        return "👨‍👩‍👧‍👦 Family-friendly properties are our specialty!\n\nWe consider:\n• Proximity to schools & hospitals\n• Gated communities with 24/7 security\n• Parks & recreational areas\n• Quiet neighborhoods\n• Modern amenities\n\nWould you like recommendations for family-friendly properties?";
+      }
+      
+      // Property Size / Bedrooms
+      if (msg.includes('bedroom') || msg.includes('bathroom') || msg.includes('size') || msg.includes('sqft') || msg.includes('square')) {
+        return "📐 We have properties in various sizes:\n\n• 2-3 Bedroom Apartments: 1,200-1,800 sqft\n• 4-5 Bedroom Homes: 2,500-4,000 sqft\n• Luxury Villas: 5,000+ sqft\n• Commercial Spaces: 1,000-10,000 sqft\n\nWhat size property are you looking for?";
+      }
+      
+      // Default: fall through to redirect
       return null;
     }
     
-    // Handle user message
+    // Handle user message with improved flow
     async function handleUserMessage() {
       const message = userInput.value.trim();
-      if (!message) return;
+      if (!message || isRedirecting) return;
       
       // Add user message
       addMessage(message, true);
@@ -496,8 +588,8 @@
       // Show typing indicator
       showTypingIndicator();
       
-      // Simulate typing delay
-      await new Promise(resolve => setTimeout(resolve, 600));
+      // Human-like random delay before response
+      await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
       
       // Get bot response
       const botResponse = getBotResponse(message);
@@ -505,12 +597,12 @@
       hideTypingIndicator();
       
       if (botResponse) {
+        // Show bot response with another natural delay
+        await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
         addMessage(botResponse, false);
       } else {
-        // Unrecognized message - redirect to WhatsApp
-        addMessage("I want to make sure you get the best assistance possible! Let me connect you with our expert team...", false);
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        redirectToWhatsApp();
+        // Unrecognized message - initiate natural WhatsApp redirect flow
+        await redirectToWhatsAppWithDelay();
       }
     }
     
@@ -540,7 +632,7 @@
     
     if (userInput) {
       userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && !isRedirecting) {
           handleUserMessage();
         }
       });
@@ -557,7 +649,6 @@
     // Initialize greeting
     setGreeting();
     
-    // Optional: Preload WhatsApp redirect tracking
-    console.log('Chatbot ready — unrecognized messages will redirect to WhatsApp');
+    console.log('Chatbot enhanced — smarter responses, human-like delays, improved WhatsApp flow');
   })();
 </script>
