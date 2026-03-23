@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Logging Out | Mannavilla Real Estate Admin</title>
+    <link rel="icon" href="./img/MANNAVILLA LOGO 1.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #5b0161;
+            --primary-dark: #3f0043;
+            --primary-light: #7a1f80;
+            --secondary: #0a0a0f;
+            --accent: #eed279;
+            --accent-dark: #d4b85a;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #9ca3af;
+            --gray-dark: #2d2d3a;
+            --dark: #11111f;
+            --darker: #0a0a12;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--darker) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(91, 1, 97, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle, rgba(238, 210, 121, 0.05) 0%, transparent 60%);
+            animation: rotate 20s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            50% { transform: translateY(-50px) translateX(30px); opacity: 0.6; }
+        }
+
+        /* Main Card */
+        .logout-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 480px;
+            margin: 20px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logout-card {
+            background: rgba(17, 17, 31, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            border: 1px solid var(--border-color);
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .logout-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Logo Section */
+        .logo-section {
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(238, 210, 121, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(238, 210, 121, 0);
+            }
+        }
+
+        .logo-icon i {
+            font-size: 40px;
+            color: var(--accent);
+        }
+
+        .logo-section h2 {
+            color: var(--white);
+            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 8px;
+        }
+
+        .logo-section p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Status Indicator */
+        .status-indicator {
+            margin: 32px 0;
+            padding: 20px;
+            background: rgba(91, 1, 97, 0.2);
+            border-radius: 32px;
+            border: 1px solid var(--border-color);
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .checkmark i {
+            font-size: 32px;
+            color: var(--white);
+        }
+
+        .status-text {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .status-subtext {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        /* Session Info */
+        .session-info {
+            margin: 24px 0;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            text-align: left;
+        }
+
+        .session-info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .session-info-item:last-child {
+            border-bottom: none;
+        }
+
+        .session-label {
+            color: var(--gray);
+        }
+
+        .session-value {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(91, 1, 97, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--gray);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .quote-text {
+            color: var(--gray);
+            font-size: 12px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .quote-author {
+            color: var(--accent);
+            font-size: 11px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Countdown */
+        .countdown {
+            margin-top: 20px;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .countdown span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .logout-card {
+                padding: 32px 24px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .logo-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-icon i {
+                font-size: 28px;
+            }
+            
+            .logo-section h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="logout-container">
+        <div class="logout-card">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h2>Mannavilla</h2>
+                <p>Administrative Portal</p>
+            </div>
+
+            <div class="status-indicator" id="statusIndicator">
+                <div class="spinner" id="spinner"></div>
+                <div class="checkmark" id="checkmark" style="display: none;">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="status-text" id="statusText">Logging you out...</div>
+                <div class="status-subtext" id="statusSubtext">Clearing session data and securing your account</div>
+            </div>
+
+            <div class="session-info" id="sessionInfo">
+                <div class="session-info-item">
+                    <span class="session-label"><i class="fas fa-user"></i> Admin Name</span>
+                    <span class="session-value" id="sessionName">Loading...</span>
+                </div>
+                <div class="session-info-item">
+                    <span class="session-label"><i class="fas fa-clock"></i> Session Started</span>
+                    <span class="session-value" id="sessionStart">--:-- --</span>
+                </div>
+                <div class="session-info-item">
+                    <span class="session-label"><i class="fas fa-hourglass-half"></i> Session Duration</span>
+                    <span class="session-value" id="sessionDuration">--:--:--</span>
+                </div>
+            </div>
+
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <a href="admin-login.html" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login Again
+                </a>
+                <a href="index.html" class="btn btn-outline">
+                    <i class="fas fa-home"></i> Return to Site
+                </a>
+            </div>
+
+            <div class="quote-section">
+                <div class="quote-text">
+                    "The best way to predict the future is to create it."
+                </div>
+                <div class="quote-author">— Peter Drucker</div>
+            </div>
+
+            <div class="countdown" id="countdown">
+                Redirecting in <span id="countdownTimer">5</span> seconds
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // Get session data before clearing
+            const adminName = sessionStorage.getItem('adminName') || 'Administrator';
+            const adminEmail = sessionStorage.getItem('adminEmail') || 'admin@mannavilla.com';
+            const loginTime = sessionStorage.getItem('adminLoginTime') || new Date().toISOString();
+            
+            // Display session info
+            document.getElementById('sessionName').innerHTML = `<i class="fas fa-crown"></i> ${adminName}`;
+            
+            // Format session start time
+            const startDate = new Date(loginTime);
+            const startTimeFormatted = startDate.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            document.getElementById('sessionStart').innerText = startTimeFormatted;
+            
+            // Calculate session duration
+            const now = new Date();
+            const durationMs = now - startDate;
+            const hours = Math.floor(durationMs / 3600000);
+            const minutes = Math.floor((durationMs % 3600000) / 60000);
+            const seconds = Math.floor((durationMs % 60000) / 1000);
+            const durationFormatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('sessionDuration').innerText = durationFormatted;
+            
+            // Create floating particles
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    const size = Math.random() * 6 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${Math.random() * 15}s`;
+                    particle.style.animationDuration = `${10 + Math.random() * 20}s`;
+                    particle.style.opacity = Math.random() * 0.3;
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            createParticles();
+            
+            // Logout sequence with steps
+            const steps = [
+                { text: "Validating session...", subtext: "Checking authentication status" },
+                { text: "Clearing session data...", subtext: "Removing stored credentials" },
+                { text: "Revoking access tokens...", subtext: "Invalidating API keys" },
+                { text: "Clearing browser cache...", subtext: "Removing temporary files" },
+                { text: "Logging audit trail...", subtext: "Recording security event" },
+                { text: "Logout complete!", subtext: "Your session has been securely terminated" }
+            ];
+            
+            let stepIndex = 0;
+            const statusText = document.getElementById('statusText');
+            const statusSubtext = document.getElementById('statusSubtext');
+            const spinner = document.getElementById('spinner');
+            const checkmark = document.getElementById('checkmark');
+            const actionButtons = document.getElementById('actionButtons');
+            const countdownDiv = document.getElementById('countdown');
+            
+            // Simulate logout process
+            function processLogoutStep() {
+                if (stepIndex < steps.length) {
+                    const step = steps[stepIndex];
+                    statusText.textContent = step.text;
+                    statusSubtext.textContent = step.subtext;
+                    stepIndex++;
+                    setTimeout(processLogoutStep, 400);
+                } else {
+                    // Logout complete
+                    spinner.style.display = 'none';
+                    checkmark.style.display = 'flex';
+                    statusText.textContent = 'Successfully logged out!';
+                    statusSubtext.textContent = 'Thank you for using Mannavilla Admin Portal';
+                    
+                    // Clear all session storage items
+                    sessionStorage.removeItem('adminLoggedIn');
+                    sessionStorage.removeItem('adminName');
+                    sessionStorage.removeItem('adminEmail');
+                    sessionStorage.removeItem('adminLoginTime');
+                    sessionStorage.removeItem('adminRole');
+                    sessionStorage.removeItem('adminAvatar');
+                    
+                    // Clear any other admin-related data
+                    const keysToRemove = [];
+                    for (let i = 0; i < sessionStorage.length; i++) {
+                        const key = sessionStorage.key(i);
+                        if (key && (key.includes('admin') || key.includes('mannavilla'))) {
+                            keysToRemove.push(key);
+                        }
+                    }
+                    keysToRemove.forEach(key => sessionStorage.removeItem(key));
+                    
+                    // Also clear local storage admin data
+                    localStorage.removeItem('mannavilla_properties');
+                    localStorage.removeItem('mannavilla_testimonials');
+                    localStorage.removeItem('mannavilla_gallery');
+                    localStorage.removeItem('mannavilla_sell_requests');
+                    
+                    // Show action buttons after delay
+                    setTimeout(() => {
+                        actionButtons.style.display = 'flex';
+                    }, 500);
+                    
+                    // Start countdown
+                    let countdown = 5;
+                    const timerElement = document.getElementById('countdownTimer');
+                    const countdownInterval = setInterval(() => {
+                        countdown--;
+                        if (timerElement) timerElement.textContent = countdown;
+                        if (countdown <= 0) {
+                            clearInterval(countdownInterval);
+                            // Auto redirect to login page
+                            window.location.href = 'admin-login.html';
+                        }
+                    }, 1000);
+                }
+            }
+            
+            // Start logout process after a short delay
+            setTimeout(processLogoutStep, 500);
+            
+            // Add keyboard shortcut for emergency return
+            document.addEventListener('keydown', (e) => {
+                // Press 'R' to reset countdown or 'L' to go to login
+                if (e.key === 'r' || e.key === 'R') {
+                    if (actionButtons.style.display === 'flex') {
+                        window.location.href = 'admin-login.html';
+                    }
+                }
+                if (e.key === 'h' || e.key === 'H') {
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Animate session info fade out
+            const sessionInfo = document.getElementById('sessionInfo');
+            setTimeout(() => {
+                sessionInfo.style.transition = 'opacity 1s ease';
+                sessionInfo.style.opacity = '0.5';
+            }, 1500);
+            
+            // Prevent back button from restoring session
+            history.pushState(null, null, location.href);
+            window.addEventListener('popstate', function () {
+                history.pushState(null, null, location.href);
+                // Force logout if someone tries to go back
+                window.location.href = 'admin-login.html';
+            });
+            
+            // Log the logout event to console (for audit)
+            console.log(`[SECURITY] Admin logout at ${new Date().toISOString()}`);
+            console.log(`[SECURITY] User: ${adminName}, Session duration: ${durationFormatted}`);
+        })();
+    </script>
+</body>
+</html>

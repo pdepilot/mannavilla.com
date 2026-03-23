@@ -19,830 +19,7 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        /* ===== VARIABLES ===== */
-        :root {
-            --primary: #5b0161;
-            --primary-light: #7a1f80;
-            --primary-dark: #3f0043;
-            --secondary: #14051d;
-            --accent: #eed279;
-            --accent-light: #f7e3a8;
-            --white: #ffffff;
-            --light-gray: #f8f9fa;
-            --gray: #6c757d;
-            --dark-gray: #343a40;
-            --border-color: rgba(91, 1, 97, 0.1);
-            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 30px rgba(91, 1, 97, 0.1);
-            --shadow-lg: 0 20px 40px rgba(20, 5, 29, 0.15);
-            --shadow-xl: 0 30px 60px rgba(91, 1, 97, 0.2);
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-            color: var(--secondary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, #fff 0%, #faf5ff 100%);
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: "Playfair Display", serif;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--secondary);
-        }
-
-        h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
-        h2 { font-size: clamp(1.75rem, 6vw, 2.5rem); }
-        p {
-            margin-bottom: 1rem;
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.875rem 2rem;
-            font-size: 1rem;
-            font-weight: 500;
-            line-height: 1.5;
-            text-align: center;
-            cursor: pointer;
-            border: 2px solid transparent;
-            border-radius: 50px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            letter-spacing: 0.5px;
-        }
-
-        .btn::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: var(--white);
-            box-shadow: 0 10px 20px rgba(91, 1, 97, 0.3);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(91, 1, 97, 0.4);
-        }
-
-        /* Navbar */
-        .nav-bar {
-            position: relative;
-            margin-top: 30px;
-            padding: 0 1rem;
-            transition: var(--transition);
-            z-index: 9999;
-        }
-
-        @media (min-width: 992px) {
-            .nav-bar { padding: 0 3rem; }
-        }
-
-        .nav-bar.sticky-top {
-            position: sticky;
-            top: 0;
-            padding: 0;
-            margin-top: 0;
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--accent);
-        }
-
-        @media (max-width: 991.98px) {
-            .navbar {  }
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 1.5rem;
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .brand-icon {
-            width: 40px;
-            height: 40px;
-            padding: 0.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .brand-icon:hover { transform: rotate(360deg); }
-        .brand-icon img { width: 100%; height: auto; filter: brightness(0) invert(1); }
-        .navbar-brand h1 {
-            color: var(--primary);
-            margin: 0;
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .navbar-toggler {
-            display: none;
-            background: transparent;
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-        }
-
-        .navbar-toggler:hover { background: var(--primary); }
-        .navbar-toggler:hover .navbar-toggler-icon { filter: brightness(0) invert(1); }
-        .navbar-toggler-icon {
-            display: inline-block;
-            width: 1.5em;
-            height: 1.5em;
-            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%235b0161' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-
-        .navbar-collapse {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-        }
-
-        .navbar-nav {
-            display: flex;
-            list-style: none;
-            margin-left: auto;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            padding: 0.5rem 0;
-            position: relative;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-link::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after { width: 100%; }
-        .nav-link:hover,
-        .nav-link.active { color: var(--primary); }
-
-        .sell-btn {
-            margin-left: 1.5rem;
-            padding: 0.75rem 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border: 2px solid var(--accent);
-            color: var(--white);
-            font-weight: 600;
-        }
-
-        @media (max-width: 991.98px) {
-            .navbar-toggler { display: block; }
-            .navbar-collapse {
-                display: block;
-                position: absolute;
-                top: 100%;
-                left: 1rem;
-                right: 1rem;
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(10px);
-                padding: 1.5rem;
-                border-radius: 30px;
-                box-shadow: var(--shadow-lg);
-                border: 2px solid var(--accent);
-                margin-top: 1rem;
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-20px);
-                transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-                pointer-events: none;
-            }
-            .navbar-collapse.show {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                pointer-events: all;
-            }
-            .navbar-nav {
-                flex-direction: column;
-                margin: 0;
-                gap: 0.8rem;
-            }
-            .nav-link {
-                padding: 1rem 0;
-                border-bottom: 1px solid var(--border-color);
-            }
-            .sell-btn {
-                margin: 1rem 0 0;
-                display: block;
-                text-align: center;
-            }
-        }
-
-        /* Page Header */
-        .page-header {
-            position: relative;
-            margin-top: -100px;
-            padding-top: 180px;
-            padding-bottom: 100px;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(91, 1, 97, 0.85) 0%, rgba(20, 5, 29, 0.9) 100%);
-        }
-
-        @media (max-width: 991.98px) {
-            .page-header { padding-top: 150px; padding-bottom: 80px; }
-        }
-
-        .page-header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .page-header-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.3;
-            mix-blend-mode: overlay;
-        }
-
-        .page-header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            opacity: 0.1;
-            animation: rotate 30s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .page-header-content {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            color: var(--white);
-        }
-
-        .page-header h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            margin-bottom: 1rem;
-            font-family: "Agbalumo", cursive;
-            color: var(--white);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .page-header .breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-            flex-wrap: wrap;
-        }
-
-        .page-header .breadcrumb a {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* Sell Property Hero Section */
-        .sell-hero {
-            padding: 60px 0 40px;
-        }
-
-        .sell-value-card {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 40px;
-            padding: 50px;
-            text-align: center;
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        @media (max-width: 768px) {
-            .sell-value-card { padding: 30px; }
-        }
-
-        .sell-value-card::before {
-            content: "";
-            position: absolute;
-            top: -30%;
-            right: -30%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            opacity: 0.1;
-            border-radius: 50%;
-        }
-
-        .sell-value-card h2 {
-            color: var(--white);
-            font-size: clamp(2rem, 5vw, 2.5rem);
-            margin-bottom: 1rem;
-        }
-
-        .sell-value-card .value-number {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            font-weight: 800;
-            color: var(--accent);
-            font-family: "Playfair Display", serif;
-            margin: 20px 0;
-        }
-
-        /* Benefits Section */
-        .benefits-section {
-            padding: 40px 0 60px;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-
-        @media (max-width: 992px) {
-            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 576px) {
-            .benefits-grid { grid-template-columns: 1fr; }
-        }
-
-        .benefit-card {
-            background: var(--white);
-            padding: 30px 25px;
-            border-radius: 30px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent);
-        }
-
-        .benefit-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(91, 1, 97, 0.1) 0%, rgba(238, 210, 121, 0.1) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2rem;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .benefit-card:hover .benefit-icon {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--white);
-        }
-
-        .benefit-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .benefit-card p {
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
-
-        /* Form Section */
-        .form-section {
-            padding: 60px 0 80px;
-            background: linear-gradient(145deg, #ffffff 0%, #faf3ff 100%);
-        }
-
-        .form-wrapper {
-            background: var(--white);
-            border-radius: 40px;
-            padding: 50px;
-            box-shadow: var(--shadow-xl);
-            border: 1px solid var(--border-color);
-        }
-
-        @media (max-width: 768px) {
-            .form-wrapper { padding: 30px; }
-        }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .form-header .subtitle {
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .form-header h2 {
-            margin-bottom: 1rem;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-        }
-
-        @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-        }
-
-        .form-group-full {
-            grid-column: span 2;
-        }
-
-        @media (max-width: 768px) {
-            .form-group-full { grid-column: span 1; }
-        }
-
-        .form-group {
-            margin-bottom: 5px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--secondary);
-            font-size: 0.9rem;
-        }
-
-        .form-group label .required {
-            color: var(--primary);
-            margin-left: 3px;
-        }
-
-        .form-control-premium {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 30px;
-            background: var(--light-gray);
-            transition: var(--transition);
-            font-family: "Inter", sans-serif;
-        }
-
-        .form-control-premium:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(91, 1, 97, 0.1);
-        }
-
-        select.form-control-premium {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235b0161'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1.5rem center;
-            background-size: 20px;
-        }
-
-        textarea.form-control-premium {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .file-upload {
-            position: relative;
-            border: 2px dashed var(--border-color);
-            border-radius: 30px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background: var(--light-gray);
-        }
-
-        .file-upload:hover {
-            border-color: var(--primary);
-            background: rgba(91, 1, 97, 0.05);
-        }
-
-        .file-upload input {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            cursor: pointer;
-        }
-
-        .file-upload i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .file-upload p {
-            margin-bottom: 0;
-            font-size: 0.85rem;
-        }
-
-        .file-upload .file-name {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: var(--primary);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1.2rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-top: 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-        }
-
-        .form-message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 30px;
-            text-align: center;
-            display: none;
-        }
-
-        .form-message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
-        }
-
-        .form-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            display: block;
-        }
-
-        /* Testimonials */
-        .testimonials-sell {
-            padding: 60px 0;
-        }
-
-        .testimonial-card {
-            background: var(--white);
-            border-radius: 30px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-        }
-
-        .testimonial-card i {
-            font-size: 3rem;
-            color: var(--accent);
-            opacity: 0.5;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-card p {
-            font-size: 1rem;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-dark) 100%);
-            color: rgba(255, 255, 255, 0.8);
-            padding-top: 5rem;
-            margin-top: 2rem;
-            position: relative;
-        }
-
-        .footer::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent));
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            padding-bottom: 4rem;
-        }
-
-        @media (max-width: 992px) {
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 576px) {
-            .footer-grid { grid-template-columns: 1fr; }
-        }
-
-        .footer-col h5 {
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer-col h5::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        .footer-col p {
-            margin-bottom: 0.75rem;
-            color: rgba(255, 255, 255, 0.7);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            transition: var(--transition);
-            display: inline-block;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-            transform: translateX(5px);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-            border-top: 2px solid rgba(238, 210, 121, 0.2);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .copyright {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .copyright a {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .back-to-top {
-            position: fixed;
-            right: 45px;
-            bottom: 45px;
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--white);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            z-index: 99;
-            transition: var(--transition);
-            border: 3px solid var(--accent);
-            cursor: pointer;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px) scale(1.1);
-        }
-
-        @media (max-width: 768px) {
-            .back-to-top {
-                right: 20px;
-                bottom: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./css/sell_your_property.css">
 </head>
 <body>
 
@@ -995,16 +172,27 @@
                             <label>Property Description <span class="required">*</span></label>
                             <textarea id="description" class="form-control-premium" placeholder="Describe your property's unique features, amenities, and selling points..." required></textarea>
                         </div>
+                        
+                        <!-- Enhanced Media Upload: Images + Videos -->
                         <div class="form-group form-group-full">
-                            <label>Upload Property Images</label>
-                            <div class="file-upload" id="fileUpload">
-                                <i class="fas fa-cloud-upload-alt"></i>
+                            <label>Upload Property Media <span class="required">*</span></label>
+                            <div class="file-upload" id="imageUploadArea">
+                                <i class="fas fa-images"></i>
                                 <p>Drag & drop or click to upload images</p>
-                                <p style="font-size: 0.75rem;">Maximum 10 images, 10MB each</p>
-                                <input type="file" id="propertyImages" multiple accept="image/*">
-                                <div id="fileNames" class="file-name"></div>
+                                <p style="font-size: 0.75rem;">Max 10 images, 10MB each (JPG, PNG, WEBP)</p>
+                                <input type="file" id="propertyImages" accept="image/*" multiple>
+                                <div id="imageFileNames" class="file-name"></div>
+                            </div>
+                            <div class="separator">OR</div>
+                            <div class="file-upload" id="videoUploadArea">
+                                <i class="fas fa-video"></i>
+                                <p>Drag & drop or click to upload videos</p>
+                                <p style="font-size: 0.75rem;">Max 5 videos, 100MB each (MP4, MOV, AVI, WebM)</p>
+                                <input type="file" id="propertyVideos" accept="video/mp4,video/mov,video/avi,video/webm,video/quicktime" multiple>
+                                <div id="videoFileNames" class="file-name"></div>
                             </div>
                         </div>
+                        
                         <div class="form-group form-group-full">
                             <label>Additional Notes</label>
                             <textarea id="notes" class="form-control-premium" placeholder="Any additional information you'd like to share with our team..."></textarea>
@@ -1122,16 +310,30 @@
                 });
             }
 
-            // File upload handling
-            const fileInput = document.getElementById("propertyImages");
-            const fileNamesDiv = document.getElementById("fileNames");
-            if (fileInput) {
-                fileInput.addEventListener("change", function() {
+            // File upload handlers: Images
+            const imageInput = document.getElementById("propertyImages");
+            const imageNamesDiv = document.getElementById("imageFileNames");
+            if (imageInput) {
+                imageInput.addEventListener("change", function() {
                     const files = Array.from(this.files);
                     if (files.length > 0) {
-                        fileNamesDiv.innerHTML = files.map(f => f.name).join(", ");
+                        imageNamesDiv.innerHTML = files.map(f => f.name).join(", ");
                     } else {
-                        fileNamesDiv.innerHTML = "";
+                        imageNamesDiv.innerHTML = "";
+                    }
+                });
+            }
+            
+            // Video upload handlers
+            const videoInput = document.getElementById("propertyVideos");
+            const videoNamesDiv = document.getElementById("videoFileNames");
+            if (videoInput) {
+                videoInput.addEventListener("change", function() {
+                    const files = Array.from(this.files);
+                    if (files.length > 0) {
+                        videoNamesDiv.innerHTML = files.map(f => f.name).join(", ");
+                    } else {
+                        videoNamesDiv.innerHTML = "";
                     }
                 });
             }
@@ -1152,6 +354,10 @@
                     const estimatedValue = document.getElementById("estimatedValue").value;
                     const description = document.getElementById("description").value.trim();
                     
+                    // At least one media file (image or video) should be uploaded? Not strictly required but beneficial.
+                    const hasImages = imageInput && imageInput.files.length > 0;
+                    const hasVideos = videoInput && videoInput.files.length > 0;
+                    
                     if (!fullName || !email || !phone || !propertyType || !address || !estimatedValue || !description) {
                         formMessage.className = "form-message error";
                         formMessage.textContent = "Please fill in all required fields.";
@@ -1164,11 +370,24 @@
                         return;
                     }
                     
+                    if (!hasImages && !hasVideos) {
+                        formMessage.className = "form-message error";
+                        formMessage.textContent = "Please upload at least one image or video to showcase your property.";
+                        return;
+                    }
+                    
+                    // Construct media summary (for console demo, in production you'd send via FormData)
+                    const imageFiles = imageInput ? Array.from(imageInput.files).map(f => f.name) : [];
+                    const videoFiles = videoInput ? Array.from(videoInput.files).map(f => f.name) : [];
+                    
+                    console.log("Form Submitted", { fullName, email, phone, propertyType, address, estimatedValue, description, images: imageFiles, videos: videoFiles });
+                    
                     formMessage.className = "form-message success";
-                    formMessage.textContent = "Thank you! Your listing request has been submitted. A luxury property specialist will contact you within 24 hours to schedule a private consultation.";
+                    formMessage.textContent = "Thank you! Your listing request with media (images & videos) has been submitted. A luxury property specialist will contact you within 24 hours to schedule a private consultation.";
                     
                     form.reset();
-                    if (fileNamesDiv) fileNamesDiv.innerHTML = "";
+                    if (imageNamesDiv) imageNamesDiv.innerHTML = "";
+                    if (videoNamesDiv) videoNamesDiv.innerHTML = "";
                     
                     setTimeout(() => {
                         formMessage.style.display = "none";

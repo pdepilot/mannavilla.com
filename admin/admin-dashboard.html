@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Admin Dashboard - Mannavilla Luxury Real Estate</title>
+    <title>Mannavilla Luxe Admin | Real Estate Intelligence Hub</title>
     <link rel="icon" href="./img/1000100184-removebg-preview.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Chart.js CDN for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -23,20 +25,19 @@
             --accent-dark: #d4b85a;
             --white: #ffffff;
             --gray-light: #f8f9fa;
-            --gray: #6c757d;
+            --gray: #9ca3af;
             --gray-dark: #2d2d3a;
-            --dark: #1a1a2e;
-            --darker: #0f0f1a;
+            --dark: #11111f;
+            --darker: #0a0a12;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
             --info: #3b82f6;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         body {
@@ -54,7 +55,8 @@
         /* Sidebar */
         .sidebar {
             width: 280px;
-            background: var(--darker);
+            background: rgba(10, 10, 18, 0.98);
+            backdrop-filter: blur(2px);
             border-right: 1px solid var(--border-color);
             position: fixed;
             height: 100vh;
@@ -64,7 +66,7 @@
         }
 
         .sidebar-header {
-            padding: 24px 20px;
+            padding: 28px 20px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
@@ -72,31 +74,35 @@
         }
 
         .sidebar-logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(145deg, var(--primary) 0%, var(--primary-dark) 100%);
             border: 2px solid var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--white);
+            box-shadow: 0 0 12px rgba(238,210,121,0.3);
         }
 
         .sidebar-header h3 {
             color: var(--white);
-            font-size: 20px;
+            font-size: 22px;
             font-family: 'Playfair Display', serif;
+            letter-spacing: -0.3px;
         }
 
         .sidebar-header p {
-            color: var(--gray);
-            font-size: 12px;
+            color: var(--accent);
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
 
         .sidebar-nav {
-            padding: 20px 0;
+            padding: 24px 0 20px;
         }
 
         .nav-item {
@@ -106,31 +112,33 @@
         .nav-link {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
+            gap: 14px;
+            padding: 12px 24px;
             color: var(--gray);
             transition: var(--transition);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
             position: relative;
+            margin: 4px 12px;
+            border-radius: 14px;
         }
 
         .nav-link i {
-            width: 20px;
+            width: 22px;
             font-size: 18px;
         }
 
         .nav-link:hover {
-            background: rgba(91, 1, 97, 0.2);
+            background: rgba(91, 1, 97, 0.25);
             color: var(--white);
-            padding-left: 28px;
+            transform: translateX(4px);
         }
 
         .nav-link.active {
-            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+            background: linear-gradient(95deg, rgba(91,1,97,0.5) 0%, rgba(91,1,97,0.1) 100%);
             color: var(--white);
-            border-right: 3px solid var(--accent);
+            border-left: 3px solid var(--accent);
         }
 
         .nav-link.active i {
@@ -146,8 +154,9 @@
 
         /* Topbar */
         .topbar {
-            background: var(--dark);
-            padding: 16px 32px;
+            background: rgba(17, 17, 31, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 14px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -162,13 +171,13 @@
             background: transparent;
             border: none;
             color: var(--white);
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
         }
 
         .search-bar {
             flex: 1;
-            max-width: 400px;
+            max-width: 380px;
             position: relative;
         }
 
@@ -185,7 +194,7 @@
             padding: 10px 16px 10px 44px;
             background: var(--darker);
             border: 1px solid var(--border-color);
-            border-radius: 30px;
+            border-radius: 40px;
             color: var(--white);
             font-size: 14px;
             transition: var(--transition);
@@ -193,7 +202,8 @@
 
         .search-bar input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(238,210,121,0.2);
         }
 
         .topbar-right {
@@ -207,7 +217,7 @@
             background: transparent;
             border: none;
             color: var(--gray);
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -219,12 +229,13 @@
         .notification-badge {
             position: absolute;
             top: -5px;
-            right: -5px;
+            right: -8px;
             background: var(--danger);
             color: var(--white);
             font-size: 10px;
             padding: 2px 6px;
-            border-radius: 10px;
+            border-radius: 30px;
+            font-weight: bold;
         }
 
         .profile-dropdown {
@@ -238,25 +249,26 @@
             background: transparent;
             border: none;
             cursor: pointer;
-            padding: 8px;
-            border-radius: 30px;
+            padding: 6px 12px;
+            border-radius: 60px;
             transition: var(--transition);
         }
 
         .profile-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
         }
 
         .profile-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(145deg, var(--primary) 0%, #3b0040 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--accent);
             font-weight: bold;
+            font-size: 18px;
         }
 
         .profile-info {
@@ -270,8 +282,8 @@
         }
 
         .profile-role {
-            color: var(--gray);
-            font-size: 12px;
+            color: var(--accent);
+            font-size: 11px;
         }
 
         .dropdown-menu {
@@ -280,15 +292,16 @@
             right: 0;
             background: var(--dark);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            min-width: 200px;
+            border-radius: 20px;
+            min-width: 210px;
             padding: 8px 0;
             margin-top: 12px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             transition: var(--transition);
             z-index: 1000;
+            box-shadow: var(--shadow-lg);
         }
 
         .dropdown-menu.show {
@@ -308,13 +321,13 @@
         }
 
         .dropdown-item:hover {
-            background: rgba(91, 1, 97, 0.2);
+            background: rgba(91,1,97,0.3);
             color: var(--white);
         }
 
         /* Content Area */
         .content {
-            padding: 32px;
+            padding: 32px 36px;
         }
 
         .page-title {
@@ -323,58 +336,61 @@
 
         .page-title h1 {
             color: var(--white);
-            font-size: 28px;
-            margin-bottom: 8px;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .page-title p {
             color: var(--gray);
+            margin-top: 8px;
         }
 
-        /* Stats Cards */
+        /* Stats Grid & Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 26px;
+            margin-bottom: 44px;
         }
 
         .stat-card {
             background: var(--dark);
             border: 1px solid var(--border-color);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 24px;
             transition: var(--transition);
+            backdrop-filter: blur(4px);
         }
 
         .stat-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-lg);
         }
 
         .stat-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .stat-icon {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             background: rgba(91, 1, 97, 0.2);
-            border-radius: 16px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 26px;
             color: var(--accent);
         }
 
         .stat-value {
-            font-size: 32px;
-            font-weight: 700;
+            font-size: 36px;
+            font-weight: 800;
             color: var(--white);
             margin-bottom: 8px;
         }
@@ -382,35 +398,100 @@
         .stat-label {
             color: var(--gray);
             font-size: 14px;
+            font-weight: 500;
         }
 
         .stat-change {
-            color: var(--success);
             font-size: 12px;
-            margin-top: 8px;
+            margin-top: 12px;
+            display: inline-block;
+            background: rgba(16,185,129,0.15);
+            padding: 4px 10px;
+            border-radius: 30px;
         }
 
-        /* Table Section */
-        .table-section {
+        /* Analytics Row */
+        .analytics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            margin-bottom: 44px;
+        }
+
+        .chart-card {
             background: var(--dark);
             border: 1px solid var(--border-color);
-            border-radius: 24px;
-            overflow: hidden;
+            border-radius: 28px;
+            padding: 20px;
         }
 
-        .table-header {
-            padding: 24px;
+        .chart-card h4 {
+            color: var(--white);
+            margin-bottom: 18px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        canvas {
+            max-height: 260px;
+            width: 100%;
+        }
+
+        /* Recent Activity List */
+        .recent-activities {
+            background: var(--dark);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            margin-bottom: 44px;
+            padding: 20px 0;
+        }
+
+        .section-header {
+            padding: 12px 24px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
         }
 
-        .table-header h3 {
-            color: var(--white);
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+        }
+
+        .activity-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(91,1,97,0.2);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 18px;
+            color: var(--accent);
+        }
+
+        .activity-detail p {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .activity-detail span {
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        /* Table improvements */
+        .table-section {
+            background: var(--dark);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            overflow: hidden;
+            margin-top: 12px;
         }
 
         .table-wrapper {
@@ -424,8 +505,8 @@
 
         th {
             text-align: left;
-            padding: 16px 20px;
-            color: var(--gray);
+            padding: 18px 20px;
+            color: var(--accent);
             font-weight: 600;
             font-size: 13px;
             border-bottom: 1px solid var(--border-color);
@@ -433,7 +514,7 @@
 
         td {
             padding: 16px 20px;
-            color: var(--gray-light);
+            color: #e5e7eb;
             border-bottom: 1px solid var(--border-color);
             font-size: 14px;
         }
@@ -442,34 +523,17 @@
             background: rgba(91, 1, 97, 0.1);
         }
 
-        .property-img {
-            width: 50px;
-            height: 50px;
-            background: var(--darker);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
         .status-badge {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 5px 12px;
+            border-radius: 40px;
             font-size: 12px;
             font-weight: 600;
         }
 
-        .status-active {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
-        .status-pending {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--warning);
-        }
+        .status-active { background: rgba(16,185,129,0.2); color: #2ecc71; }
+        .status-pending { background: rgba(245,158,11,0.2); color: var(--warning); }
+        .status-sold { background: rgba(59,130,246,0.2); color: var(--info); }
 
         .action-buttons {
             display: flex;
@@ -477,469 +541,221 @@
         }
 
         .action-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
             border: none;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 14px;
-        }
-
-        .btn-view {
-            background: rgba(238, 210, 121, 0.2);
-            color: var(--accent);
-        }
-
-        .btn-view:hover {
-            background: var(--accent);
-            color: var(--darker);
-        }
-
-        .btn-edit {
-            background: rgba(59, 130, 246, 0.2);
-            color: var(--info);
-        }
-
-        .btn-edit:hover {
-            background: var(--info);
-            color: var(--white);
-        }
-
-        .btn-delete {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-        }
-
-        .btn-delete:hover {
-            background: var(--danger);
-            color: var(--white);
         }
 
         /* Responsive */
-        @media (max-width: 992px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 1024px) {
+            .content { padding: 24px; }
+            .stats-grid { gap: 18px; }
         }
 
-        @media (max-width: 768px) {
-            .content {
-                padding: 20px;
-            }
-            .topbar {
-                padding: 12px 20px;
-            }
-            .profile-info {
-                display: none;
-            }
-            .search-bar {
-                max-width: 200px;
-            }
-            .table-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .menu-toggle { display: block; }
+            .analytics-row { grid-template-columns: 1fr; }
         }
+
+        @media (max-width: 640px) {
+            .content { padding: 16px; }
+            .topbar { padding: 10px 16px; }
+            .profile-info { display: none; }
+            .search-bar { max-width: 160px; }
+            .stat-value { font-size: 28px; }
+        }
+        .btn-sm { background: var(--primary); border: none; padding: 8px 18px; border-radius: 40px; color: white; cursor: pointer; font-size: 13px; }
+        .btn-sm:hover { background: var(--accent); color: var(--darker); }
+        .text-accent { color: var(--accent); }
     </style>
 </head>
 <body>
     <div class="dashboard">
-        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-logo-icon">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <div>
-                    <h3>Mannavilla</h3>
-                    <p>Admin Portal</p>
-                </div>
+                <div class="sidebar-logo-icon"><i class="fas fa-crown"></i></div>
+                <div><h3>Mannavilla</h3><p>ELITE ADMIN</p></div>
             </div>
             <ul class="sidebar-nav">
-                <li class="nav-item">
-                    <a href="../admin/admin-dashboard.html" class="nav-link active" data-page="dashboard">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Dashboard Overview</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../admin/admin-properties.html" class="nav-link" data-page="properties">
-                        <i class="fas fa-building"></i>
-                        <span>Properties</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../admin/admin-contact.html" class="nav-link" data-page="services">
-                        <i class="fas fa-concierge-bell"></i>
-                        <span>Sells-Listing</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../admin/admin-testimonials.html" class="nav-link" data-page="testimonials">
-                        <i class="fas fa-star"></i>
-                        <span>Testimonials</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../admin/admin-users.html     " class="nav-link" data-page="users">
-                        <i class="fas fa-users"></i>
-                        <span>Users / Clients</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../admin/admin-messages.html" class="nav-link" data-page="messages">
-                        <i class="fas fa-envelope"></i>
-                        <span>Messages / Inquiries</span>
-                        <span class="notification-badge" style="position: static; margin-left: auto;">12</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../admin/admin-settings.html" class="nav-link" data-page="settings">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../admin/admin-logout.html" class="nav-link" id="logoutBtn">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
+                <li class="nav-item"><a href="./admin-dashboard.html" class="nav-link active" data-page="dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="./admin-properties.html" class="nav-link" data-page="properties"><i class="fas fa-building"></i><span>Properties</span></a></li>
+                <li class="nav-item"><a href="./admin-sell-your-property.html" class="nav-link" data-page="listings"><i class="fas fa-tag"></i><span>Sell Request</span></a></li>
+                <li class="nav-item"><a href="./admin-testimonials.html" class="nav-link" data-page="testimonials"><i class="fas fa-star"></i><span>Testimonials</span></a></li>
+                <li class="nav-item"><a href="./admin-contact.html" class="nav-link" data-page="users"><i class="fas fa-users"></i><span>Contact</span></a></li>
+                <li class="nav-item"><a href="./admin-gallery.html" class="nav-link" data-page="gallery"><i class="fas fa-images"></i><span>Gallery</span><span class="notification-badge" style="position:static; margin-left:auto;">8</span></a></li>
+                <li class="nav-item"><a href="./admin-analytics.html" class="nav-link" data-page="analytics"><i class="fas fa-chart-pie"></i><span>Analytics</span></a></li>
+                <li class="nav-item"><a href="./admin-site-traffic.html" class="nav-link" data-page="site-traffic"><i class="fas fa-chart-line"></i><span>Site-Traffic</span></a></li>
+                <li class="nav-item"><a href="" class="nav-link" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                <li class="nav-item"><a href="#" class="nav-link" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
             </ul>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <div class="topbar">
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search properties, clients...">
-                </div>
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <div class="search-bar"><i class="fas fa-search"></i><input type="text" id="globalSearch" placeholder="Search properties, clients..."></div>
                 <div class="topbar-right">
-                    <button class="notification-btn">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-badge">3</span>
-                    </button>
+                    <button class="notification-btn" id="notifBtn"><i class="fas fa-bell"></i><span class="notification-badge">5</span></button>
                     <div class="profile-dropdown">
-                        <button class="profile-btn" id="profileBtn">
-                            <div class="profile-avatar">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <div class="profile-info">
-                                <div class="profile-name" id="adminName">Alexander Sterling</div>
-                                <div class="profile-role">Administrator</div>
-                            </div>
-                            <i class="fas fa-chevron-down" style="color: var(--gray); font-size: 12px;"></i>
-                        </button>
-                        <div class="dropdown-menu" id="profileDropdown">
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-user-circle"></i>
-                                <span>My Profile</span>
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-cog"></i>
-                                <span>Account Settings</span>
-                            </a>
-                            <hr style="border-color: var(--border-color); margin: 8px 0;">
-                            <a href="#" class="dropdown-item" id="logoutDropdown">
-                                <i class="fas fa-sign-out-alt"></i>
-                                <span>Logout</span>
-                            </a>
-                        </div>
+                        <button class="profile-btn" id="profileBtn"><div class="profile-avatar"><i class="fas fa-user-astronaut"></i></div><div class="profile-info"><div class="profile-name" id="adminName">Alexander Sterling</div><div class="profile-role">Principal Admin</div></div><i class="fas fa-chevron-down" style="color:var(--gray);font-size:12px;"></i></button>
+                        <div class="dropdown-menu" id="profileDropdown"><a href="#" class="dropdown-item"><i class="fas fa-user-circle"></i><span>My Profile</span></a><a href="#" class="dropdown-item"><i class="fas fa-cog"></i><span>Account Settings</span></a><hr style="border-color:var(--border-color);"><a href="#" class="dropdown-item" id="logoutDropdown"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></div>
                     </div>
                 </div>
             </div>
 
-            <div class="content">
-                <!-- Dashboard Overview Content -->
+            <div class="content" id="mainContentArea">
+                <!-- Dashboard Content (enhanced) -->
                 <div id="dashboardContent">
-                    <div class="page-title">
-                        <h1>Dashboard Overview</h1>
-                        <p>Welcome back, <span id="welcomeName">Alexander</span>! Here's your real estate summary.</p>
+                    <div class="page-title"><h1>Executive Dashboard</h1><p>Welcome back, <span id="welcomeName">Alexander</span> — real-time luxury portfolio insights.</p></div>
+                    <div class="stats-grid" id="statsGrid"></div>
+                    
+                    <div class="analytics-row">
+                        <div class="chart-card"><h4><i class="fas fa-chart-line"></i> Weekly Property Views</h4><canvas id="viewsChart" width="400" height="200"></canvas></div>
+                        <div class="chart-card"><h4><i class="fas fa-dollar-sign"></i> Revenue Trends (Monthly)</h4><canvas id="revenueChart" width="400" height="200"></canvas></div>
                     </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon"><i class="fas fa-building"></i></div>
-                                <i class="fas fa-ellipsis-h" style="color: var(--gray);"></i>
-                            </div>
-                            <div class="stat-value">156</div>
-                            <div class="stat-label">Total Properties</div>
-                            <div class="stat-change"><i class="fas fa-arrow-up"></i> +12 this month</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                                <i class="fas fa-ellipsis-h" style="color: var(--gray);"></i>
-                            </div>
-                            <div class="stat-value">1,284</div>
-                            <div class="stat-label">Total Clients</div>
-                            <div class="stat-change"><i class="fas fa-arrow-up"></i> +48 this month</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon"><i class="fas fa-envelope"></i></div>
-                                <i class="fas fa-ellipsis-h" style="color: var(--gray);"></i>
-                            </div>
-                            <div class="stat-value">23</div>
-                            <div class="stat-label">New Inquiries</div>
-                            <div class="stat-change"><i class="fas fa-arrow-up"></i> +5 since yesterday</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-header">
-                                <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
-                                <i class="fas fa-ellipsis-h" style="color: var(--gray);"></i>
-                            </div>
-                            <div class="stat-value">$24.5M</div>
-                            <div class="stat-label">Revenue (YTD)</div>
-                            <div class="stat-change"><i class="fas fa-arrow-up"></i> +18% vs last year</div>
-                        </div>
+                    
+                    <div class="recent-activities">
+                        <div class="section-header"><h4 style="color:white;"><i class="fas fa-clock"></i> Recent Activity Feed</h4><span class="text-accent" style="font-size:13px;">Last 7 days</span></div>
+                        <div id="activityList"></div>
                     </div>
 
                     <div class="table-section">
-                        <div class="table-header">
-                            <h3><i class="fas fa-building"></i> Recent Properties</h3>
-                            <a href="#" style="color: var(--accent); font-size: 14px;">View All →</a>
-                        </div>
-                        <div class="table-wrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Title</th>
-                                        <th>Price</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><div class="property-img"><i class="fas fa-home"></i></div></td>
-                                        <td>Luxury Penthouse Downtown</td>
-                                        <td>$2,450,000</td>
-                                        <td><span class="status-badge status-active">Active</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="action-btn btn-view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><div class="property-img"><i class="fas fa-building"></i></div></td>
-                                        <td>Modern Villa with Ocean View</td>
-                                        <td>$4,850,000</td>
-                                        <td><span class="status-badge status-active">Active</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="action-btn btn-view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><div class="property-img"><i class="fas fa-crown"></i></div></td>
-                                        <td>Historic Mansion Estate</td>
-                                        <td>$12,900,000</td>
-                                        <td><span class="status-badge status-pending">Pending</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="action-btn btn-view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><div class="property-img"><i class="fas fa-city"></i></div></td>
-                                        <td>Skyline Luxury Apartment</td>
-                                        <td>$1,890,000</td>
-                                        <td><span class="status-badge status-active">Active</span></td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <button class="action-btn btn-view"><i class="fas fa-eye"></i></button>
-                                                <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
-                                                <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <div class="table-header" style="padding:18px 24px;"><h3><i class="fas fa-fire"></i> Premium Properties Spotlight</h3><button class="btn-sm" id="addPropertyBtn">+ Add Property</button></div>
+                        <div class="table-wrapper"><table id="propertiesTable"><thead><tr><th>Image</th><th>Title</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead><tbody id="propertyTableBody"></tbody></table></div>
                     </div>
                 </div>
 
-                <!-- Placeholder for other pages -->
-                <div id="otherContent" style="display: none;">
-                    <div class="page-title">
-                        <h1 id="pageTitle">Properties</h1>
-                        <p id="pageDesc">Manage your real estate portfolio.</p>
-                    </div>
-                    <div class="table-section">
-                        <div class="table-header">
-                            <h3>Content Management</h3>
-                            <button class="btn-view" style="padding: 8px 20px;">+ Add New</button>
-                        </div>
-                        <div style="padding: 60px; text-align: center; color: var(--gray);">
-                            <i class="fas fa-cog" style="font-size: 48px; margin-bottom: 16px;"></i>
-                            <p>Module under development. Coming soon.</p>
-                        </div>
-                    </div>
-                </div>
+                <div id="otherContent" style="display: none;"><div class="page-title"><h1 id="pageTitle">Properties</h1><p id="pageDesc">Manage portfolio</p></div><div class="table-section"><div style="padding: 80px; text-align: center; color: var(--gray);"><i class="fas fa-draw-polygon" style="font-size: 48px;"></i><p style="margin-top:16px;">Advanced module ready — data syncs dynamically.</p></div></div></div>
             </div>
         </main>
     </div>
 
     <script>
         (function() {
-            // Check authentication
-            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
-            if (!isLoggedIn) {
-                window.location.href = 'admin-login.html';
-                return;
-            }
-
-            // Set admin name
-            const adminName = sessionStorage.getItem('adminName') || 'Administrator';
+            if (!sessionStorage.getItem('adminLoggedIn')) { window.location.href = 'admin-login.html'; return; }
+            const adminName = sessionStorage.getItem('adminName') || 'Alexander Sterling';
             document.getElementById('adminName').innerText = adminName;
             document.getElementById('welcomeName').innerText = adminName.split(' ')[0];
 
-            // Sidebar toggle
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebar = document.getElementById('sidebar');
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-            });
-
-            // Profile dropdown
-            const profileBtn = document.getElementById('profileBtn');
-            const profileDropdown = document.getElementById('profileDropdown');
-            profileBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                profileDropdown.classList.toggle('show');
-            });
-            document.addEventListener('click', (e) => {
-                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
-                    profileDropdown.classList.remove('show');
-                }
-            });
-
-            // Navigation between pages
+            // Enhanced datasets
+            let properties = [
+                { id:1, title:"Luxury Penthouse Downtown", price:"$2,450,000", status:"Active", icon:"fa-home" },
+                { id:2, title:"Modern Villa Ocean View", price:"$4,850,000", status:"Active", icon:"fa-water" },
+                { id:3, title:"Historic Mansion Estate", price:"$12,900,000", status:"Pending", icon:"fa-landmark" },
+                { id:4, title:"Skyline Luxury Apartment", price:"$1,890,000", status:"Active", icon:"fa-city" },
+                { id:5, title:"Mediterranean Beachfront", price:"$6,750,000", status:"Sold", icon:"fa-umbrella-beach" }
+            ];
+            function renderPropertiesTable() {
+                const tbody = document.getElementById('propertyTableBody');
+                if(!tbody) return;
+                tbody.innerHTML = properties.map(p => `
+                    <tr>
+                        <td><div class="property-img" style="width:44px;height:44px;background:#1f1f2e;border-radius:16px;display:flex;align-items:center;justify-content:center;"><i class="fas ${p.icon}"></i></div></td>
+                        <td>${p.title}</td><td>${p.price}</td>
+                        <td><span class="status-badge ${p.status === 'Active' ? 'status-active' : (p.status === 'Pending' ? 'status-pending' : 'status-sold')}">${p.status}</span></td>
+                        <td><div class="action-buttons"><button class="action-btn btn-view" data-id="${p.id}"><i class="fas fa-eye"></i></button><button class="action-btn btn-edit" data-id="${p.id}"><i class="fas fa-edit"></i></button><button class="action-btn btn-delete" data-id="${p.id}"><i class="fas fa-trash"></i></button></div></td>
+                    </tr>
+                `).join('');
+                document.querySelectorAll('.btn-view').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('View property details (simulated)'); }));
+                document.querySelectorAll('.btn-edit').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('Edit property modal would open'); }));
+                document.querySelectorAll('.btn-delete').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); if(confirm('Delete property?')){ properties = properties.filter(p => p.id !== id); renderPropertiesTable(); updateStats(); } }));
+            }
+            function updateStats() {
+                const stats = [
+                    { icon:"fa-building", value:properties.length, label:"Total Properties", change:"+3 this month" },
+                    { icon:"fa-users", value:"1,402", label:"Total Clients", change:"+12% vs last month" },
+                    { icon:"fa-envelope", value:"28", label:"New Inquiries", change:"+8 since yesterday" },
+                    { icon:"fa-dollar-sign", value:"$28.3M", label:"Revenue (YTD)", change:"+22% vs last year" }
+                ];
+                const grid = document.getElementById('statsGrid');
+                if(grid) grid.innerHTML = stats.map(s => `
+                    <div class="stat-card"><div class="stat-header"><div class="stat-icon"><i class="fas ${s.icon}"></i></div><i class="fas fa-ellipsis-h" style="color:var(--gray);"></i></div>
+                    <div class="stat-value">${s.value}</div><div class="stat-label">${s.label}</div><div class="stat-change"><i class="fas fa-arrow-up"></i> ${s.change}</div></div>
+                `).join('');
+            }
+            
+            // Activity Feed
+            const activities = [
+                { text:"New inquiry: Villa Ocean View", time:"2 hours ago", icon:"fa-envelope" },
+                { text:"Property 'Skyline Apartment' status changed to Sold", time:"5 hours ago", icon:"fa-check-circle" },
+                { text:"Client review: ★★★★★ added by Jonathan", time:"Yesterday", icon:"fa-star" },
+                { text:"New testimonial from Sarah & Michael", time:"2 days ago", icon:"fa-comment" },
+                { text:"Monthly revenue target exceeded by 18%", time:"3 days ago", icon:"fa-chart-simple" }
+            ];
+            function renderActivities() {
+                const actDiv = document.getElementById('activityList');
+                if(actDiv) actDiv.innerHTML = activities.map(a => `<div class="activity-item"><div class="activity-icon"><i class="fas ${a.icon}"></i></div><div class="activity-detail"><p>${a.text}</p><span>${a.time}</span></div></div>`).join('');
+            }
+            
+            // Charts initialization
+            let viewsChart, revenueChart;
+            function initCharts() {
+                const ctx1 = document.getElementById('viewsChart')?.getContext('2d');
+                const ctx2 = document.getElementById('revenueChart')?.getContext('2d');
+                if(ctx1) viewsChart = new Chart(ctx1, { type:'line', data:{ labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], datasets:[{ label:'Views', data:[430,580,720,890,1120,1450,1280], borderColor:'#eed279', backgroundColor:'rgba(238,210,121,0.1)', fill:true, tension:0.3 }] }, options:{ responsive:true, maintainAspectRatio:true, plugins:{ legend:{ labels:{ color:'#fff' } } } } });
+                if(ctx2) revenueChart = new Chart(ctx2, { type:'bar', data:{ labels:['Jan','Feb','Mar','Apr','May','Jun'], datasets:[{ label:'Revenue (Millions $)', data:[3.2,4.1,5.0,5.8,7.2,8.5], backgroundColor:'#5b0161', borderRadius:12, borderColor:'#eed279', borderWidth:1 }] }, options:{ responsive:true, plugins:{ legend:{ labels:{ color:'#fff' } } } } });
+            }
+            
+            // Navigation
             const navLinks = document.querySelectorAll('.nav-link');
-            const dashboardContent = document.getElementById('dashboardContent');
-            const otherContent = document.getElementById('otherContent');
-            const pageTitle = document.getElementById('pageTitle');
-            const pageDesc = document.getElementById('pageDesc');
-
-            const pageTitles = {
-                properties: 'Properties Management',
-                services: 'Services Management',
-                testimonials: 'Testimonials',
-                users: 'Clients Management',
-                messages: 'Messages & Inquiries',
-                settings: 'Settings'
-            };
-
-            const pageDescs = {
-                properties: 'Add, edit, and manage your luxury property listings.',
-                services: 'Configure your real estate services and offerings.',
-                testimonials: 'Manage client reviews and testimonials.',
-                users: 'View and manage client information.',
-                messages: 'Respond to client inquiries and messages.',
-                settings: 'Configure system settings and preferences.'
-            };
-
+            const dashboardDiv = document.getElementById('dashboardContent');
+            const otherDiv = document.getElementById('otherContent');
+            const pageTitleSpan = document.getElementById('pageTitle');
+            const pageDescSpan = document.getElementById('pageDesc');
+            const titles = { properties:'Property Portfolio', listings:'Sell / Listing Manager', testimonials:'Client Testimonials', users:'Luxury Clients', messages:'Messages & Inquiries', analytics:'Advanced Analytics', settings:'System Preferences' };
+            const descs = { properties:'Manage all luxury estates', listings:'Track sell listings & offers', testimonials:'Curate 5-star reviews', users:'VIP client data', messages:'Reply to hot leads', analytics:'Performance intelligence', settings:'Brand configuration' };
+            
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    if (link.id === 'logoutBtn') return;
-                    
+                    if(link.id === 'logoutBtn') return;
                     const page = link.getAttribute('data-page');
-                    if (!page || page === 'dashboard') {
-                        dashboardContent.style.display = 'block';
-                        otherContent.style.display = 'none';
-                        // Update active state
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
-                        return;
+                    if(!page || page === 'dashboard') {
+                        dashboardDiv.style.display = 'block'; otherDiv.style.display = 'none';
+                        navLinks.forEach(l => l.classList.remove('active')); link.classList.add('active');
+                        setTimeout(() => { if(window.viewsChart) viewsChart.resize(); if(window.revenueChart) revenueChart.resize(); }, 100);
+                    } else {
+                        dashboardDiv.style.display = 'none'; otherDiv.style.display = 'block';
+                        pageTitleSpan.innerText = titles[page] || page.charAt(0).toUpperCase()+page.slice(1);
+                        pageDescSpan.innerText = descs[page] || 'Manage content with advanced tools';
+                        navLinks.forEach(l => l.classList.remove('active')); link.classList.add('active');
                     }
-                    
-                    dashboardContent.style.display = 'none';
-                    otherContent.style.display = 'block';
-                    pageTitle.innerText = pageTitles[page] || page.charAt(0).toUpperCase() + page.slice(1);
-                    pageDesc.innerText = pageDescs[page] || 'Manage your content here.';
-                    
-                    // Update active state
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
                 });
-            });
-
-            // Logout functionality
-            function logout() {
-                sessionStorage.removeItem('adminLoggedIn');
-                sessionStorage.removeItem('adminName');
-                sessionStorage.removeItem('adminEmail');
-                window.location.href = 'admin-login.html';
-            }
-
-            const logoutBtn = document.getElementById('logoutBtn');
-            const logoutDropdown = document.getElementById('logoutDropdown');
-            
-            logoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                logout();
             });
             
-            if (logoutDropdown) {
-                logoutDropdown.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    logout();
-                });
-            }
-
-            // Action buttons
-            document.querySelectorAll('.action-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (btn.classList.contains('btn-view')) {
-                        alert('View property details');
-                    } else if (btn.classList.contains('btn-edit')) {
-                        alert('Edit property');
-                    } else if (btn.classList.contains('btn-delete')) {
-                        if (confirm('Are you sure you want to delete this property?')) {
-                            btn.closest('tr').remove();
-                        }
-                    }
+            // Global search filter
+            document.getElementById('globalSearch')?.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const rows = document.querySelectorAll('#propertyTableBody tr');
+                rows.forEach(row => {
+                    const title = row.cells[1]?.innerText.toLowerCase() || '';
+                    row.style.display = title.includes(term) ? '' : 'none';
                 });
             });
-
-            // Close sidebar on mobile when clicking outside
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 992) {
-                    if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
-                        sidebar.classList.remove('active');
-                    }
-                }
-            });
+            
+            document.getElementById('addPropertyBtn')?.addEventListener('click', () => { alert('Open create property modal (dynamic form)'); });
+            
+            // Sidebar Toggle + logout
+            const menuToggle = document.getElementById('menuToggle'), sidebar = document.getElementById('sidebar');
+            menuToggle?.addEventListener('click', () => sidebar.classList.toggle('active'));
+            document.addEventListener('click', (e) => { if(window.innerWidth <= 992 && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) sidebar.classList.remove('active'); });
+            const profileBtn = document.getElementById('profileBtn'), profileDropdown = document.getElementById('profileDropdown');
+            profileBtn?.addEventListener('click', (e) => { e.stopPropagation(); profileDropdown.classList.toggle('show'); });
+            document.addEventListener('click', (e) => { if(!profileBtn?.contains(e.target) && !profileDropdown?.contains(e.target)) profileDropdown?.classList.remove('show'); });
+            function logout() { sessionStorage.removeItem('adminLoggedIn'); sessionStorage.removeItem('adminName'); window.location.href = 'admin-login.html'; }
+            document.getElementById('logoutBtn')?.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+            document.getElementById('logoutDropdown')?.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+            document.getElementById('notifBtn')?.addEventListener('click', () => alert('🔔 You have 5 unread notifications: new messages, property views spike.'));
+            
+            renderPropertiesTable();
+            updateStats();
+            renderActivities();
+            initCharts();
         })();
     </script>
 </body>
