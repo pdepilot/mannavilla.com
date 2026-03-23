@@ -35,7 +35,7 @@
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
             --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-            --transition: all 0.2s ease;
+            --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         body {
@@ -49,16 +49,17 @@
             min-height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar - identical to traffic page */
         .sidebar {
             width: 280px;
-            background: var(--darker);
+            background: rgba(10, 10, 18, 0.98);
+            backdrop-filter: blur(2px);
             border-right: 1px solid var(--border-color);
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            transition: var(--transition);
-            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            z-index: 1000;
         }
 
         .sidebar-header {
@@ -67,6 +68,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .sidebar-logo-icon {
@@ -80,12 +82,14 @@
             justify-content: center;
             font-size: 20px;
             color: var(--white);
+            flex-shrink: 0;
         }
 
         .sidebar-header h3 {
             color: var(--white);
             font-size: 20px;
             font-family: 'Playfair Display', serif;
+            line-height: 1.2;
         }
 
         .sidebar-header p {
@@ -118,6 +122,11 @@
         .nav-link i {
             width: 22px;
             font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .nav-link span {
+            white-space: nowrap;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -133,13 +142,15 @@
         .main-content {
             flex: 1;
             margin-left: 280px;
+            transition: margin-left 0.3s ease;
+            width: calc(100% - 280px);
         }
 
-        /* Topbar */
+        /* Topbar - Fully responsive */
         .topbar {
             background: rgba(17, 17, 31, 0.95);
             backdrop-filter: blur(10px);
-            padding: 14px 32px;
+            padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -147,6 +158,8 @@
             position: sticky;
             top: 0;
             z-index: 99;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .menu-toggle {
@@ -156,11 +169,16 @@
             color: var(--white);
             font-size: 24px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
         }
 
         .page-title-section h1 {
             color: var(--white);
-            font-size: 24px;
+            font-size: clamp(20px, 5vw, 24px);
             font-weight: 600;
         }
 
@@ -174,6 +192,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            flex-shrink: 0;
         }
 
         .profile-btn {
@@ -185,6 +204,11 @@
             cursor: pointer;
             padding: 6px 12px;
             border-radius: 40px;
+            transition: var(--transition);
+        }
+
+        .profile-btn:hover {
+            background: rgba(255,255,255,0.05);
         }
 
         .profile-avatar {
@@ -196,6 +220,7 @@
             align-items: center;
             justify-content: center;
             color: var(--accent);
+            flex-shrink: 0;
         }
 
         .profile-info {
@@ -215,13 +240,15 @@
 
         /* Content Area */
         .content {
-            padding: 28px 32px;
+            padding: 24px 28px;
+            transition: padding 0.2s ease;
         }
 
-        /* Settings Layout */
+        /* Settings Layout - Enhanced responsive */
         .settings-container {
             display: flex;
             gap: 32px;
+            flex-wrap: wrap;
         }
 
         .settings-sidebar {
@@ -246,6 +273,12 @@
         .settings-tab i {
             width: 24px;
             font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .settings-tab span {
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .settings-tab:hover {
@@ -261,6 +294,7 @@
 
         .settings-content {
             flex: 1;
+            min-width: 0; /* Prevents overflow */
         }
 
         .settings-panel {
@@ -343,6 +377,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            flex-wrap: wrap;
             margin-bottom: 24px;
         }
 
@@ -357,6 +392,14 @@
             font-size: 32px;
             color: var(--accent);
             border: 2px solid var(--accent);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .toggle-switch {
@@ -365,6 +408,8 @@
             justify-content: space-between;
             padding: 12px 0;
             border-bottom: 1px solid var(--border-color);
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .toggle-switch:last-child {
@@ -391,6 +436,7 @@
             cursor: pointer;
             transition: var(--transition);
             border: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
 
         .toggle.active {
@@ -486,9 +532,46 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            word-break: break-all;
         }
 
-        /* Responsive */
+        .api-key code {
+            word-break: break-all;
+            font-size: 12px;
+        }
+
+        /* Toast notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--dark);
+            border-left: 4px solid var(--success);
+            padding: 12px 20px;
+            border-radius: 12px;
+            color: var(--white);
+            z-index: 1200;
+            animation: slideIn 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Breakpoints - matching traffic page */
         @media (max-width: 992px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -498,6 +581,7 @@
             }
             .main-content {
                 margin-left: 0;
+                width: 100%;
             }
             .menu-toggle {
                 display: block;
@@ -511,47 +595,79 @@
                 overflow-x: auto;
                 gap: 12px;
                 padding-bottom: 8px;
+                scrollbar-width: thin;
             }
             .settings-tab {
                 flex-shrink: 0;
                 margin-bottom: 0;
+                white-space: nowrap;
             }
         }
 
         @media (max-width: 768px) {
             .content {
-                padding: 20px;
+                padding: 16px;
             }
             .form-row {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
             .profile-info {
                 display: none;
             }
+            .topbar {
+                padding: 12px 16px;
+            }
+            .card-header {
+                padding: 16px 20px;
+            }
+            .card-body {
+                padding: 20px;
+            }
+            .settings-tab {
+                padding: 12px 16px;
+            }
+            .settings-tab span {
+                font-size: 13px;
+            }
+            .api-key {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .btn {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
         }
 
-        .toast-notification {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: var(--dark);
-            border-left: 4px solid var(--success);
-            padding: 12px 20px;
-            border-radius: 12px;
-            color: var(--white);
-            z-index: 1100;
-            animation: slideIn 0.3s ease;
+        @media (max-width: 550px) {
+            .avatar-upload {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .danger-zone {
+                padding: 16px;
+            }
+            .toggle-switch {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .card-header h3 {
+                font-size: 16px;
+            }
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -595,7 +711,7 @@
 
             <div class="content">
                 <div class="settings-container">
-                    <!-- Settings Tabs -->
+                    <!-- Settings Tabs - Scrollable on mobile -->
                     <div class="settings-sidebar">
                         <div class="settings-tab active" data-tab="profile">
                             <i class="fas fa-user-circle"></i>
@@ -603,7 +719,7 @@
                         </div>
                         <div class="settings-tab" data-tab="security">
                             <i class="fas fa-lock"></i>
-                            <span>Security & Authentication</span>
+                            <span>Security & Auth</span>
                         </div>
                         <div class="settings-tab" data-tab="notifications">
                             <i class="fas fa-bell"></i>
@@ -611,7 +727,7 @@
                         </div>
                         <div class="settings-tab" data-tab="system">
                             <i class="fas fa-globe"></i>
-                            <span>System Configuration</span>
+                            <span>System Config</span>
                         </div>
                         <div class="settings-tab" data-tab="integrations">
                             <i class="fas fa-plug"></i>
@@ -638,7 +754,7 @@
                                             <i class="fas fa-user"></i>
                                         </div>
                                         <div>
-                                            <button class="btn btn-outline" id="uploadAvatarBtn"><i class="fas fa-upload"></i> Upload New Avatar</button>
+                                            <button class="btn btn-outline" id="uploadAvatarBtn" type="button"><i class="fas fa-upload"></i> Upload New Avatar</button>
                                             <input type="file" id="avatarInput" accept="image/*" style="display: none;">
                                             <p style="font-size: 11px; color: var(--gray); margin-top: 8px;">JPG, PNG or GIF. Max size 2MB</p>
                                         </div>
@@ -667,7 +783,7 @@
                                         <label>Bio / Description</label>
                                         <textarea id="bio" rows="3" placeholder="Tell us a little about yourself...">Luxury real estate expert with over 15 years of experience in high-end property management and client relations.</textarea>
                                     </div>
-                                    <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                                    <div style="display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap;">
                                         <button class="btn btn-outline" id="cancelProfileBtn">Cancel</button>
                                         <button class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
                                     </div>
@@ -717,7 +833,7 @@
                                         </div>
                                     </div>
                                     <div id="twoFactorSetup" style="display: none; margin-top: 20px; padding: 16px; background: var(--darker); border-radius: 16px;">
-                                        <p style="color: var(--accent); margin-bottom: 12px;"><i class="fas fa-qrcode"></i> Scan QR code with authenticator app</p>
+                                        <p style="color: var(--accent); margin-bottom: 12px; text-align: center;"><i class="fas fa-qrcode"></i> Scan QR code with authenticator app</p>
                                         <div style="background: white; width: 160px; height: 160px; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 12px;">
                                             <i class="fas fa-qrcode" style="font-size: 80px; color: var(--primary);"></i>
                                         </div>
@@ -741,51 +857,11 @@
                                     <p>Choose what notifications you'd like to receive</p>
                                 </div>
                                 <div class="card-body">
-                                    <div class="toggle-switch">
-                                        <div class="toggle-info">
-                                            <h4>Email Notifications</h4>
-                                            <p>Receive email updates about your account and activity</p>
-                                        </div>
-                                        <div class="toggle active" id="emailNotifToggle">
-                                            <div class="toggle-slider"></div>
-                                        </div>
-                                    </div>
-                                    <div class="toggle-switch">
-                                        <div class="toggle-info">
-                                            <h4>New Property Listings</h4>
-                                            <p>Get notified when new properties are added</p>
-                                        </div>
-                                        <div class="toggle active" id="newPropertyToggle">
-                                            <div class="toggle-slider"></div>
-                                        </div>
-                                    </div>
-                                    <div class="toggle-switch">
-                                        <div class="toggle-info">
-                                            <h4>Property Inquiries</h4>
-                                            <p>Receive alerts for new client inquiries</p>
-                                        </div>
-                                        <div class="toggle active" id="inquiryToggle">
-                                            <div class="toggle-slider"></div>
-                                        </div>
-                                    </div>
-                                    <div class="toggle-switch">
-                                        <div class="toggle-info">
-                                            <h4>Sell Requests</h4>
-                                            <p>Get notified when someone wants to sell their property</p>
-                                        </div>
-                                        <div class="toggle active" id="sellRequestToggle">
-                                            <div class="toggle-slider"></div>
-                                        </div>
-                                    </div>
-                                    <div class="toggle-switch">
-                                        <div class="toggle-info">
-                                            <h4>Weekly Reports</h4>
-                                            <p>Receive weekly analytics and performance reports</p>
-                                        </div>
-                                        <div class="toggle" id="weeklyReportToggle">
-                                            <div class="toggle-slider"></div>
-                                        </div>
-                                    </div>
+                                    <div class="toggle-switch"><div class="toggle-info"><h4>Email Notifications</h4><p>Receive email updates about your account and activity</p></div><div class="toggle active" id="emailNotifToggle"><div class="toggle-slider"></div></div></div>
+                                    <div class="toggle-switch"><div class="toggle-info"><h4>New Property Listings</h4><p>Get notified when new properties are added</p></div><div class="toggle active" id="newPropertyToggle"><div class="toggle-slider"></div></div></div>
+                                    <div class="toggle-switch"><div class="toggle-info"><h4>Property Inquiries</h4><p>Receive alerts for new client inquiries</p></div><div class="toggle active" id="inquiryToggle"><div class="toggle-slider"></div></div></div>
+                                    <div class="toggle-switch"><div class="toggle-info"><h4>Sell Requests</h4><p>Get notified when someone wants to sell their property</p></div><div class="toggle active" id="sellRequestToggle"><div class="toggle-slider"></div></div></div>
+                                    <div class="toggle-switch"><div class="toggle-info"><h4>Weekly Reports</h4><p>Receive weekly analytics and performance reports</p></div><div class="toggle" id="weeklyReportToggle"><div class="toggle-slider"></div></div></div>
                                 </div>
                             </div>
                         </div>
@@ -793,41 +869,13 @@
                         <!-- System Configuration Panel -->
                         <div class="settings-panel" id="systemPanel">
                             <div class="settings-card">
-                                <div class="card-header">
-                                    <h3>General Settings</h3>
-                                    <p>Configure system-wide preferences</p>
-                                </div>
+                                <div class="card-header"><h3>General Settings</h3><p>Configure system-wide preferences</p></div>
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label>Site Name</label>
-                                        <input type="text" id="siteName" value="Mannavilla Luxury Real Estate">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Site Tagline</label>
-                                        <input type="text" id="siteTagline" value="Where Luxury Finds a Home">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Default Currency</label>
-                                        <select id="currency">
-                                            <option value="USD" selected>USD - US Dollar</option>
-                                            <option value="EUR">EUR - Euro</option>
-                                            <option value="GBP">GBP - British Pound</option>
-                                            <option value="CAD">CAD - Canadian Dollar</option>
-                                            <option value="AED">AED - UAE Dirham</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Time Zone</label>
-                                        <select id="timezone">
-                                            <option value="America/New_York">Eastern Time (ET)</option>
-                                            <option value="America/Los_Angeles" selected>Pacific Time (PT)</option>
-                                            <option value="Europe/London">GMT (London)</option>
-                                            <option value="Asia/Dubai">GST (Dubai)</option>
-                                        </select>
-                                    </div>
-                                    <div style="display: flex; justify-content: flex-end;">
-                                        <button class="btn btn-primary" id="saveSystemBtn">Save System Settings</button>
-                                    </div>
+                                    <div class="form-group"><label>Site Name</label><input type="text" id="siteName" value="Mannavilla Luxury Real Estate"></div>
+                                    <div class="form-group"><label>Site Tagline</label><input type="text" id="siteTagline" value="Where Luxury Finds a Home"></div>
+                                    <div class="form-group"><label>Default Currency</label><select id="currency"><option value="USD" selected>USD - US Dollar</option><option value="EUR">EUR - Euro</option><option value="GBP">GBP - British Pound</option><option value="CAD">CAD - Canadian Dollar</option><option value="AED">AED - UAE Dirham</option></select></div>
+                                    <div class="form-group"><label>Time Zone</label><select id="timezone"><option value="America/New_York">Eastern Time (ET)</option><option value="America/Los_Angeles" selected>Pacific Time (PT)</option><option value="Europe/London">GMT (London)</option><option value="Asia/Dubai">GST (Dubai)</option></select></div>
+                                    <div style="display: flex; justify-content: flex-end;"><button class="btn btn-primary" id="saveSystemBtn">Save System Settings</button></div>
                                 </div>
                             </div>
                         </div>
@@ -835,38 +883,13 @@
                         <!-- Integrations Panel -->
                         <div class="settings-panel" id="integrationsPanel">
                             <div class="settings-card">
-                                <div class="card-header">
-                                    <h3>API Configuration</h3>
-                                    <p>Manage API keys and third-party integrations</p>
-                                </div>
+                                <div class="card-header"><h3>API Configuration</h3><p>Manage API keys and third-party integrations</p></div>
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label>API Key</label>
-                                        <div class="api-key">
-                                            <code>mvn_sk_live_8x9k3m2n7p4q1w5r8t2y6u</code>
-                                            <button class="btn btn-outline" id="copyApiKey" style="padding: 4px 12px;"><i class="fas fa-copy"></i> Copy</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Google Maps API Key</label>
-                                        <input type="text" id="googleMapsKey" value="AIzaSyB8x9K3mN7pQ4rW5tY6uI8oP2z">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Stripe Secret Key</label>
-                                        <input type="password" id="stripeKey" value="sk_live_4x7k9m2n5p8q1w3r6t9y">
-                                    </div>
-                                    <div class="toggle-switch">
-                                        <div class="toggle-info">
-                                            <h4>Enable Google Analytics</h4>
-                                            <p>Track website traffic and user behavior</p>
-                                        </div>
-                                        <div class="toggle active" id="analyticsToggle">
-                                            <div class="toggle-slider"></div>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-                                        <button class="btn btn-primary" id="saveIntegrationsBtn">Save Integration Settings</button>
-                                    </div>
+                                    <div class="form-group"><label>API Key</label><div class="api-key"><code>mvn_sk_live_8x9k3m2n7p4q1w5r8t2y6u</code><button class="btn btn-outline" id="copyApiKey" style="padding: 4px 12px;"><i class="fas fa-copy"></i> Copy</button></div></div>
+                                    <div class="form-group"><label>Google Maps API Key</label><input type="text" id="googleMapsKey" value="AIzaSyB8x9K3mN7pQ4rW5tY6uI8oP2z"></div>
+                                    <div class="form-group"><label>Stripe Secret Key</label><input type="password" id="stripeKey" value="sk_live_4x7k9m2n5p8q1w3r6t9y"></div>
+                                    <div class="toggle-switch"><div class="toggle-info"><h4>Enable Google Analytics</h4><p>Track website traffic and user behavior</p></div><div class="toggle active" id="analyticsToggle"><div class="toggle-slider"></div></div></div>
+                                    <div style="display: flex; justify-content: flex-end; margin-top: 20px;"><button class="btn btn-primary" id="saveIntegrationsBtn">Save Integration Settings</button></div>
                                 </div>
                             </div>
                         </div>
@@ -874,16 +897,13 @@
                         <!-- Backup Panel -->
                         <div class="settings-panel" id="backupPanel">
                             <div class="settings-card">
-                                <div class="card-header">
-                                    <h3>Backup & Restore</h3>
-                                    <p>Manage your data backups and restore points</p>
-                                </div>
+                                <div class="card-header"><h3>Backup & Restore</h3><p>Manage your data backups and restore points</p></div>
                                 <div class="card-body">
                                     <div style="text-align: center; padding: 20px;">
                                         <i class="fas fa-database" style="font-size: 48px; color: var(--accent); margin-bottom: 16px;"></i>
                                         <h4 style="color: var(--white); margin-bottom: 8px;">Last Backup: March 22, 2026</h4>
                                         <p style="color: var(--gray); margin-bottom: 24px;">All data backed up successfully</p>
-                                        <div style="display: flex; gap: 16px; justify-content: center;">
+                                        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
                                             <button class="btn btn-primary" id="backupNowBtn"><i class="fas fa-download"></i> Backup Now</button>
                                             <button class="btn btn-outline" id="restoreBackupBtn"><i class="fas fa-upload"></i> Restore Backup</button>
                                         </div>
@@ -908,7 +928,6 @@
                 window.location.href = 'admin-login.html';
                 return;
             }
-
             const adminName = sessionStorage.getItem('adminName') || 'System Admin';
             document.getElementById('adminName').innerText = adminName;
 
@@ -921,184 +940,111 @@
                 setTimeout(() => toast.remove(), 3000);
             }
 
-            // Tab switching
-            const tabs = document.querySelectorAll('.settings-tab');
-            const panels = document.querySelectorAll('.settings-panel');
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    const tabId = tab.dataset.tab;
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    panels.forEach(panel => panel.classList.remove('active'));
-                    document.getElementById(`${tabId}Panel`).classList.add('active');
-                });
-            });
-
-            // Toggle switch handler
             function initToggle(toggleElement, onToggle) {
+                if (!toggleElement) return;
                 toggleElement.addEventListener('click', () => {
                     toggleElement.classList.toggle('active');
                     if (onToggle) onToggle(toggleElement.classList.contains('active'));
                 });
             }
 
-            // Two-factor toggle
+            // Tab switching
+            const tabs = document.querySelectorAll('.settings-tab');
+            const panels = document.querySelectorAll('.settings-panel');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.dataset.tab;
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    panels.forEach(panel => panel.classList.remove('active'));
+                    const activePanel = document.getElementById(`${tabId}Panel`);
+                    if (activePanel) activePanel.classList.add('active');
+                });
+            });
+
+            // Toggle handlers
             const twoFactorToggle = document.getElementById('twoFactorToggle');
             const twoFactorSetup = document.getElementById('twoFactorSetup');
-            initToggle(twoFactorToggle, (isActive) => {
-                twoFactorSetup.style.display = isActive ? 'block' : 'none';
-                if (isActive) showToast('Two-factor authentication enabled');
-                else showToast('Two-factor authentication disabled');
-            });
-
-            // Notification toggles
-            const emailNotif = document.getElementById('emailNotifToggle');
-            const newProperty = document.getElementById('newPropertyToggle');
-            const inquiryToggle = document.getElementById('inquiryToggle');
-            const sellRequest = document.getElementById('sellRequestToggle');
-            const weeklyReport = document.getElementById('weeklyReportToggle');
+            if (twoFactorToggle) initToggle(twoFactorToggle, (active) => { if(twoFactorSetup) twoFactorSetup.style.display = active ? 'block' : 'none'; showToast(active ? '2FA enabled' : '2FA disabled'); });
             
-            initToggle(emailNotif);
-            initToggle(newProperty);
-            initToggle(inquiryToggle);
-            initToggle(sellRequest);
-            initToggle(weeklyReport);
-
-            // Analytics toggle
-            const analyticsToggle = document.getElementById('analyticsToggle');
-            initToggle(analyticsToggle);
+            ['emailNotifToggle', 'newPropertyToggle', 'inquiryToggle', 'sellRequestToggle', 'weeklyReportToggle', 'analyticsToggle'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) initToggle(el);
+            });
 
             // Avatar upload
-            const uploadAvatarBtn = document.getElementById('uploadAvatarBtn');
+            const uploadBtn = document.getElementById('uploadAvatarBtn');
             const avatarInput = document.getElementById('avatarInput');
             const avatarPreview = document.getElementById('avatarPreview');
-
-            uploadAvatarBtn.addEventListener('click', () => avatarInput.click());
-            avatarInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file && file.type.startsWith('image/')) {
-                    if (file.size > 2 * 1024 * 1024) {
-                        showToast('Image size should be less than 2MB', true);
-                        return;
+            if (uploadBtn && avatarInput) {
+                uploadBtn.addEventListener('click', () => avatarInput.click());
+                avatarInput.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                        if (file.size > 2 * 1024 * 1024) { showToast('Image size should be less than 2MB', true); return; }
+                        const reader = new FileReader();
+                        reader.onload = (ev) => { avatarPreview.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`; showToast('Avatar uploaded'); };
+                        reader.readAsDataURL(file);
                     }
-                    const reader = new FileReader();
-                    reader.onload = (ev) => {
-                        avatarPreview.innerHTML = `<img src="${ev.target.result}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
-                        showToast('Avatar uploaded successfully');
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
+                });
+            }
 
-            // Save profile
-            document.getElementById('saveProfileBtn').addEventListener('click', () => {
-                const fullName = document.getElementById('fullName').value;
-                const email = document.getElementById('email').value;
-                if (fullName && email) {
-                    sessionStorage.setItem('adminName', fullName);
-                    document.getElementById('adminName').innerText = fullName;
-                    showToast('Profile updated successfully');
-                } else {
-                    showToast('Please fill in all required fields', true);
-                }
+            // Profile save
+            const saveProfile = document.getElementById('saveProfileBtn');
+            if (saveProfile) saveProfile.addEventListener('click', () => {
+                const fullName = document.getElementById('fullName')?.value;
+                if (fullName) { sessionStorage.setItem('adminName', fullName); document.getElementById('adminName').innerText = fullName; showToast('Profile updated'); }
+                else showToast('Please fill in name', true);
             });
+            const cancelProfile = document.getElementById('cancelProfileBtn');
+            if (cancelProfile) cancelProfile.addEventListener('click', () => { showToast('Changes discarded'); });
 
-            document.getElementById('cancelProfileBtn').addEventListener('click', () => {
-                document.getElementById('fullName').value = 'Alexander Sterling';
-                document.getElementById('email').value = 'alexander@mannavilla.com';
-                document.getElementById('phone').value = '+1 (212) 555-0123';
-                document.getElementById('role').value = 'Principal Administrator';
-                document.getElementById('bio').value = 'Luxury real estate expert with over 15 years of experience in high-end property management and client relations.';
-                showToast('Changes discarded');
-            });
-
-            // Change password
-            document.getElementById('changePasswordBtn').addEventListener('click', () => {
-                const current = document.getElementById('currentPassword').value;
-                const newPass = document.getElementById('newPassword').value;
-                const confirm = document.getElementById('confirmPassword').value;
-                
-                if (!current || !newPass || !confirm) {
-                    showToast('Please fill in all password fields', true);
-                    return;
-                }
-                if (newPass !== confirm) {
-                    showToast('New passwords do not match', true);
-                    return;
-                }
-                if (newPass.length < 6) {
-                    showToast('Password must be at least 6 characters', true);
-                    return;
-                }
-                showToast('Password changed successfully');
-                document.getElementById('currentPassword').value = '';
-                document.getElementById('newPassword').value = '';
-                document.getElementById('confirmPassword').value = '';
+            // Password change
+            const changePwd = document.getElementById('changePasswordBtn');
+            if (changePwd) changePwd.addEventListener('click', () => {
+                const newPass = document.getElementById('newPassword')?.value;
+                const confirm = document.getElementById('confirmPassword')?.value;
+                if (!newPass || !confirm) showToast('Fill all password fields', true);
+                else if (newPass !== confirm) showToast('Passwords do not match', true);
+                else if (newPass.length < 6) showToast('Password must be at least 6 chars', true);
+                else { showToast('Password changed'); document.getElementById('currentPassword').value = ''; document.getElementById('newPassword').value = ''; document.getElementById('confirmPassword').value = ''; }
             });
 
             // Delete account
-            document.getElementById('deleteAccountBtn').addEventListener('click', () => {
-                if (confirm('Are you absolutely sure you want to delete your account? This action cannot be undone.')) {
-                    showToast('Account deletion requested. Administrator will process shortly.');
-                }
-            });
+            const deleteBtn = document.getElementById('deleteAccountBtn');
+            if (deleteBtn) deleteBtn.addEventListener('click', () => { if(confirm('Are you sure? This cannot be undone.')) showToast('Account deletion requested'); });
 
-            // Save system settings
-            document.getElementById('saveSystemBtn').addEventListener('click', () => {
-                showToast('System settings saved successfully');
-            });
+            // Save system
+            const saveSystem = document.getElementById('saveSystemBtn');
+            if (saveSystem) saveSystem.addEventListener('click', () => showToast('System settings saved'));
 
             // Save integrations
-            document.getElementById('saveIntegrationsBtn').addEventListener('click', () => {
-                showToast('Integration settings saved successfully');
-            });
+            const saveIntegrations = document.getElementById('saveIntegrationsBtn');
+            if (saveIntegrations) saveIntegrations.addEventListener('click', () => showToast('Integration settings saved'));
 
             // Copy API key
-            document.getElementById('copyApiKey').addEventListener('click', () => {
-                const apiKey = document.querySelector('.api-key code').innerText;
-                navigator.clipboard.writeText(apiKey);
-                showToast('API key copied to clipboard');
-            });
+            const copyApi = document.getElementById('copyApiKey');
+            if (copyApi) copyApi.addEventListener('click', () => { const key = document.querySelector('.api-key code')?.innerText; if(key) { navigator.clipboard.writeText(key); showToast('API key copied'); } });
 
             // Backup actions
-            document.getElementById('backupNowBtn').addEventListener('click', () => {
-                showToast('Backup initiated. Download will start shortly.');
-                setTimeout(() => showToast('Backup completed!'), 2000);
-            });
-            
-            document.getElementById('restoreBackupBtn').addEventListener('click', () => {
-                if (confirm('Restoring a backup will overwrite current data. Continue?')) {
-                    showToast('Restore initiated. Please wait...');
-                }
-            });
-            
-            document.getElementById('resetDataBtn').addEventListener('click', () => {
-                if (confirm('⚠️ WARNING: This will permanently delete ALL data. This action cannot be undone. Type "CONFIRM" to proceed.')) {
-                    const userConfirm = prompt('Type "CONFIRM" to reset all data:');
-                    if (userConfirm === 'CONFIRM') {
-                        showToast('All data has been reset');
-                    }
-                }
-            });
+            const backupNow = document.getElementById('backupNowBtn');
+            if (backupNow) backupNow.addEventListener('click', () => { showToast('Backup initiated'); setTimeout(() => showToast('Backup completed'), 2000); });
+            const restoreBackup = document.getElementById('restoreBackupBtn');
+            if (restoreBackup) restoreBackup.addEventListener('click', () => { if(confirm('Restore backup?')) showToast('Restore initiated'); });
+            const resetData = document.getElementById('resetDataBtn');
+            if (resetData) resetData.addEventListener('click', () => { if(prompt('Type "CONFIRM" to reset all data:') === 'CONFIRM') showToast('All data has been reset'); });
 
             // Sidebar toggle
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
-            menuToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
-            document.addEventListener('click', (e) => {
-                if(window.innerWidth <= 992 && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
-                    sidebar.classList.remove('active');
-                }
-            });
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
+                document.addEventListener('click', (e) => { if(window.innerWidth <= 992 && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) sidebar.classList.remove('active'); });
+            }
 
             // Logout
-            document.getElementById('logoutBtn').addEventListener('click', (e) => {
-                e.preventDefault();
-                sessionStorage.removeItem('adminLoggedIn');
-                sessionStorage.removeItem('adminName');
-                window.location.href = 'admin-login.html';
-            });
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) logoutBtn.addEventListener('click', (e) => { e.preventDefault(); sessionStorage.removeItem('adminLoggedIn'); sessionStorage.removeItem('adminName'); window.location.href = 'admin-login.html'; });
         })();
     </script>
 </body>

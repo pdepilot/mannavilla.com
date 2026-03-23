@@ -7,7 +7,6 @@
     <link rel="icon" href="./img/1000100184-removebg-preview.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Chart.js CDN for analytics -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
@@ -52,7 +51,7 @@
             min-height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar - Enhanced responsiveness */
         .sidebar {
             width: 280px;
             background: rgba(10, 10, 18, 0.98);
@@ -61,8 +60,8 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            transition: var(--transition);
-            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), width 0.2s ease;
+            z-index: 1000;
         }
 
         .sidebar-header {
@@ -71,6 +70,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .sidebar-logo-icon {
@@ -85,6 +85,7 @@
             font-size: 20px;
             color: var(--white);
             box-shadow: 0 0 12px rgba(238,210,121,0.3);
+            flex-shrink: 0;
         }
 
         .sidebar-header h3 {
@@ -92,6 +93,7 @@
             font-size: 22px;
             font-family: 'Playfair Display', serif;
             letter-spacing: -0.3px;
+            line-height: 1.2;
         }
 
         .sidebar-header p {
@@ -127,6 +129,11 @@
         .nav-link i {
             width: 22px;
             font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .nav-link span {
+            white-space: nowrap;
         }
 
         .nav-link:hover {
@@ -149,14 +156,15 @@
         .main-content {
             flex: 1;
             margin-left: 280px;
-            transition: var(--transition);
+            transition: margin-left 0.3s ease;
+            width: calc(100% - 280px);
         }
 
-        /* Topbar */
+        /* Topbar - fully responsive */
         .topbar {
             background: rgba(17, 17, 31, 0.85);
             backdrop-filter: blur(12px);
-            padding: 14px 32px;
+            padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -164,6 +172,8 @@
             position: sticky;
             top: 0;
             z-index: 99;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .menu-toggle {
@@ -173,11 +183,17 @@
             color: var(--white);
             font-size: 26px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
         }
 
         .search-bar {
             flex: 1;
             max-width: 380px;
+            min-width: 160px;
             position: relative;
         }
 
@@ -187,6 +203,7 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
+            pointer-events: none;
         }
 
         .search-bar input {
@@ -209,7 +226,8 @@
         .topbar-right {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 20px;
+            flex-shrink: 0;
         }
 
         .notification-btn {
@@ -236,6 +254,8 @@
             padding: 2px 6px;
             border-radius: 30px;
             font-weight: bold;
+            min-width: 18px;
+            text-align: center;
         }
 
         .profile-dropdown {
@@ -269,6 +289,7 @@
             color: var(--accent);
             font-weight: bold;
             font-size: 18px;
+            flex-shrink: 0;
         }
 
         .profile-info {
@@ -327,16 +348,17 @@
 
         /* Content Area */
         .content {
-            padding: 32px 36px;
+            padding: 28px 32px;
+            transition: padding 0.2s ease;
         }
 
         .page-title {
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .page-title h1 {
             color: var(--white);
-            font-size: 30px;
+            font-size: clamp(24px, 5vw, 30px);
             font-weight: 700;
             letter-spacing: -0.5px;
         }
@@ -344,23 +366,23 @@
         .page-title p {
             color: var(--gray);
             margin-top: 8px;
+            font-size: clamp(13px, 3vw, 14px);
         }
 
-        /* Stats Grid & Cards */
+        /* Stats Grid - fully responsive */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 26px;
-            margin-bottom: 44px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
         }
 
         .stat-card {
             background: var(--dark);
             border: 1px solid var(--border-color);
             border-radius: 28px;
-            padding: 24px;
+            padding: 22px;
             transition: var(--transition);
-            backdrop-filter: blur(4px);
         }
 
         .stat-card:hover {
@@ -373,7 +395,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .stat-icon {
@@ -389,10 +411,11 @@
         }
 
         .stat-value {
-            font-size: 36px;
+            font-size: clamp(28px, 6vw, 36px);
             font-weight: 800;
             color: var(--white);
             margin-bottom: 8px;
+            line-height: 1.2;
         }
 
         .stat-label {
@@ -413,9 +436,9 @@
         /* Analytics Row */
         .analytics-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 28px;
-            margin-bottom: 44px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 26px;
+            margin-bottom: 40px;
         }
 
         .chart-card {
@@ -430,11 +453,15 @@
             margin-bottom: 18px;
             font-size: 18px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         canvas {
             max-height: 260px;
-            width: 100%;
+            width: 100% !important;
         }
 
         /* Recent Activity List */
@@ -442,16 +469,18 @@
             background: var(--dark);
             border: 1px solid var(--border-color);
             border-radius: 28px;
-            margin-bottom: 44px;
-            padding: 20px 0;
+            margin-bottom: 40px;
+            overflow: hidden;
         }
 
         .section-header {
-            padding: 12px 24px;
+            padding: 16px 24px;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .activity-item {
@@ -461,6 +490,7 @@
             padding: 16px 24px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             transition: var(--transition);
+            flex-wrap: wrap;
         }
 
         .activity-icon {
@@ -473,11 +503,17 @@
             justify-content: center;
             font-size: 18px;
             color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .activity-detail {
+            flex: 1;
         }
 
         .activity-detail p {
             color: var(--white);
             font-weight: 500;
+            font-size: 14px;
         }
 
         .activity-detail span {
@@ -485,7 +521,7 @@
             font-size: 12px;
         }
 
-        /* Table improvements */
+        /* Table improvements - fully responsive */
         .table-section {
             background: var(--dark);
             border: 1px solid var(--border-color);
@@ -494,18 +530,38 @@
             margin-top: 12px;
         }
 
+        .table-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table-header h3 {
+            color: var(--white);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .table-wrapper {
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 500px;
         }
 
         th {
             text-align: left;
-            padding: 18px 20px;
+            padding: 16px 20px;
             color: var(--accent);
             font-weight: 600;
             font-size: 13px;
@@ -513,7 +569,7 @@
         }
 
         td {
-            padding: 16px 20px;
+            padding: 14px 20px;
             color: #e5e7eb;
             border-bottom: 1px solid var(--border-color);
             font-size: 14px;
@@ -529,6 +585,7 @@
             border-radius: 40px;
             font-size: 12px;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .status-active { background: rgba(16,185,129,0.2); color: #2ecc71; }
@@ -538,6 +595,7 @@
         .action-buttons {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .action-btn {
@@ -547,32 +605,125 @@
             border: none;
             cursor: pointer;
             transition: var(--transition);
+            background: rgba(255,255,255,0.05);
+            color: var(--gray);
         }
 
-        /* Responsive */
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-sm {
+            background: var(--primary);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-sm:hover {
+            background: var(--accent);
+            color: var(--darker);
+        }
+
+        .text-accent { color: var(--accent); }
+
+        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
             .content { padding: 24px; }
-            .stats-grid { gap: 18px; }
+            .stats-grid { gap: 20px; }
         }
 
         @media (max-width: 992px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.active { transform: translateX(0); }
-            .main-content { margin-left: 0; }
-            .menu-toggle { display: block; }
-            .analytics-row { grid-template-columns: 1fr; }
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .analytics-row {
+                grid-template-columns: 1fr;
+            }
         }
 
-        @media (max-width: 640px) {
-            .content { padding: 16px; }
-            .topbar { padding: 10px 16px; }
-            .profile-info { display: none; }
-            .search-bar { max-width: 160px; }
-            .stat-value { font-size: 28px; }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            .topbar {
+                padding: 12px 16px;
+            }
+            .profile-info {
+                display: none;
+            }
+            .search-bar {
+                max-width: 200px;
+            }
+            .stat-card {
+                padding: 18px;
+            }
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
-        .btn-sm { background: var(--primary); border: none; padding: 8px 18px; border-radius: 40px; color: white; cursor: pointer; font-size: 13px; }
-        .btn-sm:hover { background: var(--accent); color: var(--darker); }
-        .text-accent { color: var(--accent); }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 16px;
+            }
+            .topbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-bar {
+                max-width: 100%;
+            }
+            .topbar-right {
+                justify-content: flex-end;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .activity-item {
+                padding: 12px 16px;
+            }
+            th, td {
+                padding: 12px 16px;
+            }
+            .stat-value {
+                font-size: 28px;
+            }
+        }
+
+        /* Utility */
+        .property-img {
+            width: 44px;
+            height: 44px;
+            background: #1f1f2e;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -583,16 +734,16 @@
                 <div><h3>Mannavilla</h3><p>ELITE ADMIN</p></div>
             </div>
             <ul class="sidebar-nav">
-                <li class="nav-item"><a href="./admin-dashboard.html" class="nav-link active" data-page="dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
-                <li class="nav-item"><a href="./admin-properties.html" class="nav-link" data-page="properties"><i class="fas fa-building"></i><span>Properties</span></a></li>
-                <li class="nav-item"><a href="./admin-sell-your-property.html" class="nav-link" data-page="listings"><i class="fas fa-tag"></i><span>Sell Request</span></a></li>
-                <li class="nav-item"><a href="./admin-testimonials.html" class="nav-link" data-page="testimonials"><i class="fas fa-star"></i><span>Testimonials</span></a></li>
-                <li class="nav-item"><a href="./admin-contact.html" class="nav-link" data-page="users"><i class="fas fa-users"></i><span>Contact</span></a></li>
-                <li class="nav-item"><a href="./admin-gallery.html" class="nav-link" data-page="gallery"><i class="fas fa-images"></i><span>Gallery</span><span class="notification-badge" style="position:static; margin-left:auto;">8</span></a></li>
-                <li class="nav-item"><a href="./admin-analytics.html" class="nav-link" data-page="analytics"><i class="fas fa-chart-pie"></i><span>Analytics</span></a></li>
-                <li class="nav-item"><a href="./admin-site-traffic.html" class="nav-link" data-page="site-traffic"><i class="fas fa-chart-line"></i><span>Site-Traffic</span></a></li>
-                <li class="nav-item"><a href="" class="nav-link" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+                <li class="nav-item"><a href="admin-dashboard.html" class="nav-link active" data-page="dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="admin-properties.html" class="nav-link" data-page="properties"><i class="fas fa-building"></i><span>Properties</span></a></li>
+                <li class="nav-item"><a href="admin-listings.html" class="nav-link" data-page="listings"><i class="fas fa-tag"></i><span>Sell Request</span></a></li>
+                <li class="nav-item"><a href="admin-testimonials.html" class="nav-link" data-page="testimonials"><i class="fas fa-star"></i><span>Testimonials</span></a></li>
+                <li class="nav-item"><a href="admin-users.html" class="nav-link" data-page="users"><i class="fas fa-users"></i><span>Contact</span></a></li>
+                <li class="nav-item"><a href="admin-gallery.html" class="nav-link" data-page="gallery"><i class="fas fa-images"></i><span>Gallery</span><span class="notification-badge" style="position:static; margin-left:auto; background:var(--accent); color:#000;">8</span></a></li>
+                <li class="nav-item"><a href="admin-analytics.html" class="nav-link" data-page="analytics"><i class="fas fa-chart-pie"></i><span>Analytics</span></a></li>
+                <li class="nav-item"><a href="admin-site-traffic.html" class="nav-link" data-page="site-traffic"><i class="fas fa-chart-line"></i><span>Site-Traffic</span></a></li>
+                <li class="nav-item"><a href="admin-settings.html" class="nav-link" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                <li class="nav-item"><a href="admin-logout.html" class="nav-link" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
             </ul>
         </aside>
 
@@ -610,7 +761,7 @@
             </div>
 
             <div class="content" id="mainContentArea">
-                <!-- Dashboard Content (enhanced) -->
+                <!-- Dashboard Content -->
                 <div id="dashboardContent">
                     <div class="page-title"><h1>Executive Dashboard</h1><p>Welcome back, <span id="welcomeName">Alexander</span> — real-time luxury portfolio insights.</p></div>
                     <div class="stats-grid" id="statsGrid"></div>
@@ -626,12 +777,12 @@
                     </div>
 
                     <div class="table-section">
-                        <div class="table-header" style="padding:18px 24px;"><h3><i class="fas fa-fire"></i> Premium Properties Spotlight</h3><button class="btn-sm" id="addPropertyBtn">+ Add Property</button></div>
+                        <div class="table-header"><h3><i class="fas fa-fire"></i> Premium Properties Spotlight</h3><button class="btn-sm" id="addPropertyBtn">+ Add Property</button></div>
                         <div class="table-wrapper"><table id="propertiesTable"><thead><tr><th>Image</th><th>Title</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead><tbody id="propertyTableBody"></tbody></table></div>
                     </div>
                 </div>
 
-                <div id="otherContent" style="display: none;"><div class="page-title"><h1 id="pageTitle">Properties</h1><p id="pageDesc">Manage portfolio</p></div><div class="table-section"><div style="padding: 80px; text-align: center; color: var(--gray);"><i class="fas fa-draw-polygon" style="font-size: 48px;"></i><p style="margin-top:16px;">Advanced module ready — data syncs dynamically.</p></div></div></div>
+                <div id="otherContent" style="display: none;"><div class="page-title"><h1 id="pageTitle">Properties</h1><p id="pageDesc">Manage portfolio</p></div><div class="table-section"><div style="padding: 60px 20px; text-align: center; color: var(--gray);"><i class="fas fa-draw-polygon" style="font-size: 48px;"></i><p style="margin-top:16px;">Advanced module ready — data syncs dynamically.</p></div></div></div>
             </div>
         </main>
     </div>
@@ -643,7 +794,6 @@
             document.getElementById('adminName').innerText = adminName;
             document.getElementById('welcomeName').innerText = adminName.split(' ')[0];
 
-            // Enhanced datasets
             let properties = [
                 { id:1, title:"Luxury Penthouse Downtown", price:"$2,450,000", status:"Active", icon:"fa-home" },
                 { id:2, title:"Modern Villa Ocean View", price:"$4,850,000", status:"Active", icon:"fa-water" },
@@ -651,21 +801,24 @@
                 { id:4, title:"Skyline Luxury Apartment", price:"$1,890,000", status:"Active", icon:"fa-city" },
                 { id:5, title:"Mediterranean Beachfront", price:"$6,750,000", status:"Sold", icon:"fa-umbrella-beach" }
             ];
+            
             function renderPropertiesTable() {
                 const tbody = document.getElementById('propertyTableBody');
                 if(!tbody) return;
                 tbody.innerHTML = properties.map(p => `
                     <tr>
-                        <td><div class="property-img" style="width:44px;height:44px;background:#1f1f2e;border-radius:16px;display:flex;align-items:center;justify-content:center;"><i class="fas ${p.icon}"></i></div></td>
-                        <td>${p.title}</td><td>${p.price}</td>
+                        <td><div class="property-img"><i class="fas ${p.icon}"></i></div></td>
+                        <td>${p.title}</td>
+                        <td>${p.price}</td>
                         <td><span class="status-badge ${p.status === 'Active' ? 'status-active' : (p.status === 'Pending' ? 'status-pending' : 'status-sold')}">${p.status}</span></td>
                         <td><div class="action-buttons"><button class="action-btn btn-view" data-id="${p.id}"><i class="fas fa-eye"></i></button><button class="action-btn btn-edit" data-id="${p.id}"><i class="fas fa-edit"></i></button><button class="action-btn btn-delete" data-id="${p.id}"><i class="fas fa-trash"></i></button></div></td>
                     </tr>
                 `).join('');
-                document.querySelectorAll('.btn-view').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('View property details (simulated)'); }));
-                document.querySelectorAll('.btn-edit').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); alert('Edit property modal would open'); }));
-                document.querySelectorAll('.btn-delete').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); const id = parseInt(btn.dataset.id); if(confirm('Delete property?')){ properties = properties.filter(p => p.id !== id); renderPropertiesTable(); updateStats(); } }));
+                document.querySelectorAll('.btn-view').forEach(btn => btn.addEventListener('click', () => alert('View property details (simulated)')));
+                document.querySelectorAll('.btn-edit').forEach(btn => btn.addEventListener('click', () => alert('Edit property modal would open')));
+                document.querySelectorAll('.btn-delete').forEach(btn => btn.addEventListener('click', () => { const id = parseInt(btn.dataset.id); if(confirm('Delete property?')){ properties = properties.filter(p => p.id !== id); renderPropertiesTable(); updateStats(); } }));
             }
+            
             function updateStats() {
                 const stats = [
                     { icon:"fa-building", value:properties.length, label:"Total Properties", change:"+3 this month" },
@@ -680,7 +833,6 @@
                 `).join('');
             }
             
-            // Activity Feed
             const activities = [
                 { text:"New inquiry: Villa Ocean View", time:"2 hours ago", icon:"fa-envelope" },
                 { text:"Property 'Skyline Apartment' status changed to Sold", time:"5 hours ago", icon:"fa-check-circle" },
@@ -693,7 +845,6 @@
                 if(actDiv) actDiv.innerHTML = activities.map(a => `<div class="activity-item"><div class="activity-icon"><i class="fas ${a.icon}"></i></div><div class="activity-detail"><p>${a.text}</p><span>${a.time}</span></div></div>`).join('');
             }
             
-            // Charts initialization
             let viewsChart, revenueChart;
             function initCharts() {
                 const ctx1 = document.getElementById('viewsChart')?.getContext('2d');
@@ -708,8 +859,8 @@
             const otherDiv = document.getElementById('otherContent');
             const pageTitleSpan = document.getElementById('pageTitle');
             const pageDescSpan = document.getElementById('pageDesc');
-            const titles = { properties:'Property Portfolio', listings:'Sell / Listing Manager', testimonials:'Client Testimonials', users:'Luxury Clients', messages:'Messages & Inquiries', analytics:'Advanced Analytics', settings:'System Preferences' };
-            const descs = { properties:'Manage all luxury estates', listings:'Track sell listings & offers', testimonials:'Curate 5-star reviews', users:'VIP client data', messages:'Reply to hot leads', analytics:'Performance intelligence', settings:'Brand configuration' };
+            const titles = { properties:'Property Portfolio', listings:'Sell / Listing Manager', testimonials:'Client Testimonials', users:'Luxury Clients', gallery:'Media Gallery', analytics:'Advanced Analytics', 'site-traffic':'Site Traffic Insights', settings:'System Preferences' };
+            const descs = { properties:'Manage all luxury estates', listings:'Track sell listings & offers', testimonials:'Curate 5-star reviews', users:'VIP client data', gallery:'Image & video management', analytics:'Performance intelligence', 'site-traffic':'Real-time visitor analytics', settings:'Brand configuration' };
             
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -718,7 +869,7 @@
                     if(!page || page === 'dashboard') {
                         dashboardDiv.style.display = 'block'; otherDiv.style.display = 'none';
                         navLinks.forEach(l => l.classList.remove('active')); link.classList.add('active');
-                        setTimeout(() => { if(window.viewsChart) viewsChart.resize(); if(window.revenueChart) revenueChart.resize(); }, 100);
+                        setTimeout(() => { if(viewsChart) viewsChart.resize(); if(revenueChart) revenueChart.resize(); }, 100);
                     } else {
                         dashboardDiv.style.display = 'none'; otherDiv.style.display = 'block';
                         pageTitleSpan.innerText = titles[page] || page.charAt(0).toUpperCase()+page.slice(1);
@@ -728,7 +879,6 @@
                 });
             });
             
-            // Global search filter
             document.getElementById('globalSearch')?.addEventListener('input', (e) => {
                 const term = e.target.value.toLowerCase();
                 const rows = document.querySelectorAll('#propertyTableBody tr');
@@ -740,13 +890,15 @@
             
             document.getElementById('addPropertyBtn')?.addEventListener('click', () => { alert('Open create property modal (dynamic form)'); });
             
-            // Sidebar Toggle + logout
+            // Sidebar Toggle + responsive close
             const menuToggle = document.getElementById('menuToggle'), sidebar = document.getElementById('sidebar');
             menuToggle?.addEventListener('click', () => sidebar.classList.toggle('active'));
             document.addEventListener('click', (e) => { if(window.innerWidth <= 992 && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) sidebar.classList.remove('active'); });
+            
             const profileBtn = document.getElementById('profileBtn'), profileDropdown = document.getElementById('profileDropdown');
             profileBtn?.addEventListener('click', (e) => { e.stopPropagation(); profileDropdown.classList.toggle('show'); });
             document.addEventListener('click', (e) => { if(!profileBtn?.contains(e.target) && !profileDropdown?.contains(e.target)) profileDropdown?.classList.remove('show'); });
+            
             function logout() { sessionStorage.removeItem('adminLoggedIn'); sessionStorage.removeItem('adminName'); window.location.href = 'admin-login.html'; }
             document.getElementById('logoutBtn')?.addEventListener('click', (e) => { e.preventDefault(); logout(); });
             document.getElementById('logoutDropdown')?.addEventListener('click', (e) => { e.preventDefault(); logout(); });

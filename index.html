@@ -89,8 +89,7 @@
               Live With Your Family
             </h1>
             <p>
-              Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no.
-              Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.
+              At Mannavilla LTD, we create and deliver exceptional living spaces in prime locations, combining elegance, comfort, and lasting value.
             </p>
             <a href="#" class="btn btn-primary">Get Started</a>
           </div>
@@ -150,9 +149,7 @@
         <div class="section-header" data-aos="fade-up" data-aos-duration="800">
           <h2>Property Types</h2>
           <p>
-            Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore
-            lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum
-            vero dolor duo.
+            Discover premium properties designed for modern living, offering unmatched quality, prime locations, and a truly elevated experience.
           </p>
         </div>
         <div class="categories-grid">
@@ -506,8 +503,7 @@
           <div class="listings-title">
             <h2>Property Listing</h2>
             <p>
-              Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut
-              dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.
+              From beautifully crafted apartments to prime land investments, we help you find spaces that reflect your lifestyle and future.
             </p>
           </div>
           <div class="listings-tabs">
@@ -683,8 +679,7 @@
             >
               <h2>Contact With Our Certified Agent</h2>
               <p>
-                Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd
-                vero ipsum sit sit diam justo sed vero dolor duo.
+                Explore high-value real estate opportunities built for growth, comfort, and long-term returns in prime locations.
               </p>
               <div class="cta-buttons">
                 <a href="#" class="btn btn-primary"
@@ -732,9 +727,7 @@
         <div class="section-header" data-aos="fade-up" data-aos-duration="800">
           <h2>Property Agents</h2>
           <p>
-            Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore
-            lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum
-            vero dolor duo.
+            Experience refined living in carefully selected locations, where comfort, elegance, and lasting value come together seamlessly.
           </p>
         </div>
         <div class="team-grid">
@@ -840,9 +833,7 @@
         <div class="section-header" data-aos="fade-up" data-aos-duration="800">
           <h2>Our Clients Say!</h2>
           <p>
-            Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore
-            lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum
-            vero dolor duo.
+            With Mannavilla LTD, every space is thoughtfully designed to offer comfort, elegance, and a place you’ll truly be proud to call home.
           </p>
         </div>
 
@@ -1482,8 +1473,8 @@
         });
       })();
 
-      // AI CHATBOT SECTION
- (function() {
+     // AI CHATBOT SECTION - FIXED WHATSAPP REDIRECT
+(function() {
     'use strict';
     
     // DOM Elements
@@ -1498,310 +1489,367 @@
     let isOpen = false;
     let isRedirecting = false; // Prevent multiple redirects
     
+    // WhatsApp Configuration - UPDATE THESE VALUES
+    const WHATSAPP_PHONE_NUMBER = '+1234567890'; // Replace with your actual WhatsApp business number
+    const WHATSAPP_MESSAGE_TEMPLATE = 'Hi! I need assistance with your real estate services. I was just chatting with your bot and would like to speak with an expert.';
+    
     // Time-based greeting
     function getTimeBasedGreeting() {
-      const hour = new Date().getHours();
-      let timeGreeting = '';
-      
-      if (hour < 12) {
-        timeGreeting = 'Good Morning! 🌅';
-      } else if (hour < 18) {
-        timeGreeting = 'Good Afternoon! ☀️';
-      } else {
-        timeGreeting = 'Good Evening! 🌙';
-      }
-      
-      return `${timeGreeting} I'm your Mannavilla assistant. How can I help you find your dream property today?`;
+        const hour = new Date().getHours();
+        let timeGreeting = '';
+        
+        if (hour < 12) {
+            timeGreeting = 'Good Morning! 🌅';
+        } else if (hour < 18) {
+            timeGreeting = 'Good Afternoon! ☀️';
+        } else {
+            timeGreeting = 'Good Evening! 🌙';
+        }
+        
+        return `${timeGreeting} I'm your Mannavilla assistant. How can I help you find your dream property today?`;
     }
     
     // Set greeting message
     function setGreeting() {
-      const greetingSpan = document.querySelector('#greetingMessage');
-      if (greetingSpan) {
-        greetingSpan.textContent = getTimeBasedGreeting();
-      }
+        const greetingSpan = document.querySelector('#greetingMessage');
+        if (greetingSpan) {
+            greetingSpan.textContent = getTimeBasedGreeting();
+        }
     }
     
     // Add message to chat
     function addMessage(text, isUser = false) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `chatbot-message ${isUser ? 'user' : 'bot'}`;
-      
-      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      
-      messageDiv.innerHTML = `
-        <div class="chatbot-message-content">
-          ${text}
-          <span class="chatbot-time">${time}</span>
-        </div>
-      `;
-      
-      messagesContainer.appendChild(messageDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chatbot-message ${isUser ? 'user' : 'bot'}`;
+        
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        messageDiv.innerHTML = `
+            <div class="chatbot-message-content">
+                ${text}
+                <span class="chatbot-time">${time}</span>
+            </div>
+        `;
+        
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
     
     // Show typing indicator
     function showTypingIndicator() {
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'chatbot-message bot';
-      typingDiv.id = 'typingIndicator';
-      typingDiv.innerHTML = `
-        <div class="chatbot-message-content" style="padding: 12px 18px;">
-          <span style="display: flex; gap: 4px;">
-            <span style="animation: typingDot 1.4s infinite;">•</span>
-            <span style="animation: typingDot 1.4s infinite 0.2s;">•</span>
-            <span style="animation: typingDot 1.4s infinite 0.4s;">•</span>
-          </span>
-        </div>
-      `;
-      
-      // Add animation style if not exists
-      if (!document.getElementById('typingDotStyle')) {
-        const style = document.createElement('style');
-        style.id = 'typingDotStyle';
-        style.textContent = `
-          @keyframes typingDot {
-            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
-            30% { opacity: 1; transform: translateY(-4px); }
-          }
+        // Remove existing typing indicator first
+        hideTypingIndicator();
+        
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chatbot-message bot';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = `
+            <div class="chatbot-message-content" style="padding: 12px 18px;">
+                <span style="display: flex; gap: 4px;">
+                    <span style="animation: typingDot 1.4s infinite;">•</span>
+                    <span style="animation: typingDot 1.4s infinite 0.2s;">•</span>
+                    <span style="animation: typingDot 1.4s infinite 0.4s;">•</span>
+                </span>
+            </div>
         `;
-        document.head.appendChild(style);
-      }
-      
-      messagesContainer.appendChild(typingDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        // Add animation style if not exists
+        if (!document.getElementById('typingDotStyle')) {
+            const style = document.createElement('style');
+            style.id = 'typingDotStyle';
+            style.textContent = `
+                @keyframes typingDot {
+                    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+                    30% { opacity: 1; transform: translateY(-4px); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
     
     function hideTypingIndicator() {
-      const indicator = document.getElementById('typingIndicator');
-      if (indicator) {
-        indicator.remove();
-      }
+        const indicator = document.getElementById('typingIndicator');
+        if (indicator) {
+            indicator.remove();
+        }
     }
     
     // Human-like random typing delay (900ms - 1500ms)
     function getRandomTypingDelay() {
-      return Math.floor(Math.random() * (1500 - 900 + 1) + 900);
+        return Math.floor(Math.random() * (1500 - 900 + 1) + 900);
     }
     
-    // WhatsApp redirect with natural flow
-    async function redirectToWhatsAppWithDelay() {
-      if (isRedirecting) return;
-      isRedirecting = true;
-      
-      // First message: Acknowledgment
-      addMessage("Hmm... I want to make sure I give you the right information. Let me connect you with one of our experts in a moment... 🤔", false);
-      
-      // Show typing indicator for second message
-      await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
-      showTypingIndicator();
-      
-      await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
-      hideTypingIndicator();
-      
-      // Second message: Redirect notification
-      addMessage("You'll be redirected to WhatsApp shortly so our team can assist you directly. 📱", false);
-      
-      // Final delay before redirect
-      await new Promise(resolve => setTimeout(resolve, 2500));
-      
-      // Perform redirect
-      const phoneNumber = '+1234567890'; // Replace with actual number
-      const message = encodeURIComponent('Hi! I need assistance with your real estate services. I was just chatting with your bot.');
-      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-      
-      isRedirecting = false;
+    // WhatsApp redirect - FIXED VERSION
+    function redirectToWhatsApp(userMessage = null) {
+        // Build message with context if user message was provided
+        let messageText = WHATSAPP_MESSAGE_TEMPLATE;
+        
+        if (userMessage && userMessage.trim()) {
+            // Truncate long messages to avoid URL length issues
+            const truncatedMsg = userMessage.trim().substring(0, 150);
+            messageText = `Hi! I was chatting with your bot and asked: "${truncatedMsg}". I'd like to speak with an expert about this.`;
+        }
+        
+        // Encode message for URL
+        const encodedMessage = encodeURIComponent(messageText);
+        
+        // Clean phone number: remove any non-digit characters except '+'
+        const cleanPhone = WHATSAPP_PHONE_NUMBER.replace(/[^\d+]/g, '');
+        
+        // Build WhatsApp URL
+        const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
+        
+        // Open in new tab
+        window.open(whatsappUrl, '_blank');
+        
+        // Optional: Also try to open with window.location as fallback for mobile
+        setTimeout(() => {
+            // If window.open was blocked, try direct navigation
+            if (window.open !== undefined) {
+                // Success - do nothing
+            }
+        }, 100);
+    }
+    
+    // WhatsApp redirect with natural conversation flow
+    async function redirectToWhatsAppWithDelay(userMessage) {
+        if (isRedirecting) return;
+        isRedirecting = true;
+        
+        // First message: Acknowledgment with empathy
+        addMessage("I understand you're looking for more detailed information. Let me help you better! 🤝", false);
+        
+        // Short pause for natural flow
+        await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
+        
+        // Show typing indicator for second message
+        showTypingIndicator();
+        await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
+        hideTypingIndicator();
+        
+        // Second message: Redirect notification
+        addMessage("I'll connect you with one of our property experts on WhatsApp. They can give you personalized assistance right away! 📱", false);
+        
+        // Additional pause before redirect
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Show typing indicator for final message
+        showTypingIndicator();
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        hideTypingIndicator();
+        
+        // Final message before redirect
+        addMessage("Opening WhatsApp now... Please wait a moment.", false);
+        
+        // Small delay before actual redirect
+        await new Promise(resolve => setTimeout(resolve, 1200));
+        
+        // Perform the actual WhatsApp redirect
+        redirectToWhatsApp(userMessage);
+        
+        isRedirecting = false;
     }
     
     // Enhanced bot response logic with more real estate topics
     function getBotResponse(userMessage) {
-      const msg = userMessage.toLowerCase().trim();
-      
-      // --- EXISTING RESPONSES (Kept intact) ---
-      
-      // Property Search
-      if (msg.includes('property') && (msg.includes('search') || msg.includes('find') || msg.includes('looking'))) {
-        return "🔍 I can help you search for properties! We have listings in:\n\n• Apartments ($200K - $500K)\n• Villas ($800K - $2.5M)\n• Commercial Spaces ($500K - $3M)\n\nWould you like me to show you our featured listings or connect you with an agent?";
-      }
-      
-      // Pricing
-      if (msg.includes('price') || msg.includes('cost') || msg.includes('how much')) {
-        return "💰 Our properties range from $150,000 for cozy apartments to $5,000,000+ for luxury estates. Pricing varies based on:\n• Location & neighborhood\n• Property size & amenities\n• Market conditions\n\nWould you like to browse properties in a specific price range?";
-      }
-      
-      // Location (general)
-      if (msg.includes('location') || msg.includes('area') || msg.includes('city') || msg.includes('where')) {
-        return "📍 We serve prime locations including:\n• Downtown & City Center\n• Beverly Hills & Luxury Districts\n• Waterfront Properties\n• Suburban Family Communities\n\nWhich area interests you most?";
-      }
-      
-      // Services
-      if (msg.includes('service') || msg.includes('help') || msg.includes('do you')) {
-        return "✨ Our premium services include:\n\n🏠 Property Sales & Rentals\n📊 Free Property Valuation\n🔍 Market Analysis & Consultation\n📝 Legal & Documentation Support\n🏦 Mortgage & Financing Assistance\n\nWhat service would you like to learn more about?";
-      }
-      
-      // Buying Process
-      if (msg.includes('buy') || msg.includes('process') || msg.includes('step') || msg.includes('how to')) {
-        return "🏡 The buying process at Mannavilla:\n\n1️⃣ Initial Consultation & Needs Assessment\n2️⃣ Property Search & Viewings\n3️⃣ Offer & Negotiation\n4️⃣ Legal Documentation & Due Diligence\n5️⃣ Finalize Purchase & Handover\n\nWould you like to schedule a free consultation?";
-      }
-      
-      // Property Verification
-      if (msg.includes('verify') || msg.includes('legit') || msg.includes('authentic') || msg.includes('trust')) {
-        return "✅ All our properties are thoroughly verified:\n\n• Legal Title Verification\n• Property Inspection Reports\n• Clear Ownership Documents\n• No Encumbrance Certificate\n\nWe provide 100% verified listings. Need verification for a specific property?";
-      }
-      
-      // Contact/Agent
-      if (msg.includes('agent') || msg.includes('contact') || msg.includes('call') || msg.includes('speak')) {
-        return "📞 I'd be happy to connect you with our expert agents! You can:\n\n• Click the 'Sell Your Property' button above\n• Visit our Contact page\n• Or I can redirect you to WhatsApp for immediate assistance\n\nWould you like me to connect you now?";
-      }
-      
-      // Greeting
-      if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
-        return "Hello! 👋 Welcome to Mannavilla. I'm here to help you find your perfect property or answer any questions you have. What would you like to know?";
-      }
-      
-      // Thanks
-      if (msg.includes('thank') || msg.includes('thanks')) {
-        return "You're most welcome! 😊 Is there anything else I can help you with regarding properties or our services?";
-      }
-      
-      // --- NEW REAL ESTATE RESPONSES (Added) ---
-      
-      // Payment / Installments
-      if (msg.includes('installment') || msg.includes('payment plan') || (msg.includes('pay') && msg.includes('monthly'))) {
-        return "💳 We offer flexible payment plans! Many of our properties come with:\n\n• 10% initial deposit\n• Up to 24-month installment options\n• Bank mortgage partnerships\n• 0% interest developer plans on select properties\n\nWould you like to know which properties have flexible payment options?";
-      }
-      
-      // Property Types (detailed)
-      if (msg.includes('duplex') || msg.includes('bungalow') || msg.includes('apartment') || msg.includes('land') || msg.includes('townhouse')) {
-        let propertyType = '';
-        if (msg.includes('duplex')) propertyType = 'Duplex';
-        else if (msg.includes('bungalow')) propertyType = 'Bungalow';
-        else if (msg.includes('apartment')) propertyType = 'Apartment';
-        else if (msg.includes('land')) propertyType = 'Land';
-        else if (msg.includes('townhouse')) propertyType = 'Townhouse';
-        else propertyType = 'property';
+        const msg = userMessage.toLowerCase().trim();
         
-        return `🏘️ We have a variety of ${propertyType} options available!\n\n• Starting from $150K\n• Multiple locations\n• Various sizes and configurations\n\nWould you like to see our current ${propertyType.toLowerCase()} listings?`;
-      }
-      
-      // Property Inspection / Visit
-      if (msg.includes('inspection') || msg.includes('visit') || msg.includes('view property') || msg.includes('see the property')) {
-        return "🔍 Property inspections are available! Here's how it works:\n\n• Schedule a physical viewing\n• Virtual tour options available\n• Accompanied by our expert agents\n• Detailed property reports provided\n\nWould you like to schedule an inspection for a specific property?";
-      }
-      
-      // Documentation / Legal
-      if (msg.includes('document') || msg.includes('c of o') || msg.includes('c-of-o') || msg.includes('title') || msg.includes('papers') || msg.includes('legal')) {
-        return "📄 We ensure all properties have proper documentation:\n\n• C of O (Certificate of Occupancy)\n• Survey Plans\n• Building Approvals\n• Title Deeds\n• Registered with relevant authorities\n\nAll documents are verified before listing. Need help with documentation for a specific property?";
-      }
-      
-      // Investment / ROI
-      if (msg.includes('investment') || msg.includes('roi') || msg.includes('return') || msg.includes('value appreciate')) {
-        return "📈 Real estate is a great investment! Our properties typically offer:\n\n• 8-15% annual appreciation\n• Rental yields of 5-10%\n• Strong capital appreciation in developing areas\n• Portfolio diversification\n\nWould you like to speak with our investment advisor about ROI opportunities?";
-      }
-      
-      // Nigerian Locations
-      if (msg.includes('imo') || msg.includes('owerri') || msg.includes('lagos') || msg.includes('abuja') || msg.includes('port harcourt') || msg.includes('enugu')) {
-        let location = '';
-        if (msg.includes('imo')) location = 'Imo State';
-        else if (msg.includes('owerri')) location = 'Owerri';
-        else if (msg.includes('lagos')) location = 'Lagos';
-        else if (msg.includes('abuja')) location = 'Abuja';
-        else if (msg.includes('port harcourt')) location = 'Port Harcourt';
-        else if (msg.includes('enugu')) location = 'Enugu';
-        else location = 'that area';
+        // --- PROPERTY SEARCH ---
+        if (msg.includes('property') && (msg.includes('search') || msg.includes('find') || msg.includes('looking'))) {
+            return "🔍 I can help you search for properties! We have listings in:\n\n• Apartments ($200K - $500K)\n• Villas ($800K - $2.5M)\n• Commercial Spaces ($500K - $3M)\n\nWould you like me to show you our featured listings or connect you with an agent?";
+        }
         
-        return `📍 We have excellent properties in ${location}! 🏠\n\n• Luxury homes and commercial spaces\n• Affordable family housing\n• Prime locations with good infrastructure\n• Verified listings with proper documentation\n\nWould you like to see our current listings in ${location}?`;
-      }
-      
-      // Lifestyle / Family / Safety
-      if (msg.includes('family') || msg.includes('safe') || msg.includes('environment') || msg.includes('school') || msg.includes('security')) {
-        return "👨‍👩‍👧‍👦 Family-friendly properties are our specialty!\n\nWe consider:\n• Proximity to schools & hospitals\n• Gated communities with 24/7 security\n• Parks & recreational areas\n• Quiet neighborhoods\n• Modern amenities\n\nWould you like recommendations for family-friendly properties?";
-      }
-      
-      // Property Size / Bedrooms
-      if (msg.includes('bedroom') || msg.includes('bathroom') || msg.includes('size') || msg.includes('sqft') || msg.includes('square')) {
-        return "📐 We have properties in various sizes:\n\n• 2-3 Bedroom Apartments: 1,200-1,800 sqft\n• 4-5 Bedroom Homes: 2,500-4,000 sqft\n• Luxury Villas: 5,000+ sqft\n• Commercial Spaces: 1,000-10,000 sqft\n\nWhat size property are you looking for?";
-      }
-      
-      // Default: fall through to redirect
-      return null;
+        // --- PRICING ---
+        if (msg.includes('price') || msg.includes('cost') || msg.includes('how much')) {
+            return "💰 Our properties range from $150,000 for cozy apartments to $5,000,000+ for luxury estates. Pricing varies based on:\n• Location & neighborhood\n• Property size & amenities\n• Market conditions\n\nWould you like to browse properties in a specific price range?";
+        }
+        
+        // --- LOCATION ---
+        if (msg.includes('location') || msg.includes('area') || msg.includes('city') || msg.includes('where')) {
+            return "📍 We serve prime locations including:\n• Downtown & City Center\n• Beverly Hills & Luxury Districts\n• Waterfront Properties\n• Suburban Family Communities\n\nWhich area interests you most?";
+        }
+        
+        // --- SERVICES ---
+        if (msg.includes('service') || msg.includes('help') || msg.includes('do you')) {
+            return "✨ Our premium services include:\n\n🏠 Property Sales & Rentals\n📊 Free Property Valuation\n🔍 Market Analysis & Consultation\n📝 Legal & Documentation Support\n🏦 Mortgage & Financing Assistance\n\nWhat service would you like to learn more about?";
+        }
+        
+        // --- BUYING PROCESS ---
+        if (msg.includes('buy') || msg.includes('process') || msg.includes('step') || msg.includes('how to')) {
+            return "🏡 The buying process at Mannavilla:\n\n1️⃣ Initial Consultation & Needs Assessment\n2️⃣ Property Search & Viewings\n3️⃣ Offer & Negotiation\n4️⃣ Legal Documentation & Due Diligence\n5️⃣ Finalize Purchase & Handover\n\nWould you like to schedule a free consultation?";
+        }
+        
+        // --- PROPERTY VERIFICATION ---
+        if (msg.includes('verify') || msg.includes('legit') || msg.includes('authentic') || msg.includes('trust')) {
+            return "✅ All our properties are thoroughly verified:\n\n• Legal Title Verification\n• Property Inspection Reports\n• Clear Ownership Documents\n• No Encumbrance Certificate\n\nWe provide 100% verified listings. Need verification for a specific property?";
+        }
+        
+        // --- AGENT / CONTACT ---
+        if (msg.includes('agent') || msg.includes('contact') || msg.includes('call') || msg.includes('speak') || msg.includes('talk')) {
+            return "📞 I'd be happy to connect you with our expert agents! You can:\n\n• Click the 'Sell Your Property' button above\n• Visit our Contact page\n• Or I can redirect you to WhatsApp for immediate assistance\n\nWould you like me to connect you now?";
+        }
+        
+        // --- GREETING ---
+        if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('good morning') || msg.includes('good afternoon') || msg.includes('good evening')) {
+            return "Hello! 👋 Welcome to Mannavilla. I'm here to help you find your perfect property or answer any questions you have. What would you like to know?";
+        }
+        
+        // --- THANKS ---
+        if (msg.includes('thank') || msg.includes('thanks')) {
+            return "You're most welcome! 😊 Is there anything else I can help you with regarding properties or our services?";
+        }
+        
+        // --- INSTALLMENT / PAYMENT PLAN ---
+        if (msg.includes('installment') || msg.includes('payment plan') || (msg.includes('pay') && msg.includes('monthly'))) {
+            return "💳 We offer flexible payment plans! Many of our properties come with:\n\n• 10% initial deposit\n• Up to 24-month installment options\n• Bank mortgage partnerships\n• 0% interest developer plans on select properties\n\nWould you like to know which properties have flexible payment options?";
+        }
+        
+        // --- PROPERTY TYPES ---
+        if (msg.includes('duplex') || msg.includes('bungalow') || msg.includes('apartment') || msg.includes('land') || msg.includes('townhouse') || msg.includes('condo')) {
+            let propertyType = '';
+            if (msg.includes('duplex')) propertyType = 'Duplex';
+            else if (msg.includes('bungalow')) propertyType = 'Bungalow';
+            else if (msg.includes('apartment')) propertyType = 'Apartment';
+            else if (msg.includes('land')) propertyType = 'Land';
+            else if (msg.includes('townhouse')) propertyType = 'Townhouse';
+            else if (msg.includes('condo')) propertyType = 'Condo';
+            else propertyType = 'property';
+            
+            return `🏘️ We have a variety of ${propertyType} options available!\n\n• Starting from $150K\n• Multiple locations\n• Various sizes and configurations\n\nWould you like to see our current ${propertyType.toLowerCase()} listings?`;
+        }
+        
+        // --- PROPERTY INSPECTION / VISIT ---
+        if (msg.includes('inspection') || msg.includes('visit') || msg.includes('view property') || msg.includes('see the property') || msg.includes('tour')) {
+            return "🔍 Property inspections are available! Here's how it works:\n\n• Schedule a physical viewing\n• Virtual tour options available\n• Accompanied by our expert agents\n• Detailed property reports provided\n\nWould you like to schedule an inspection for a specific property?";
+        }
+        
+        // --- DOCUMENTATION / LEGAL ---
+        if (msg.includes('document') || msg.includes('c of o') || msg.includes('c-of-o') || msg.includes('title') || msg.includes('papers') || msg.includes('legal') || msg.includes('deed')) {
+            return "📄 We ensure all properties have proper documentation:\n\n• C of O (Certificate of Occupancy)\n• Survey Plans\n• Building Approvals\n• Title Deeds\n• Registered with relevant authorities\n\nAll documents are verified before listing. Need help with documentation for a specific property?";
+        }
+        
+        // --- INVESTMENT / ROI ---
+        if (msg.includes('investment') || msg.includes('roi') || msg.includes('return') || msg.includes('value appreciate') || msg.includes('appreciation')) {
+            return "📈 Real estate is a great investment! Our properties typically offer:\n\n• 8-15% annual appreciation\n• Rental yields of 5-10%\n• Strong capital appreciation in developing areas\n• Portfolio diversification\n\nWould you like to speak with our investment advisor about ROI opportunities?";
+        }
+        
+        // --- NIGERIAN LOCATIONS ---
+        if (msg.includes('imo') || msg.includes('owerri') || msg.includes('lagos') || msg.includes('abuja') || msg.includes('port harcourt') || msg.includes('enugu') || msg.includes('ph') || msg.includes('fct')) {
+            let location = '';
+            if (msg.includes('imo')) location = 'Imo State';
+            else if (msg.includes('owerri')) location = 'Owerri';
+            else if (msg.includes('lagos')) location = 'Lagos';
+            else if (msg.includes('abuja') || msg.includes('fct')) location = 'Abuja';
+            else if (msg.includes('port harcourt') || msg.includes('ph')) location = 'Port Harcourt';
+            else if (msg.includes('enugu')) location = 'Enugu';
+            else location = 'that area';
+            
+            return `📍 We have excellent properties in ${location}! 🏠\n\n• Luxury homes and commercial spaces\n• Affordable family housing\n• Prime locations with good infrastructure\n• Verified listings with proper documentation\n\nWould you like to see our current listings in ${location}?`;
+        }
+        
+        // --- FAMILY / SAFETY / SCHOOLS ---
+        if (msg.includes('family') || msg.includes('safe') || msg.includes('environment') || msg.includes('school') || msg.includes('security') || msg.includes('neighborhood')) {
+            return "👨‍👩‍👧‍👦 Family-friendly properties are our specialty!\n\nWe consider:\n• Proximity to schools & hospitals\n• Gated communities with 24/7 security\n• Parks & recreational areas\n• Quiet neighborhoods\n• Modern amenities\n\nWould you like recommendations for family-friendly properties?";
+        }
+        
+        // --- PROPERTY SIZE / BEDROOMS ---
+        if (msg.includes('bedroom') || msg.includes('bathroom') || msg.includes('size') || msg.includes('sqft') || msg.includes('square')) {
+            return "📐 We have properties in various sizes:\n\n• 2-3 Bedroom Apartments: 1,200-1,800 sqft\n• 4-5 Bedroom Homes: 2,500-4,000 sqft\n• Luxury Villas: 5,000+ sqft\n• Commercial Spaces: 1,000-10,000 sqft\n\nWhat size property are you looking for?";
+        }
+        
+        // --- RENTAL ---
+        if (msg.includes('rent') || msg.includes('lease') || msg.includes('monthly payment')) {
+            return "🏢 We have excellent rental properties available!\n\n• Short-term and long-term leases\n• Fully furnished options\n• Competitive rental rates\n• Prime locations\n\nWould you like to see our current rental listings?";
+        }
+        
+        // --- SELL PROPERTY ---
+        if (msg.includes('sell') || msg.includes('list my property') || msg.includes('valuation')) {
+            return "📢 Looking to sell your property? We can help!\n\n• Free property valuation\n• Professional marketing\n• Wide buyer network\n• Fast closing process\n\nClick the 'Sell Your Property' button above or let me connect you with our listing specialist!";
+        }
+        
+        // Default: no match - trigger WhatsApp redirect
+        return null;
     }
     
     // Handle user message with improved flow
     async function handleUserMessage() {
-      const message = userInput.value.trim();
-      if (!message || isRedirecting) return;
-      
-      // Add user message
-      addMessage(message, true);
-      userInput.value = '';
-      
-      // Show typing indicator
-      showTypingIndicator();
-      
-      // Human-like random delay before response
-      await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
-      
-      // Get bot response
-      const botResponse = getBotResponse(message);
-      
-      hideTypingIndicator();
-      
-      if (botResponse) {
-        // Show bot response with another natural delay
+        const message = userInput.value.trim();
+        if (!message || isRedirecting) return;
+        
+        // Add user message
+        addMessage(message, true);
+        userInput.value = '';
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Human-like random delay before response
         await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
-        addMessage(botResponse, false);
-      } else {
-        // Unrecognized message - initiate natural WhatsApp redirect flow
-        await redirectToWhatsAppWithDelay();
-      }
+        
+        // Get bot response
+        const botResponse = getBotResponse(message);
+        
+        hideTypingIndicator();
+        
+        if (botResponse) {
+            // Show bot response with another natural delay
+            await new Promise(resolve => setTimeout(resolve, getRandomTypingDelay()));
+            addMessage(botResponse, false);
+        } else {
+            // Unrecognized message - initiate natural WhatsApp redirect flow
+            await redirectToWhatsAppWithDelay(message);
+        }
     }
     
     // Toggle chat window
     function toggleChat() {
-      isOpen = !isOpen;
-      if (isOpen) {
-        chatWindow.classList.add('open');
-        userInput.focus();
-      } else {
-        chatWindow.classList.remove('open');
-      }
+        isOpen = !isOpen;
+        if (isOpen) {
+            chatWindow.classList.add('open');
+            userInput.focus();
+        } else {
+            chatWindow.classList.remove('open');
+        }
     }
     
     // Event Listeners
     if (toggleBtn) {
-      toggleBtn.addEventListener('click', toggleChat);
+        toggleBtn.addEventListener('click', toggleChat);
     }
     
     if (closeBtn) {
-      closeBtn.addEventListener('click', toggleChat);
+        closeBtn.addEventListener('click', toggleChat);
     }
     
     if (sendBtn) {
-      sendBtn.addEventListener('click', handleUserMessage);
+        sendBtn.addEventListener('click', handleUserMessage);
     }
     
     if (userInput) {
-      userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && !isRedirecting) {
-          handleUserMessage();
-        }
-      });
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !isRedirecting) {
+                e.preventDefault();
+                handleUserMessage();
+            }
+        });
     }
     
     // Close chat when clicking outside (optional)
     document.addEventListener('click', (e) => {
-      const widget = document.getElementById('chatbotWidget');
-      if (widget && !widget.contains(e.target) && isOpen) {
-        toggleChat();
-      }
+        const widget = document.getElementById('chatbotWidget');
+        if (widget && !widget.contains(e.target) && isOpen) {
+            toggleChat();
+        }
     });
     
     // Initialize greeting
     setGreeting();
     
-    console.log('Chatbot enhanced — smarter responses, human-like delays, improved WhatsApp flow');
-  })();    
-  </script>
+    console.log('Chatbot enhanced — WhatsApp redirect fixed, responses improved');
+})();  
+</script>
   </body>
 </html>

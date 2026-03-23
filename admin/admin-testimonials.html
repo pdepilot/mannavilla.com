@@ -35,7 +35,7 @@
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
             --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-            --transition: all 0.2s ease;
+            --transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         body {
@@ -49,16 +49,17 @@
             min-height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar - Consistent with traffic page */
         .sidebar {
             width: 280px;
-            background: var(--darker);
+            background: rgba(10, 10, 18, 0.98);
+            backdrop-filter: blur(2px);
             border-right: 1px solid var(--border-color);
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            transition: var(--transition);
-            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            z-index: 1000;
         }
 
         .sidebar-header {
@@ -67,6 +68,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .sidebar-logo-icon {
@@ -80,12 +82,14 @@
             justify-content: center;
             font-size: 20px;
             color: var(--white);
+            flex-shrink: 0;
         }
 
         .sidebar-header h3 {
             color: var(--white);
             font-size: 20px;
             font-family: 'Playfair Display', serif;
+            line-height: 1.2;
         }
 
         .sidebar-header p {
@@ -118,6 +122,11 @@
         .nav-link i {
             width: 22px;
             font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .nav-link span {
+            white-space: nowrap;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -133,13 +142,15 @@
         .main-content {
             flex: 1;
             margin-left: 280px;
+            transition: margin-left 0.3s ease;
+            width: calc(100% - 280px);
         }
 
-        /* Topbar */
+        /* Topbar - Fully responsive */
         .topbar {
             background: rgba(17, 17, 31, 0.95);
             backdrop-filter: blur(10px);
-            padding: 14px 32px;
+            padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -147,6 +158,8 @@
             position: sticky;
             top: 0;
             z-index: 99;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .menu-toggle {
@@ -156,11 +169,16 @@
             color: var(--white);
             font-size: 24px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
         }
 
         .page-title-section h1 {
             color: var(--white);
-            font-size: 24px;
+            font-size: clamp(20px, 5vw, 24px);
             font-weight: 600;
         }
 
@@ -174,6 +192,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            flex-shrink: 0;
         }
 
         .profile-btn {
@@ -185,6 +204,11 @@
             cursor: pointer;
             padding: 6px 12px;
             border-radius: 40px;
+            transition: var(--transition);
+        }
+
+        .profile-btn:hover {
+            background: rgba(255,255,255,0.05);
         }
 
         .profile-avatar {
@@ -196,6 +220,7 @@
             align-items: center;
             justify-content: center;
             color: var(--accent);
+            flex-shrink: 0;
         }
 
         .profile-info {
@@ -215,10 +240,11 @@
 
         /* Content Area */
         .content {
-            padding: 28px 32px;
+            padding: 24px 28px;
+            transition: padding 0.2s ease;
         }
 
-        /* Stats Cards */
+        /* Stats Cards - Responsive grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -229,8 +255,15 @@
         .stat-card {
             background: var(--dark);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 20px;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-md);
         }
 
         .stat-card .stat-icon {
@@ -247,9 +280,10 @@
         }
 
         .stat-card .stat-value {
-            font-size: 28px;
+            font-size: clamp(28px, 5vw, 32px);
             font-weight: 700;
             color: var(--white);
+            line-height: 1.2;
         }
 
         .stat-card .stat-label {
@@ -258,7 +292,7 @@
             margin-top: 4px;
         }
 
-        /* Action Bar */
+        /* Action Bar - Fully responsive */
         .action-bar {
             display: flex;
             justify-content: space-between;
@@ -269,7 +303,7 @@
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 10px 24px;
             border-radius: 40px;
             font-weight: 600;
             font-size: 14px;
@@ -333,7 +367,7 @@
             border-color: var(--accent);
         }
 
-        /* Testimonials Grid */
+        /* Testimonials Grid - Responsive */
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -360,12 +394,15 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .client-info {
             display: flex;
             gap: 16px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .client-avatar {
@@ -378,6 +415,14 @@
             justify-content: center;
             font-size: 24px;
             color: var(--accent);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .client-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .client-details h4 {
@@ -395,6 +440,7 @@
         .rating {
             display: flex;
             gap: 4px;
+            flex-shrink: 0;
         }
 
         .rating i {
@@ -442,7 +488,14 @@
             padding: 16px 24px;
             border-top: 1px solid var(--border-color);
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-actions {
+            display: flex;
             gap: 12px;
         }
 
@@ -468,7 +521,7 @@
             color: var(--danger);
         }
 
-        /* Modal */
+        /* Modal - Responsive */
         .modal {
             display: none;
             position: fixed;
@@ -495,6 +548,7 @@
             max-height: 85vh;
             overflow-y: auto;
             border: 1px solid var(--border-color);
+            margin: 20px;
         }
 
         .modal-header {
@@ -503,11 +557,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .modal-header h3 {
             color: var(--white);
-            font-size: 20px;
+            font-size: clamp(18px, 4vw, 20px);
         }
 
         .modal-close {
@@ -516,6 +572,11 @@
             color: var(--gray);
             font-size: 24px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
         }
 
         .modal-body {
@@ -558,6 +619,7 @@
             gap: 8px;
             flex-direction: row-reverse;
             justify-content: flex-end;
+            flex-wrap: wrap;
         }
 
         .star-rating input {
@@ -636,6 +698,7 @@
             display: flex;
             justify-content: flex-end;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .empty-state {
@@ -650,47 +713,7 @@
             opacity: 0.5;
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-            .menu-toggle {
-                display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 20px;
-            }
-            .action-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .profile-info {
-                display: none;
-            }
-        }
-
+        /* Toast Notification */
         .toast-notification {
             position: fixed;
             bottom: 24px;
@@ -700,8 +723,12 @@
             padding: 12px 20px;
             border-radius: 12px;
             color: var(--white);
-            z-index: 1100;
+            z-index: 1200;
             animation: slideIn 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         @keyframes slideIn {
@@ -714,6 +741,93 @@
                 opacity: 1;
             }
         }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 16px;
+            }
+            .action-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-filter {
+                justify-content: stretch;
+            }
+            .search-filter input, .search-filter select {
+                flex: 1;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .profile-info {
+                display: none;
+            }
+            .topbar {
+                padding: 12px 16px;
+            }
+            .testimonial-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-body {
+                padding: 20px;
+            }
+            .modal-header {
+                padding: 16px 20px;
+            }
+            .star-rating label {
+                font-size: 24px;
+            }
+            .testimonial-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -724,15 +838,14 @@
                 <div><h3>Mannavilla</h3><p>Admin Portal</p></div>
             </div>
             <ul class="sidebar-nav">
-                <li class="nav-item"><a href="./admin-dashboard.html" class="nav-link" data-page="dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
-                <li class="nav-item"><a href="./admin-properties.html" class="nav-link" data-page="properties"><i class="fas fa-building"></i><span>Properties</span></a></li>
-                <li class="nav-item"><a href="./admin-sell-your-property.html" class="nav-link" data-page="listings"><i class="fas fa-tag"></i><span>Sell Request</span></a></li>
-                <li class="nav-item"><a href="./admin-testimonials.html" class="nav-link active" data-page="testimonials"><i class="fas fa-star"></i><span>Testimonials</span></a></li>
-                <li class="nav-item"><a href="./admin-contact.html" class="nav-link" data-page="users"><i class="fas fa-users"></i><span>Contact</span></a></li>
-                <li class="nav-item"><a href="./admin-gallery.html" class="nav-link" data-page="gallery"><i class="fas fa-images"></i><span>Gallery</span><span class="notification-badge" style="position:static; margin-left:auto;">8</span></a></li>
-                <li class="nav-item"><a href="./admin-analytics.html" class="nav-link" data-page="analytics"><i class="fas fa-chart-pie"></i><span>Analytics</span></a></li>
-                <li class="nav-item"><a href="./admin-site-traffic.html" class="nav-link" data-page="site-traffic"><i class="fas fa-chart-line"></i><span>Site-Traffic</span></a></li>
-                <li class="nav-item"><a href="" class="nav-link" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                <li class="nav-item"><a href="admin-dashboard.html" class="nav-link"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="admin-properties.html" class="nav-link"><i class="fas fa-building"></i><span>Properties</span></a></li>
+                <li class="nav-item"><a href="admin-sell-your-property.html" class="nav-link"><i class="fas fa-hand-holding-usd"></i><span>Sell Requests</span></a></li>
+                <li class="nav-item"><a href="admin-testimonials.html" class="nav-link active"><i class="fas fa-star"></i><span>Testimonials</span></a></li>
+                <li class="nav-item"><a href="admin-gallery.html" class="nav-link"><i class="fas fa-images"></i><span>Gallery</span></a></li>
+                <li class="nav-item"><a href="admin-analytics.html" class="nav-link"><i class="fas fa-chart-pie"></i><span>Analytics</span></a></li>
+                <li class="nav-item"><a href="admin-site-traffic.html" class="nav-link"><i class="fas fa-chart-line"></i><span>Site Traffic</span></a></li>
+                <li class="nav-item"><a href="admin-settings.html" class="nav-link"><i class="fas fa-cog"></i><span>Settings</span></a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
             </ul>
         </aside>
@@ -850,7 +963,6 @@
             const adminName = sessionStorage.getItem('adminName') || 'Content Manager';
             document.getElementById('adminName').innerText = adminName;
 
-            // Sample testimonials data
             let testimonials = [];
 
             function loadTestimonials() {
@@ -862,50 +974,10 @@
                 }
                 if (!testimonials.length) {
                     testimonials = [
-                        {
-                            id: 1,
-                            clientName: "Jonathan Reynolds",
-                            clientTitle: "CEO, Tech Innovators",
-                            propertyName: "Penthouse with Panoramic Views",
-                            rating: 5,
-                            text: "Mannavilla's team sold my penthouse in just 14 days for 12% above the asking price. Their marketing expertise and network of qualified buyers is truly unparalleled. The white-glove service made the entire process effortless.",
-                            avatar: null,
-                            status: "published",
-                            createdAt: new Date(Date.now() - 30*24*60*60*1000).toISOString()
-                        },
-                        {
-                            id: 2,
-                            clientName: "Sarah Chen",
-                            clientTitle: "Real Estate Investor",
-                            propertyName: "Mediterranean Style Villa",
-                            rating: 5,
-                            text: "Exceptional service from start to finish. The team at Mannavilla understood exactly what we were looking for and delivered beyond expectations. Their attention to detail and market knowledge is outstanding.",
-                            avatar: null,
-                            status: "published",
-                            createdAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
-                        },
-                        {
-                            id: 3,
-                            clientName: "Michael Thompson",
-                            clientTitle: "Business Owner",
-                            propertyName: "Corporate Office Space",
-                            rating: 4,
-                            text: "Very professional and responsive team. They helped us find the perfect office space for our growing company. Highly recommended for commercial real estate needs.",
-                            avatar: null,
-                            status: "published",
-                            createdAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
-                        },
-                        {
-                            id: 4,
-                            clientName: "Elizabeth Williams",
-                            clientTitle: "Homeowner",
-                            propertyName: "Contemporary Family Home",
-                            rating: 5,
-                            text: "Absolutely thrilled with our new home! The Mannavilla team was incredibly helpful throughout the entire buying process. They truly care about their clients.",
-                            avatar: null,
-                            status: "draft",
-                            createdAt: new Date(Date.now() - 5*24*60*60*1000).toISOString()
-                        }
+                        { id: 1, clientName: "Jonathan Reynolds", clientTitle: "CEO, Tech Innovators", propertyName: "Penthouse with Panoramic Views", rating: 5, text: "Mannavilla's team sold my penthouse in just 14 days for 12% above the asking price. Their marketing expertise and network of qualified buyers is truly unparalleled.", avatar: null, status: "published", createdAt: new Date(Date.now() - 30*24*60*60*1000).toISOString() },
+                        { id: 2, clientName: "Sarah Chen", clientTitle: "Real Estate Investor", propertyName: "Mediterranean Style Villa", rating: 5, text: "Exceptional service from start to finish. The team at Mannavilla understood exactly what we were looking for and delivered beyond expectations.", avatar: null, status: "published", createdAt: new Date(Date.now() - 45*24*60*60*1000).toISOString() },
+                        { id: 3, clientName: "Michael Thompson", clientTitle: "Business Owner", propertyName: "Corporate Office Space", rating: 4, text: "Very professional and responsive team. They helped us find the perfect office space for our growing company.", avatar: null, status: "published", createdAt: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+                        { id: 4, clientName: "Elizabeth Williams", clientTitle: "Homeowner", propertyName: "Contemporary Family Home", rating: 5, text: "Absolutely thrilled with our new home! The Mannavilla team was incredibly helpful throughout the entire buying process.", avatar: null, status: "draft", createdAt: new Date(Date.now() - 5*24*60*60*1000).toISOString() }
                     ];
                     saveTestimonials();
                 }
@@ -929,13 +1001,19 @@
             function renderStars(rating) {
                 let stars = '';
                 for (let i = 1; i <= 5; i++) {
-                    if (i <= rating) {
-                        stars += '<i class="fas fa-star filled"></i>';
-                    } else {
-                        stars += '<i class="fas fa-star empty"></i>';
-                    }
+                    stars += i <= rating ? '<i class="fas fa-star filled"></i>' : '<i class="fas fa-star empty"></i>';
                 }
                 return stars;
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str).replace(/[&<>]/g, function(m) {
+                    if (m === '&') return '&amp;';
+                    if (m === '<') return '&lt;';
+                    if (m === '>') return '&gt;';
+                    return m;
+                });
             }
 
             function renderTestimonials() {
@@ -952,13 +1030,7 @@
                 const container = document.getElementById('testimonialsContainer');
                 
                 if (filtered.length === 0) {
-                    container.innerHTML = `
-                        <div class="empty-state" style="grid-column: 1/-1;">
-                            <i class="fas fa-star"></i>
-                            <h3>No testimonials found</h3>
-                            <p>Add your first testimonial to showcase client satisfaction.</p>
-                        </div>
-                    `;
+                    container.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><i class="fas fa-star"></i><h3>No testimonials found</h3><p>Add your first testimonial to showcase client satisfaction.</p></div>`;
                     updateStats();
                     return;
                 }
@@ -967,13 +1039,8 @@
                     <div class="testimonial-card" data-id="${t.id}">
                         <div class="testimonial-header">
                             <div class="client-info">
-                                <div class="client-avatar">
-                                    ${t.avatar ? `<img src="${t.avatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">` : `<i class="fas fa-user"></i>`}
-                                </div>
-                                <div class="client-details">
-                                    <h4>${escapeHtml(t.clientName)}</h4>
-                                    ${t.clientTitle ? `<p>${escapeHtml(t.clientTitle)}</p>` : ''}
-                                </div>
+                                <div class="client-avatar">${t.avatar ? `<img src="${t.avatar}" alt="${escapeHtml(t.clientName)}">` : '<i class="fas fa-user"></i>'}</div>
+                                <div class="client-details"><h4>${escapeHtml(t.clientName)}</h4>${t.clientTitle ? `<p>${escapeHtml(t.clientTitle)}</p>` : ''}</div>
                             </div>
                             <div class="rating">${renderStars(t.rating)}</div>
                         </div>
@@ -982,30 +1049,21 @@
                             ${t.propertyName ? `<div class="property-info"><span class="property-tag"><i class="fas fa-building"></i> ${escapeHtml(t.propertyName)}</span></div>` : ''}
                         </div>
                         <div class="testimonial-footer">
-                            <span style="font-size: 11px; color: var(--gray); flex:1;">${t.status === 'published' ? '<i class="fas fa-check-circle" style="color:var(--success);"></i> Published' : '<i class="fas fa-pencil-alt" style="color:var(--warning);"></i> Draft'}</span>
-                            <button class="action-icon" onclick="editTestimonial(${t.id})"><i class="fas fa-edit"></i></button>
-                            <button class="action-icon delete" onclick="deleteTestimonial(${t.id})"><i class="fas fa-trash"></i></button>
+                            <span style="font-size: 11px; color: var(--gray);">${t.status === 'published' ? '<i class="fas fa-check-circle" style="color:var(--success);"></i> Published' : '<i class="fas fa-pencil-alt" style="color:var(--warning);"></i> Draft'}</span>
+                            <div class="footer-actions">
+                                <button class="action-icon" onclick="editTestimonial(${t.id})"><i class="fas fa-edit"></i></button>
+                                <button class="action-icon delete" onclick="deleteTestimonial(${t.id})"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                 `).join('');
                 updateStats();
             }
 
-            function escapeHtml(str) {
-                if (!str) return '';
-                return String(str).replace(/[&<>]/g, function(m) {
-                    if (m === '&') return '&amp;';
-                    if (m === '<') return '&lt;';
-                    if (m === '>') return '&gt;';
-                    return m;
-                });
-            }
-
             function updateStats() {
                 const total = testimonials.length;
                 const published = testimonials.filter(t => t.status === 'published').length;
-                const avgRating = testimonials.length > 0 ? 
-                    (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1) : 0;
+                const avgRating = testimonials.length > 0 ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1) : 0;
                 const fiveStar = testimonials.filter(t => t.rating === 5).length;
                 
                 document.getElementById('statsGrid').innerHTML = `
@@ -1027,21 +1085,11 @@
                     document.getElementById('testimonialText').value = testimonial.text;
                     document.getElementById('testimonialStatus').value = testimonial.status;
                     
-                    // Set rating
                     const ratingInput = document.querySelector(`input[name="rating"][value="${testimonial.rating}"]`);
                     if (ratingInput) ratingInput.checked = true;
                     
                     currentAvatar = testimonial.avatar;
-                    if (currentAvatar) {
-                        document.getElementById('avatarPreview').innerHTML = `
-                            <div class="preview-item">
-                                <img src="${currentAvatar}" alt="Avatar">
-                                <button class="remove-image" onclick="removeAvatar()">×</button>
-                            </div>
-                        `;
-                    } else {
-                        document.getElementById('avatarPreview').innerHTML = '';
-                    }
+                    document.getElementById('avatarPreview').innerHTML = currentAvatar ? `<div class="preview-item"><img src="${currentAvatar}" alt="Avatar"><button class="remove-image" onclick="removeAvatar()">×</button></div>` : '';
                     
                     document.getElementById('testimonialModal').classList.add('active');
                 }
@@ -1067,8 +1115,7 @@
                 document.getElementById('modalTitle').innerText = 'Add New Testimonial';
                 currentAvatar = null;
                 document.getElementById('avatarPreview').innerHTML = '';
-                const ratingInputs = document.querySelectorAll('input[name="rating"]');
-                ratingInputs.forEach(input => input.checked = false);
+                document.querySelectorAll('input[name="rating"]').forEach(input => input.checked = false);
             }
 
             function saveTestimonial() {
@@ -1077,18 +1124,9 @@
                 const testimonialText = document.getElementById('testimonialText').value.trim();
                 const ratingInput = document.querySelector('input[name="rating"]:checked');
                 
-                if (!clientName) {
-                    showToast('Please enter client name', true);
-                    return;
-                }
-                if (!testimonialText) {
-                    showToast('Please enter testimonial text', true);
-                    return;
-                }
-                if (!ratingInput) {
-                    showToast('Please select a rating', true);
-                    return;
-                }
+                if (!clientName) { showToast('Please enter client name', true); return; }
+                if (!testimonialText) { showToast('Please enter testimonial text', true); return; }
+                if (!ratingInput) { showToast('Please select a rating', true); return; }
                 
                 const newTestimonial = {
                     id: id ? parseInt(id) : Date.now(),
@@ -1099,7 +1137,7 @@
                     text: testimonialText,
                     avatar: currentAvatar,
                     status: document.getElementById('testimonialStatus').value,
-                    createdAt: id ? testimonials.find(t => t.id === parseInt(id))?.createdAt || new Date().toISOString() : new Date().toISOString()
+                    createdAt: id ? (testimonials.find(t => t.id === parseInt(id))?.createdAt || new Date().toISOString()) : new Date().toISOString()
                 };
                 
                 if (id) {
@@ -1121,67 +1159,39 @@
                 resetForm();
             }
 
-            // Image upload handling
             function setupAvatarUpload() {
                 const uploadArea = document.getElementById('avatarUploadArea');
                 const avatarInput = document.getElementById('avatarInput');
-                
                 uploadArea.addEventListener('click', () => avatarInput.click());
                 avatarInput.addEventListener('change', (e) => {
                     const file = e.target.files[0];
                     if (file && file.type.startsWith('image/')) {
-                        if (file.size > 2 * 1024 * 1024) {
-                            showToast('Image size should be less than 2MB', true);
-                            return;
-                        }
+                        if (file.size > 2 * 1024 * 1024) { showToast('Image size should be less than 2MB', true); return; }
                         const reader = new FileReader();
                         reader.onload = (ev) => {
                             currentAvatar = ev.target.result;
-                            document.getElementById('avatarPreview').innerHTML = `
-                                <div class="preview-item">
-                                    <img src="${currentAvatar}" alt="Avatar">
-                                    <button class="remove-image" onclick="removeAvatar()">×</button>
-                                </div>
-                            `;
+                            document.getElementById('avatarPreview').innerHTML = `<div class="preview-item"><img src="${currentAvatar}" alt="Avatar"><button class="remove-image" onclick="removeAvatar()">×</button></div>`;
                         };
                         reader.readAsDataURL(file);
                     }
                 });
             }
 
-            // Event listeners
-            document.getElementById('addTestimonialBtn').addEventListener('click', () => {
-                resetForm();
-                document.getElementById('testimonialModal').classList.add('active');
-            });
+            document.getElementById('addTestimonialBtn').addEventListener('click', () => { resetForm(); document.getElementById('testimonialModal').classList.add('active'); });
             document.getElementById('closeModal').addEventListener('click', closeModal);
             document.getElementById('cancelModalBtn').addEventListener('click', closeModal);
             document.getElementById('saveTestimonialBtn').addEventListener('click', saveTestimonial);
             document.getElementById('searchInput').addEventListener('input', renderTestimonials);
             document.getElementById('ratingFilter').addEventListener('change', renderTestimonials);
 
-            // Sidebar toggle
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
             menuToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
-            document.addEventListener('click', (e) => {
-                if(window.innerWidth <= 992 && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
-                    sidebar.classList.remove('active');
-                }
-            });
+            document.addEventListener('click', (e) => { if(window.innerWidth <= 992 && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) sidebar.classList.remove('active'); });
 
-            // Logout
-            document.getElementById('logoutBtn').addEventListener('click', (e) => {
-                e.preventDefault();
-                sessionStorage.removeItem('adminLoggedIn');
-                sessionStorage.removeItem('adminName');
-                window.location.href = 'admin-login.html';
-            });
+            document.getElementById('logoutBtn').addEventListener('click', (e) => { e.preventDefault(); sessionStorage.removeItem('adminLoggedIn'); sessionStorage.removeItem('adminName'); window.location.href = 'admin-login.html'; });
 
-            window.onclick = function(e) {
-                const modal = document.getElementById('testimonialModal');
-                if (e.target === modal) closeModal();
-            };
+            window.onclick = function(e) { if (e.target === document.getElementById('testimonialModal')) closeModal(); };
 
             loadTestimonials();
             setupAvatarUpload();
